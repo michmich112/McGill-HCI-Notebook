@@ -1,0 +1,680 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Observations and Proposal</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="68f429e5-fc43-46c6-9d12-b7aa4b914321" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1586985564259-6211deb4c122?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;ixid=eyJhcHBfaWQiOjYzOTIxfQ" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">👁️‍🗨️</span></div><h1 class="page-title">Observations and Proposal</h1></header><div class="page-body"><nav id="331e400e-ac50-40e1-be6f-99f50d1e9f2e" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5a6e0a94-1fcb-496c-b973-1d02209493c1">Interviews, Observations &amp; Empathy maps</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#537f6056-a41a-4a20-b63b-04cea356466a">Lois Hellman</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#dfb0ac4c-8e6d-4eea-8653-f4001e032002">The Interview</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#b59b0ab3-85bd-4858-bf44-631bd79147c6">Empathy map</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e2297554-6cd8-4bed-bd97-47714cde1233">Simona Cantacuzene</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#d6a0a837-f2e9-42b0-a7b8-c8d462cde78b">Interview</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#7bdcc17d-1add-452c-b886-2ca994f3a801">Empathy map</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#fb3f372d-84f2-460f-93f9-be33cee5db9e">Michel and Leone Villeneuve</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#d533a291-bc8f-4e6c-b909-f0fb09713fab">Interview</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#4359e64f-b49f-4ffc-953c-7a5b78b17de5">Empathy map</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0fa3ba0f-d4fd-4e2d-8a05-06c6dc33c948">Identifying the Problem</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c522b353-7ed2-4248-945c-b185f759d4d3">Developing Personas and the Mental Models Charts</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#371f5060-d2f7-42af-9e6e-56c8a4cec18a">Step 1: List Distinguishing Behaviours</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#81e16c4b-739f-40fa-8abf-106f069b0fea">Step 2: Group By Behavior</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1b068082-4e0c-4563-9817-c2ffe1ffa789">Step 3. Name the Groups</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#99f58108-7220-480d-acfe-effc94a12e5b">Personas</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#b083cf06-05f3-436b-b01a-7c60b279da3e">Doris, The eager beaver</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#bba84777-00eb-45e0-8bbc-acec94d4ef39">Steve, The Troubleshootee</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#8b7d9fe1-9f42-43c9-9736-83733d7a8216">Bettle, The Underdog</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f49097d0-8d75-465e-9fed-4335bf68430a">Our Solution</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#010f7eb5-8c1d-448f-833f-60f1cb466087">Use Case Scenario</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b6696409-2785-4689-a702-52dd1c9fca54">Related Products</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#668598ef-0550-435a-9220-c182a0de610d">Konnekt Videophone</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7c5e025e-b41b-4b0a-819f-dbcb124c91a8">KOMP</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b0a5b920-904e-408d-9588-11cbd304c0ad">Competition Analysis</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#214d435f-9adf-4e84-b080-884ee620f45d">Competition chart</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a2f5a141-f679-4429-aa75-0349e1b40652">Feasibility Justification</a></div></nav><h1 id="5a6e0a94-1fcb-496c-b973-1d02209493c1" class="">Interviews, Observations &amp; Empathy maps</h1><p id="95aeacac-63ea-4371-a213-92c8e27a5ffe" class="">To begin our research into the experiences of senior citizens (aged 65 and older) in the video conferencing world, the group interviewed 4 participants in total with one interview being conducted on two users at the same time.</p><h2 id="537f6056-a41a-4a20-b63b-04cea356466a" class="">Lois Hellman</h2><p id="7bf139d5-05a2-459f-98f2-253dee7b6eca" class="">Lois Hellman is a 78 year old woman from Upstate New York and is the grandmother of a team member. She was a probation officer in Saratoga County, New York for many years. While not an avid technology user, she can hold her own. Lois owns an iPhone, a Chromebook, and a Kindle Fire to help her conduct her day to day life. Lois does have hearing aids, but frequently does not use them, especially for video calls. </p><h3 id="dfb0ac4c-8e6d-4eea-8653-f4001e032002" class="">The Interview</h3><p id="d1a5a341-b315-41bb-8e3b-31124a18174b" class="">This interview with Lois was conducted via Google Meet on her iPhone. During this interview, Lois was in her home where her husband, her son and daughter-in-law, and two grandsons live as well. Lois placed the most importance on good audio with video being a great additional feature. </p><p id="42d11fee-d682-488f-a57c-65a13c15705e" class="">At the time of this interview, Lois was not wearing her hearing aids and was recovering from surgery on her elbow resulting in limited mobility of her arm. When audio and video were not possible, the interviewer requested Lois to turn on the closed captions feature on Google Meets. Lois had a hard time finding the closed captions button on the application and had to ask for help from her grandson who was in the living room with her. The closed captioning was very difficult for Lois to follow and was very happy when the interview was able to return back to normal audio/video.</p><p id="4faec89b-0408-4536-a45f-957a69f5a793" class="">The entire interview was conducted over decent WIFI connection and one of Lois&#x27;s grandson&#x27;s was present in case additional help was needed.</p><p id="b3048c5d-e575-4953-81f4-6c312490ec6c" class="">The first part of the interview used video and audio as normal. </p><p id="d8b6e31a-f503-4eb6-b5d3-86b0ddab7ae4" class="">The second part of the interview turned the video off and used audio as normal.</p><p id="1c257b26-d8d5-41b6-a5ea-6eb01606536b" class="">The third part of the interview simulated poor audio by having Lois turn off her sound and turn on Google Meet&#x27;s closed captions. Finding this button was difficult for Lois and she had to ask her grandson for help. Lois had a difficult time following the captions due to their size on her screen; she felt like she didn&#x27;t know when she missed parts of the conversation.</p><p id="8efa4f72-0e6e-45fb-8cf0-c295271cae18" class="">The final part of the interview was with audio, video, and closed captions all turned on. Lois did not actively use the closed captions despite her hearing problems and loud environment.</p><h3 id="b59b0ab3-85bd-4858-bf44-631bd79147c6" class="">Empathy map</h3><figure id="c02f3900-940c-4ec5-af85-72b1d3ebc45b" class="image"><a href="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Lois_Hellman_Empathy_Map_(1).jpg"><img style="width:1136px" src="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Lois_Hellman_Empathy_Map_(1).jpg"/></a></figure><h2 id="e2297554-6cd8-4bed-bd97-47714cde1233" class="">Simona Cantacuzene</h2><p id="feeb39c2-03c4-4f02-ae46-6c84ba6048d8" class="">Simona Cantacuzene is a 79 year old woman living in Paris. Grandmother of team member <span class="user">@Michel Cantacuzene</span>. 
+She lives alone and owns an iPhone (7th generation) and an iPad (2nd generation). She uses these devices to call and video chat with her friends but mostly family through the use of the Face Time application.
+She can be characterized as a novice technological user, having a limited amount of applications on her device and on average only using her web browser, email, Face Time and WhatsApp.</p><h3 id="d6a0a837-f2e9-42b0-a7b8-c8d462cde78b" class="">Interview</h3><p id="fc9160d0-797e-40cd-aea8-e0ae1808d089" class="">The interview was held through FaceTime started on a MacBook for the interviewer (Michel Cantacuzene) and an iPhone for the interviewee (Simona Cantacuzene).</p><p id="703db7c5-332b-4ee2-a35e-ad7273915e65" class="">The first part of the interview was done is normal conditions with a good quality connection for audio and video. 
+The interviewer talked in a loud voice as was usual.
+The conversation was properly held with both parties being joyful and no miscommunications</p><p id="491e34f0-72ca-498f-addc-4a9f50ac299c" class="">The second part of the interview was done in the same conditions as the first part.
+The interviewer talked in their normal voice level.
+The interviewee had to ask the interviewer to repeat multiple times before understanding the question.
+The interviewee instinctively moved the phone away from its forward facing position to her ear like one would do on a phone call.</p><p id="77bbee90-9118-4136-ab9c-8d64af622990" class="">The third part of the interview was done in the same conditions as the first part.
+The interviewer talked in a loud voice and turned their camera off.
+Upon the camera turning off the interviewee&#x27;s expression changed to a neutral one.
+The interviewee asked why the video had cut off to which the interviewer responded that it was due to poor connectivity.
+The interviewee returned to talking without looking at the screen.
+After a few moments the interviewee leaves to get their iPad and proceeds to call the interviewer on FaceTime using their iPad while the interview is still on-going with the iPhone.</p><p id="165e5b9c-e7db-49b4-81a1-cbe8c56fa213" class="">The interview then switched over to the iPad for the interviewee.</p><p id="2956622d-31aa-4da3-a9fe-5a96226682db" class="">The fourth part of the interview was done in the same conditions as the first part.
+The interviewer talked in a loud voice with their camera on.
+The interviewer asked if the interviewee had problems or issues when using video calling platforms/tools.
+The interviewee responded that she had no problems and that she manages to hear and see during calls and that was enough for her.</p><h3 id="7bdcc17d-1add-452c-b886-2ca994f3a801" class="">Empathy map</h3><figure id="12ebf133-5b4a-44d5-96b4-c86450029a9f" class="image"><a href="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Simona_Cantacuzene_Empathy_Map.jpg"><img style="width:1397px" src="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Simona_Cantacuzene_Empathy_Map.jpg"/></a></figure><h2 id="fb3f372d-84f2-460f-93f9-be33cee5db9e" class="">Michel and Leone Villeneuve</h2><p id="b2348d85-a56e-4ddb-af77-73ab55f244ac" class="">Michel (74) and Leone (73) Villeneuve are a married couple living in western France. They are the grandparents of team member <span class="user">@Michel Cantacuzene</span>.
+They live alone in a small town where they have been for their entire lives. They own a Samsung A10 and an iPad (4th generation). They use these devices to watch news, play sudoku and solitaire and to communicate with their family.
+They use FaceTime and WhatsApp to communicate with their family (using the video feature present on WhatsApp).
+They can be categorized as beginner technology users, being able to solve certain problems after having been shown a few times.</p><h3 id="d533a291-bc8f-4e6c-b909-f0fb09713fab" class="">Interview</h3><p id="3213b6ac-0b2a-4b61-b7b0-85cb44c639d6" class="">The interview was held through FaceTime with the interviewer using a MacBook and the interviewees using their iPad (2nd generation).</p><p id="28e3d3ec-33a6-4293-8cba-6362c95e804f" class="">The first part of the interview was done in normal conditions with good quality connection for audio and video
+The interviewer talked in a loud voice as was usually done.
+The interviewees understood properly with no miscommunication.</p><p id="d58bc195-207d-48ab-bbef-7e203b7677ff" class="">The second part of the interview was done in the same conditions as the first part.
+The interviewer talked in a normal voice.
+The interviewees squinted and took longer to respond but understood without miscommunications.</p><p id="52f88847-e66c-4b2f-a89b-08dd91c34068" class="">The third part of the interview was done in the same conditions as the first part.
+The interviewer talked in a loud voice and turned their video off.
+The interviewees reacted to the video being cut off.
+The interviewees attempted to disconnect and re-connect, to this the interviewer responded that the video being cut off was intentional.
+The interviewees looked less at the screen and more at their surroundings when talking with the interviewer.
+The interviewees mis-understood a question from the interviewer.
+The interviewees had a neutral expression and reaction when talking to the interviewer, in opposition with their expression and reactions when the video was on.</p><p id="09853d2a-26b3-4c7f-9145-f2f33b959aa0" class="">The fourth part of the interview was done in the same conditions as the first part.
+The interviewer talked in a loud voice and had his video turned on.
+The interviewer asked if the interviewee had problems or issues when using video calling platforms/tools.
+The interviewees responded that they did not have problems and that they are just happy to be able to see and talk to their grandson/family.
+After more questioning form the interviewer, the interviewees admitted that it is more difficult to understand when there is no video and that subtitles would help.</p><h3 id="4359e64f-b49f-4ffc-953c-7a5b78b17de5" class="">Empathy map</h3><figure id="b9a73513-2acc-4a03-97ea-dd1c3652d5ea" class="image"><a href="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Michel__Leone_Villeneuve_Empathy_Map_(1).jpg"><img style="width:1396px" src="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Michel__Leone_Villeneuve_Empathy_Map_(1).jpg"/></a></figure><h1 id="0fa3ba0f-d4fd-4e2d-8a05-06c6dc33c948" class="">Identifying the Problem</h1><p id="30eaa63f-345e-4239-a0cd-6d4d0c0eeaf4" class="">For senior citizens, using technology comes in varying degrees of ease and participating in video calls is no exception. Since the COVID 19 pandemic has declared senior citizens to be one of the most vulnerable populations, video calls to family, friends, and community or religious based events have been crucial to the mental well-being of so many. However, from our observations, it is clear that the following problems remain to be addressed for our target audience.</p><ol id="22a690c4-3767-455b-a79a-633587be9c3e" class="numbered-list" start="1"><li>Seeing loved ones and feeling connected to community members is the main goal for our target audience. When the video of the person or people the individual is trying to connect with doesn&#x27;t work due to low bandwidth, connectivity issues, lack of technology infrastructure (no camera), etc..., this negatively impacts the users, leading to feelings of sadness and frustration.</li></ol><ol id="45776f9f-0e1c-4f8c-ac90-6334df9f4062" class="numbered-list" start="2"><li>Using many of the video conferencing platforms is difficult for senior citizens to navigate. The interfaces are confusing and overwhelming to the users. Some are able to learn how to navigate the apps on their own after some instruction, but some are not. Regardless, the interface design is not accessible for many senior citizens, which greatly diminishes their experience on the app and can even impede individuals from connecting with their loved ones. </li></ol><p id="b6b86ac6-9fa9-4389-80b7-75d096085f69" class="">As COVID19 persists and more technologically adept family members have to help their elderly loved ones, comedy content, such as the video below, has sprung up showing some of the problems faced by this subsection of the population (albeit from the perspective of the person helping their parents/grandparents, but the same problems are conveyed).</p><figure id="d1b708db-4cd7-4722-b572-a26059d85673"><div class="source"><a href="https://youtu.be/JY4vFj_fGWg">https://youtu.be/JY4vFj_fGWg</a></div></figure><p id="b6691081-0eb7-4529-83d3-ac39a97f2455" class="">While this situation makes for good comedy, there are certainly ways to make the video conferencing experience easier for all parties involved.</p><h1 id="c522b353-7ed2-4248-945c-b185f759d4d3" class="">Developing Personas and the Mental Models Charts</h1><p id="777473d6-11c4-4be1-8525-2c8ebd11c925" class="">Indi Young&#x27;s Mental Models: Aligning Design Strategy with Human Behavior states that to properly develop the personas to ground our design and product, we must define the task-based audience segments. The following details our steps through this process to arrive at our three personas below.</p><h3 id="371f5060-d2f7-42af-9e6e-56c8a4cec18a" class="">Step 1: List Distinguishing Behaviours</h3><p id="f7575c29-7f33-41e2-adb6-0ed651d54974" class="">The first step lists all user behavior of the senior citizen society subgroup. See Table 1.</p><p id="ec6da9e7-d45e-4888-884f-f4a8b39df8d5" class="">
+</p><figure id="25998f44-5263-4483-abc6-9186dc0d5ea1" class="image"><a href="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Untitled.png"><img style="width:1008px" src="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Untitled.png"/></a><figcaption>Table 1. Video Conferencing Senior Citizen User Behavior</figcaption></figure><h3 id="81e16c4b-739f-40fa-8abf-106f069b0fea" class="">Step 2: Group By Behavior</h3><p id="db4e2b2e-2536-465f-9afd-c8bbc9fef3d1" class="">For behaviours that fall into similar task-based categories, we group them together and identify which segments of the Senior Citizen group would exhibit these behaviors. See Table 2 and Table 3.</p><p id="ec072a51-48a1-49d7-b71a-a2ff85f9cf72" class="">
+</p><figure id="14a42d9b-157c-4a80-9dde-ff2e9901d03c" class="image"><a href="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Untitled%201.png"><img style="width:1008px" src="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Untitled%201.png"/></a><figcaption>Table 2. Senior Citizen User Behaviour Grouped</figcaption></figure><p id="1b1f81e4-6ae2-417d-bbd3-1e8fd155d109" class="">
+</p><figure id="8d43c5c1-f5de-4413-8dd4-ca07d7918276" class="image"><a href="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Untitled%202.png"><img style="width:864px" src="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Untitled%202.png"/></a><figcaption>Table 3. Identifying behaviours in the specific segments within the Senior Citizen group.</figcaption></figure><h3 id="1b068082-4e0c-4563-9817-c2ffe1ffa789" class="">Step 3. Name the Groups</h3><p id="51d5a2d1-86d0-4d84-a7f3-7cb683772be2" class="">After finishing step 3, we were able to eliminate some behaviours (talk one-on-one; join video call; etc.) and two of the user group segments (Technological Guru and Individuals without Troubleshooters). The decision to remove the behavioural groups was two-fold: </p><ol id="27a3aa0a-d252-4d39-94d4-3a98ab257e01" class="numbered-list" start="1"><li>Almost every sub-group of the senior citizen demographic would be able to exercise those behaviours.</li></ol><ol id="36ddfdcd-71e2-4f23-b88e-ba23bca7bc8a" class="numbered-list" start="2"><li>If that subgroup could not exercise those behaviours, we felt this this limitation was outside our scope. (i.e. talking one-on-one was removed because if a person could not connect one-on-one (whether through sign language or audible speech, etc.) we felt this was outside our ability, nor did we have access to this demographic to observe).</li></ol><p id="0444f413-b6ea-4a02-8ac2-cd8c5507bdd8" class="">Our final results are below in Table 4. The three named groups are the:</p><ul id="06bcc760-49a9-4991-8488-71ce68756515" class="block-color-red_background bulleted-list"><li>The Eager Beaver</li></ul><ul id="b0b80bfd-2231-4905-8192-de44dc3b9321" class="block-color-blue_background bulleted-list"><li>The Troubleshootee</li></ul><ul id="53915861-f1cc-486d-870f-dcec44a7f827" class="block-color-teal_background bulleted-list"><li>The The Underdog</li></ul><figure id="367456fd-3aa7-4845-9750-481f15306e12" class="image"><a href="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Untitled%203.png"><img style="width:529px" src="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Untitled%203.png"/></a><figcaption>Table 4. Named Groups</figcaption></figure><p id="b1d1739d-c369-4600-9b18-35b369a40790" class=""><strong>The Eager Beaver:</strong></p><p id="a610cc7c-c3be-4a5e-805d-b443de7433bb" class="">The eager beaver is ready to take on the new challenges of learning how to use new technology. They may not be a tech wiz, but the eager beaver is prepared to learn and is confident that they can replicate the steps to use the application on their own next time. The eager beaver may get overwhelmed by the interface and not know right away what all the buttons are for, but eventually they get the hang of it. The eager beaver is likely to not only use video calls to connect one-on-one with family members but also to join discussion groups, religious services, and even the occasional talk.</p><p id="62abcba8-f8dc-46b1-ab1b-372a24cd706e" class=""><strong>The Troubleshootee:</strong></p><p id="0ba59821-00b1-497e-a3a8-64b9ed32052e" class="">Yes, we made up our own word. The troubleshootee is someone who is a bit wary of the technology. The troubleshootee wants to benefit from the connection and opportunities video calling affords, but does not know how to use the application on their own, regardless of how many times he is show how. The troubleshootee, affectionately named for frequently having a troubleshooter - or helper - available close by for help at a moments notice, will likely be using a video conferencing app when someone is there to help them use it. This way, the troubleshootee does not need to feel frustrated when they get confused or frustrated by the complicated or unclear user interface. However, it is not impossible for the troubleshootee to venture off on their own every once in a while to join a call with a grandchild.</p><p id="afa5cd82-9916-4f29-8078-55af875d5dcb" class=""><strong>The Underdog:</strong></p><p id="7d84891a-7b8b-413d-a8dc-a559a7dd9c7f" class="">The underdog is the most technologically challenged member of our pack. The underdog, also, wants the connection to their loved ones that video calling provides. However, unlike the troubleshootee who might live in a home with people available to them for help at any time, the underdog likely lacks this support. The underdog needs the most support and asks the most questions, likely over a phone call to establish the video call on a different device. To ensure the underdog can stay connected with loved ones, keeping it simple and familiar is key. This means no fancy interfaces and minimal options to click.</p><h2 id="99f58108-7220-480d-acfe-effc94a12e5b" class="">Personas</h2><h3 id="b083cf06-05f3-436b-b01a-7c60b279da3e" class="">Doris, The eager beaver</h3><div id="b178be03-60bc-45cf-a60e-4cdcc3bc3fce" class="column-list"><div id="2fc32a16-0c58-4c20-ac29-8a82eb834183" style="width:31.25%" class="column"><figure id="5dce6790-dba2-4aae-98e1-0f410f862bbc" class="image"><a href="https://images.unsplash.com/photo-1504778995644-77707b624d5a?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;ixid=eyJhcHBfaWQiOjYzOTIxfQ"><img style="width:384px" src="https://images.unsplash.com/photo-1504778995644-77707b624d5a?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;ixid=eyJhcHBfaWQiOjYzOTIxfQ"/></a></figure></div><div id="2d0bbe3c-fecf-4eb8-8f54-4f6beb484bcc" style="width:68.75%" class="column"><p id="8866b7a5-5840-4f1f-9a8d-8eff5ab8e3c4" class="">Age: 68
+Gender: Female</p><p id="29637aa2-60e4-404e-9fef-1a02b73b5cec" class="">Doris is somewhat well versed in technology, but still has some trouble getting all that she can out of video conferencing. However, when presented with new tools for dealing with the problems she faces when talking over video chat, she is able to understand the fixes and remember them to use later. She sometimes has trouble with her bandwidth and as a result cannot always get video to work on her iPad, which she uses to video call both her family and for meetings within her community. This causes her to enjoy video calling far less. When she is able to stay on the line, she is comfortable with the general functionality of video calling but in cases where the video drops she finds it hard to keep up with what&#x27;s going on on the other end of the call.</p><p id="28ed34cf-c9bf-4f36-9edc-d4d49d4e72ee" class="">
+</p></div></div><h3 id="bba84777-00eb-45e0-8bbc-acec94d4ef39" class="">Steve, The Troubleshootee</h3><div id="a73b5f73-565e-4c69-9665-3dc898b97b15" class="column-list"><div id="0f3ace6e-31c3-47f8-a0ba-4cbdcbd1d517" style="width:31.25%" class="column"><figure id="b2ed4533-7e33-4e9d-9208-e5a794d7cf11" class="image"><a href="https://images.unsplash.com/photo-1562457753-6867bda028cd?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;ixid=eyJhcHBfaWQiOjYzOTIxfQ"><img style="width:384px" src="https://images.unsplash.com/photo-1562457753-6867bda028cd?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;ixid=eyJhcHBfaWQiOjYzOTIxfQ"/></a></figure></div><div id="377ed1fb-d9f0-4938-8a14-a59f1966d8b9" style="width:68.75%" class="column"><p id="3e18ce12-16b2-4d0f-9496-595b31443133" class="">Age: 78
+Gender: Male</p><p id="161d251d-3c44-41c2-9601-7c7ffd22a4a9" class="">Steve has a very limited knowledge of technology but would like to be able to call family and friends via video chat. However, due to his limited understanding of how video chat works, he is not able to make calls alone. Fortunately, his son is often present to help him with setting up and participating in calls. Steve&#x27;s son bought Steve a smart phone this past March so Steve could stay connected with his loved ones. When Steve&#x27;s son is present, several of the problems that Steve has with making video calls are reduced. The problem that cannot be fixed is that video is not always consistent on calls that Steve and his son make. If there was a way to fix this problem, Steve’s son would be able to set it up.</p><p id="53e15558-a781-4044-85b2-a4ad60fa2bd0" class="">
+</p></div></div><h3 id="8b7d9fe1-9f42-43c9-9736-83733d7a8216" class="">Bettle, The Underdog</h3><div id="f6937b0f-508a-40e7-b8b4-2abd5ec3bff6" class="column-list"><div id="31ef5bf1-9561-4226-897f-1bc5d0487831" style="width:31.25%" class="column"><figure id="a58a3c0a-04d5-4c14-8b63-ce6a6ab717c8" class="image"><a href="https://images.unsplash.com/photo-1525599428495-0441bd5c67de?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;ixid=eyJhcHBfaWQiOjYzOTIxfQ"><img style="width:384px" src="https://images.unsplash.com/photo-1525599428495-0441bd5c67de?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;ixid=eyJhcHBfaWQiOjYzOTIxfQ"/></a></figure></div><div id="73314d90-83b0-4ff4-8be1-191a9ab6801a" style="width:68.75%" class="column"><p id="b8439d54-809f-49a0-8b84-f7c96e44de07" class="">Age: 83
+Gender: Female</p><p id="085244eb-57ad-4418-8f3d-739634d2de3d" class="">Bette has a limited knowledge of technology but would still like to be able to do basic functions with video calling. Unfortunately, she does not consistently have someone to troubleshoot for her when she has problems. However, she would likely be able to deal with limited functionality in video calling if a system was available that made it work in a relatively simple manner. A simple UI setup that allowed for her to easily understand what the person on the other side of the call was saying and feeling would be very helpful in making video calling useful to her.</p><p id="a3be6d34-5f7c-4ace-8dde-201ff9b6304f" class="">
+</p></div></div><p id="bc0fcebf-d582-4d28-a71c-c608c56d96a3" class="">
+</p><h1 id="f49097d0-8d75-465e-9fed-4335bf68430a" class="">Our Solution</h1><p id="2bbaa973-07db-4a39-932d-16fbef09d594" class="">We resolve to implement a clear solution for seniors that will be able to handle cases in which video either drops out or is not available and thus much of the emotional information about a call is lost. In order to implement this we will use sentiment analysis on incoming audio in order to determine what emotion the user on the other end of the call is having. From here, we intend to implement the display of emoji or gifs in order to translate the emotion to the end user. This will replace some of the emotional information that is lost based on the loss of video from the call and improve the individual&#x27;s experience of connection. </p><p id="68eab5e7-525b-4b19-b3b7-2026738c2f78" class="">
+</p><p id="ed6e854f-1669-4f42-8a98-92bbc2617428" class="">In addition, we resolve to ensure that the user interface for our design is easily understandable by older users who may have more limited experience with video calling technology than their younger counterparts. The solution should take at most one button to turn on and when video is lost or turned off should automatically begin to run and display emoji or gifs in order to replace the video which has just been disabled.</p><h1 id="010f7eb5-8c1d-448f-833f-60f1cb466087" class="">Use Case Scenario</h1><p id="5199c870-3140-4f00-a30c-e6ea12479ad7" class=""><strong>The Scenario:</strong></p><p id="504b2a39-df8c-4eea-8397-fdd89984f061" class="">Steve woke up today really excited, its his grandchild&#x27;s birthday - Steve&#x27;s daughter&#x27;s child, whose family lives in the next province over. Normally, he would be attending a family party in his grandchild&#x27;s honor; however, due to COVID19 restrictions and necessary precautions because Steve is high risk, there will be no party this year. But Steve and his son have worked it out that they will be video calling his daughter shortly.</p><p id="a352ada5-ab3f-4298-bee3-7f74892d9f6c" class="">When the time arrives, Steve is apprehensive that something will go wrong, not wanting to miss his opportunity to see his family. But thankfully, Steve&#x27;s son is present (with his mask on, to be safe). Steve&#x27;s son, though, wants Steve to try joining the call himself and remains on the side for help. Steve is able to join the call with only needing to ask his son where the link is to join the call (in his email inbox) and how to make sure the volume and video were on (Steve could not locate these features on his own), but soon Steve was looking upon the faces of his lovely family. </p><p id="31316c45-1d55-424c-98d6-bb415bc28800" class="">However, soon there are video problems and Steve cannot see his family anymore. Steve hasn&#x27;t finished telling his grandchild about their birthday present and the video cut off greatly impacts Steve. Steve&#x27;s son takes the laptop and fiddles around with a few things, but ultimately realizes that the problem cannot be immediately fixed. Steve doesn&#x27;t quite know who he is talking to or if his grandchild is listening anymore; Steve is worried that the call will have to end soon and is saddened by the prospect.</p><p id="0650fd36-0958-4506-953c-0b30c0c4f8fe" class=""><strong>The Intervention:</strong></p><p id="130d34f0-f041-4700-a756-9281e38af6ad" class="">We know that when technology inhibits seeing the faces of your loved ones, it can be a real damper on your mood and makes it difficult to keep the meaningful relationships alive. With our solution, Steve&#x27;s life will be infinitely improved. Our product, a simple web app available for use on a browser (laptop, android, and iOS), provides a simple user interface designed for use by our target groups listed above - all of them. After one or two run throughs with his son for help if needed, Steve will feel confident to manage the call with his family on his own by the time his grandchild&#x27;s birthday rolls around. The independence this affords Steve is hypothesized to have a drastic positive effect on his mental state as the COVID19 pandemic carries on.</p><p id="41afab2b-8aed-4394-a380-c0c5ac34872e" class="">And the piece de resistance of our product, is that when the video cuts out, Steve will no longer be left with an empty screen. Our product will immediately provide a constantly updating, in-time portrayal of the sentiment audibly expressed by Steve&#x27;s loved ones on the other side of the screen. This portrayal will take the form of smiley faces (or basic emojis that are familiar to our named groups) to indicate to Steve that his family is present and engaging with him still, even though he cannot see their faces. This display of emotion, </p><p id="ed6423e4-e49b-4236-a251-4967a6c12d49" class="">
+</p><p id="d4e85363-08f4-48ed-8322-2ee608332804" class="">
+</p><h1 id="b6696409-2785-4689-a702-52dd1c9fca54" class="">Related Products</h1><h3 id="668598ef-0550-435a-9220-c182a0de610d" class="">Konnekt Videophone</h3><p id="3cad9d76-f37b-4370-abce-b4a8a1c44edd" class="">
+</p><figure id="a978c1bb-7446-426f-ad83-51042ce21daa" class="image"><a href="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Untitled%204.png"><img style="width:768px" src="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Untitled%204.png"/></a></figure><p id="a5e68c31-f1a7-4125-8731-13cb102772a6" class="">The <a href="http://konnekt.com.au">Konnekt Videophone</a> is a video calling implementation that is specifically designed to be easily usable by seniors. It has a simple UI that can be navigated quickly, high volume to be easily heard by those with hearing difficulty and is able to call telephones as well as make video calls. The entire implementation of the hardware is geared to allowing older folks to have an easier time making and receiving video calls.</p><p id="fde74b13-3738-4069-a6d5-fad44a02bac1" class=""><strong>Limitations:</strong></p><p id="419946e1-4896-4240-977c-e54658154653" class="">
+</p><p id="5d7626ad-33ae-41c9-8fd2-893ffbf7f4ae" class="">The limitations of this product stem from the fact that it is a dedicated hardware implementation which does not provide all of the other functions of smartphones, tablets, or laptops. As such, it is only likely to be used by those who do not own or unable to use these other products. </p><p id="3a84e7e6-1835-46ef-b7dc-028bb00c18ed" class="">This implementation requires a certain level of bandwidth in order to be usable. In cases where the bandwidth was not as consistent, it would not be able to provide any ulterior functionality to deal with the loss of consistent video/audio.</p><p id="96a642f8-26bb-433c-95f2-8258a0a814c1" class="">
+</p><h3 id="7c5e025e-b41b-4b0a-819f-dbcb124c91a8" class="">KOMP</h3><figure id="ba5e04a5-5e2e-4abb-88d7-2199e7210d46" class="image"><a href="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Screen_Shot_2020-09-22_at_10.44.30_PM.png"><img style="width:672px" src="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Screen_Shot_2020-09-22_at_10.44.30_PM.png"/></a></figure><p id="db3f57ac-87f4-45cd-89b4-b4c24ad64824" class="">&quot;Revolutionary technology. For those who didn&#x27;t grow up with it.&quot; is the first thing you see on KOMP&#x27;s <a href="https://www.noisolation.com/global/komp/">webpage</a>. 
+This device from NoIsolation resembles an old television monitor with a dial button that is used for interaction.
+It has 3 main features such as Message, Photo and Video call.</p><p id="a79deb26-6084-418a-8a8d-f483efcf9262" class="">Their main usability focus are as follows:</p><figure id="391114f4-b2bb-4874-94ba-0ac72d2b8cc0" class="image"><a href="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Screen_Shot_2020-09-22_at_10.40.44_PM.png"><img style="width:997px" src="Observations%20and%20Proposal%2068f429e5fc4346c69d12b7aa4b914321/Screen_Shot_2020-09-22_at_10.40.44_PM.png"/></a></figure><p id="419fc1d5-afc2-4d7b-8eef-905c66209390" class="">
+</p><p id="6e0165b1-6ae9-4657-b0a4-7e151d025817" class="">Limitations:</p><ul id="f7fb0159-074f-4a01-86f8-9b43734059d5" class="bulleted-list"><li>Targets a niche market: starting at 39 GBP per months for a minimum of 3 months it is an expensive product compared to getting a tablet for your elders.</li></ul><ul id="54303dd5-a7c4-4e64-a139-9d3285920e77" class="bulleted-list"><li>Limited features: with only 3 features, this physical product targets a niche usage and can become cumbersome if not deemed useful enough. It has the size of a small tv but cannot be used as one.</li></ul><ul id="007f5011-ca3c-4ab2-843d-7efed3eb0612" class="bulleted-list"><li>Mobility required: This product prides itself in only needing one button to be used but this requires the people with the 
+KOMP to move and have to physically get closer to the device to send or answer calls which is a <strong>severe design flaw.</strong> </li></ul><h1 id="b0a5b920-904e-408d-9588-11cbd304c0ad" class="">Competition Analysis</h1><h2 id="214d435f-9adf-4e84-b080-884ee620f45d" class="">Competition chart</h2><p id="586b9ba0-5505-4ddc-8b7c-a3722e8f34d0" class="">In comparison to the Konnekt Videophone, our product would provide useful functionality to those users who did not wish to purchase a completely new piece of hardware which was completely dedicated to video calling. Our product will be available as an add on which can be used alongside any hardware that a user has at their disposal. For this reason, our product will likely be able to reach a far greater portion of available users than Konnekt Videophone. </p><p id="0212f149-b881-4e7e-b7e7-289f59c0bfe2" class="">Secondly, our product is able to run without consistent bandwidth - a point which may be particularly important to seniors who are less likely to have a high powered WiFi connection. Whereas Konnekt Videophone does not provide any functionality for cases in which video might not be available, our product would be specifically tailored to these situations.</p><p id="1ec0ecc4-c919-42f4-8d77-7555bd75801a" class="">
+</p><p id="3527d09b-3acc-461c-a023-56d1d877246e" class="">Our product is not dependent on a single physical implementation. Browser based, it allows users to interact from wherever they may be.  It also allows us to worry about the software functioning properly and just the software, allowing us to create an improved product that can be used by anyone with a phone, tablet or computer and an internet connection to communicate.</p><h1 id="a2f5a141-f679-4429-aa75-0349e1b40652" class="">Feasibility Justification</h1><p id="0342fbbc-6848-457a-aa28-b066c5f43091" class="">In order to complete our project, we will need to be able to implement sentiment analysis on incoming audio signal. There are many available implementations of this concept which can be found online. We intend to use the API provided by <a href="https://www.deepaffects.com/">DeepAffects</a> in order to aid in our implementation of sentiment analysis. This will allow us to convert the incoming audio into emotional data which can then be used to display a corresponding emoji or gif. These should also be somewhat trivial to choose although more discussion on them will be required. Finally, while it is very important to ensure that the UI is streamlined and not complex, this will also mean that the amount of actual coding needed to present a working UI will not be very large as functionality will largely be automatic and will require only a small amount of buttons. These required implementation points lead us to believe that the design is completely feasible to implement within the confines of this HCI course.</p></div></article></body></html>
