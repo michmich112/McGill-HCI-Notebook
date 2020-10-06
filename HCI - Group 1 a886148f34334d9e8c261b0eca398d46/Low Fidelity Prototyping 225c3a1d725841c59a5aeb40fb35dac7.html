@@ -1,0 +1,640 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Low Fidelity Prototyping</title><style>
+	/* webkit printing magic: print all background colors */
+	html {
+		-webkit-print-color-adjust: exact;
+	}
+	* {
+		box-sizing: border-box;
+		-webkit-print-color-adjust: exact;
+	}
+	
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+	}
+	@media only screen {
+		body {
+			margin: 2em auto;
+			max-width: 900px;
+			color: rgb(55, 53, 47);
+		}
+	}
+	
+	body {
+		line-height: 1.5;
+		white-space: pre-wrap;
+	}
+	
+	a,
+	a.visited {
+		color: inherit;
+		text-decoration: underline;
+	}
+	
+	.pdf-relative-link-path {
+		font-size: 80%;
+		color: #444;
+	}
+	
+	h1,
+	h2,
+	h3 {
+		letter-spacing: -0.01em;
+		line-height: 1.2;
+		font-weight: 600;
+		margin-bottom: 0;
+	}
+	
+	.page-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-top: 0;
+		margin-bottom: 0.75em;
+	}
+	
+	h1 {
+		font-size: 1.875rem;
+		margin-top: 1.875rem;
+	}
+	
+	h2 {
+		font-size: 1.5rem;
+		margin-top: 1.5rem;
+	}
+	
+	h3 {
+		font-size: 1.25rem;
+		margin-top: 1.25rem;
+	}
+	
+	.source {
+		border: 1px solid #ddd;
+		border-radius: 3px;
+		padding: 1.5em;
+		word-break: break-all;
+	}
+	
+	.callout {
+		border-radius: 3px;
+		padding: 1rem;
+	}
+	
+	figure {
+		margin: 1.25em 0;
+		page-break-inside: avoid;
+	}
+	
+	figcaption {
+		opacity: 0.5;
+		font-size: 85%;
+		margin-top: 0.5em;
+	}
+	
+	mark {
+		background-color: transparent;
+	}
+	
+	.indented {
+		padding-left: 1.5em;
+	}
+	
+	hr {
+		background: transparent;
+		display: block;
+		width: 100%;
+		height: 1px;
+		visibility: visible;
+		border: none;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+	}
+	
+	img {
+		max-width: 100%;
+	}
+	
+	@media only print {
+		img {
+			max-height: 100vh;
+			object-fit: contain;
+		}
+	}
+	
+	@page {
+		margin: 1in;
+	}
+	
+	.collection-content {
+		font-size: 0.875rem;
+	}
+	
+	.column-list {
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	.column {
+		padding: 0 1em;
+	}
+	
+	.column:first-child {
+		padding-left: 0;
+	}
+	
+	.column:last-child {
+		padding-right: 0;
+	}
+	
+	.table_of_contents-item {
+		display: block;
+		font-size: 0.875rem;
+		line-height: 1.3;
+		padding: 0.125rem;
+	}
+	
+	.table_of_contents-indent-1 {
+		margin-left: 1.5rem;
+	}
+	
+	.table_of_contents-indent-2 {
+		margin-left: 3rem;
+	}
+	
+	.table_of_contents-indent-3 {
+		margin-left: 4.5rem;
+	}
+	
+	.table_of_contents-link {
+		text-decoration: none;
+		opacity: 0.7;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+	}
+	
+	table,
+	th,
+	td {
+		border: 1px solid rgba(55, 53, 47, 0.09);
+		border-collapse: collapse;
+	}
+	
+	table {
+		border-left: none;
+		border-right: none;
+	}
+	
+	th,
+	td {
+		font-weight: normal;
+		padding: 0.25em 0.5em;
+		line-height: 1.5;
+		min-height: 1.5em;
+		text-align: left;
+	}
+	
+	th {
+		color: rgba(55, 53, 47, 0.6);
+	}
+	
+	ol,
+	ul {
+		margin: 0;
+		margin-block-start: 0.6em;
+		margin-block-end: 0.6em;
+	}
+	
+	li > ol:first-child,
+	li > ul:first-child {
+		margin-block-start: 0.6em;
+	}
+	
+	ul > li {
+		list-style: disc;
+	}
+	
+	ul.to-do-list {
+		text-indent: -1.7em;
+	}
+	
+	ul.to-do-list > li {
+		list-style: none;
+	}
+	
+	.to-do-children-checked {
+		text-decoration: line-through;
+		opacity: 0.375;
+	}
+	
+	ul.toggle > li {
+		list-style: none;
+	}
+	
+	ul {
+		padding-inline-start: 1.7em;
+	}
+	
+	ul > li {
+		padding-left: 0.1em;
+	}
+	
+	ol {
+		padding-inline-start: 1.6em;
+	}
+	
+	ol > li {
+		padding-left: 0.2em;
+	}
+	
+	.mono ol {
+		padding-inline-start: 2em;
+	}
+	
+	.mono ol > li {
+		text-indent: -0.4em;
+	}
+	
+	.toggle {
+		padding-inline-start: 0em;
+		list-style-type: none;
+	}
+	
+	/* Indent toggle children */
+	.toggle > li > details {
+		padding-left: 1.7em;
+	}
+	
+	.toggle > li > details > summary {
+		margin-left: -1.1em;
+	}
+	
+	.selected-value {
+		display: inline-block;
+		padding: 0 0.5em;
+		background: rgba(206, 205, 202, 0.5);
+		border-radius: 3px;
+		margin-right: 0.5em;
+		margin-top: 0.3em;
+		margin-bottom: 0.3em;
+		white-space: nowrap;
+	}
+	
+	.collection-title {
+		display: inline-block;
+		margin-right: 1em;
+	}
+	
+	time {
+		opacity: 0.5;
+	}
+	
+	.icon {
+		display: inline-block;
+		max-width: 1.2em;
+		max-height: 1.2em;
+		text-decoration: none;
+		vertical-align: text-bottom;
+		margin-right: 0.5em;
+	}
+	
+	img.icon {
+		border-radius: 3px;
+	}
+	
+	.user-icon {
+		width: 1.5em;
+		height: 1.5em;
+		border-radius: 100%;
+		margin-right: 0.5rem;
+	}
+	
+	.user-icon-inner {
+		font-size: 0.8em;
+	}
+	
+	.text-icon {
+		border: 1px solid #000;
+		text-align: center;
+	}
+	
+	.page-cover-image {
+		display: block;
+		object-fit: cover;
+		width: 100%;
+		height: 30vh;
+	}
+	
+	.page-header-icon {
+		font-size: 3rem;
+		margin-bottom: 1rem;
+	}
+	
+	.page-header-icon-with-cover {
+		margin-top: -0.72em;
+		margin-left: 0.07em;
+	}
+	
+	.page-header-icon img {
+		border-radius: 3px;
+	}
+	
+	.link-to-page {
+		margin: 1em 0;
+		padding: 0;
+		border: none;
+		font-weight: 500;
+	}
+	
+	p > .user {
+		opacity: 0.5;
+	}
+	
+	td > .user,
+	td > time {
+		white-space: nowrap;
+	}
+	
+	input[type="checkbox"] {
+		transform: scale(1.5);
+		margin-right: 0.6em;
+		vertical-align: middle;
+	}
+	
+	p {
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
+	
+	.image {
+		border: none;
+		margin: 1.5em 0;
+		padding: 0;
+		border-radius: 0;
+		text-align: center;
+	}
+	
+	.code,
+	code {
+		background: rgba(135, 131, 120, 0.15);
+		border-radius: 3px;
+		padding: 0.2em 0.4em;
+		border-radius: 3px;
+		font-size: 85%;
+		tab-size: 2;
+	}
+	
+	code {
+		color: #eb5757;
+	}
+	
+	.code {
+		padding: 1.5em 1em;
+	}
+	
+	.code-wrap {
+		white-space: pre-wrap;
+		word-break: break-all;
+	}
+	
+	.code > code {
+		background: none;
+		padding: 0;
+		font-size: 100%;
+		color: inherit;
+	}
+	
+	blockquote {
+		font-size: 1.25em;
+		margin: 1em 0;
+		padding-left: 1em;
+		border-left: 3px solid rgb(55, 53, 47);
+	}
+	
+	.bookmark {
+		text-decoration: none;
+		max-height: 8em;
+		padding: 0;
+		display: flex;
+		width: 100%;
+		align-items: stretch;
+	}
+	
+	.bookmark-title {
+		font-size: 0.85em;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		height: 1.75em;
+		white-space: nowrap;
+	}
+	
+	.bookmark-text {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.bookmark-info {
+		flex: 4 1 180px;
+		padding: 12px 14px 14px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	
+	.bookmark-image {
+		width: 33%;
+		flex: 1 1 180px;
+		display: block;
+		position: relative;
+		object-fit: cover;
+		border-radius: 1px;
+	}
+	
+	.bookmark-description {
+		color: rgba(55, 53, 47, 0.6);
+		font-size: 0.75em;
+		overflow: hidden;
+		max-height: 4.5em;
+		word-break: break-word;
+	}
+	
+	.bookmark-href {
+		font-size: 0.75em;
+		margin-top: 0.25em;
+	}
+	
+	.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+	.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+	.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+	.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+	.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+	
+	.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+	
+	.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+	
+	.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+	
+	.highlight-default {
+	}
+	.highlight-gray {
+		color: rgb(155,154,151);
+	}
+	.highlight-brown {
+		color: rgb(100,71,58);
+	}
+	.highlight-orange {
+		color: rgb(217,115,13);
+	}
+	.highlight-yellow {
+		color: rgb(223,171,1);
+	}
+	.highlight-teal {
+		color: rgb(15,123,108);
+	}
+	.highlight-blue {
+		color: rgb(11,110,153);
+	}
+	.highlight-purple {
+		color: rgb(105,64,165);
+	}
+	.highlight-pink {
+		color: rgb(173,26,114);
+	}
+	.highlight-red {
+		color: rgb(224,62,62);
+	}
+	.highlight-gray_background {
+		background: rgb(235,236,237);
+	}
+	.highlight-brown_background {
+		background: rgb(233,229,227);
+	}
+	.highlight-orange_background {
+		background: rgb(250,235,221);
+	}
+	.highlight-yellow_background {
+		background: rgb(251,243,219);
+	}
+	.highlight-teal_background {
+		background: rgb(221,237,234);
+	}
+	.highlight-blue_background {
+		background: rgb(221,235,241);
+	}
+	.highlight-purple_background {
+		background: rgb(234,228,242);
+	}
+	.highlight-pink_background {
+		background: rgb(244,223,235);
+	}
+	.highlight-red_background {
+		background: rgb(251,228,228);
+	}
+	.block-color-default {
+		color: inherit;
+		fill: inherit;
+	}
+	.block-color-gray {
+		color: rgba(55, 53, 47, 0.6);
+		fill: rgba(55, 53, 47, 0.6);
+	}
+	.block-color-brown {
+		color: rgb(100,71,58);
+		fill: rgb(100,71,58);
+	}
+	.block-color-orange {
+		color: rgb(217,115,13);
+		fill: rgb(217,115,13);
+	}
+	.block-color-yellow {
+		color: rgb(223,171,1);
+		fill: rgb(223,171,1);
+	}
+	.block-color-teal {
+		color: rgb(15,123,108);
+		fill: rgb(15,123,108);
+	}
+	.block-color-blue {
+		color: rgb(11,110,153);
+		fill: rgb(11,110,153);
+	}
+	.block-color-purple {
+		color: rgb(105,64,165);
+		fill: rgb(105,64,165);
+	}
+	.block-color-pink {
+		color: rgb(173,26,114);
+		fill: rgb(173,26,114);
+	}
+	.block-color-red {
+		color: rgb(224,62,62);
+		fill: rgb(224,62,62);
+	}
+	.block-color-gray_background {
+		background: rgb(235,236,237);
+	}
+	.block-color-brown_background {
+		background: rgb(233,229,227);
+	}
+	.block-color-orange_background {
+		background: rgb(250,235,221);
+	}
+	.block-color-yellow_background {
+		background: rgb(251,243,219);
+	}
+	.block-color-teal_background {
+		background: rgb(221,237,234);
+	}
+	.block-color-blue_background {
+		background: rgb(221,235,241);
+	}
+	.block-color-purple_background {
+		background: rgb(234,228,242);
+	}
+	.block-color-pink_background {
+		background: rgb(244,223,235);
+	}
+	.block-color-red_background {
+		background: rgb(251,228,228);
+	}
+	.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+	.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+	.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+	.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+	.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+	.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+	.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+	.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+	.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+	.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+	
+	.checkbox {
+		display: inline-flex;
+		vertical-align: text-bottom;
+		width: 16;
+		height: 16;
+		background-size: 16px;
+		margin-left: 2px;
+		margin-right: 5px;
+	}
+	
+	.checkbox-on {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+	
+	.checkbox-off {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+		
+	</style></head><body><article id="225c3a1d-7258-41c5-9a5a-eb40fb35dac7" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📜</span></div><h1 class="page-title">Low Fidelity Prototyping</h1></header><div class="page-body"><nav id="4f4cc316-3ece-47c6-9f1f-fbe9034d64c2" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#abbd87d9-265d-45f2-b559-3a1ad8b35f99">Iterations</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1d26be9a-ffc5-4116-9865-e36001ea703f">Iteration 1: 10+10 method</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7d8d9a7a-0214-4148-a077-de0c3d548cb7">Iteration 2: </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#458b2554-4201-42c4-b31e-f0a41a3cdbed">Groupings</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#be02d546-6be1-4cdd-b772-11def31217a7">Prototypes</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3c6bfcbb-62d0-4e7c-a799-c4c205cbeac9">Prototype #1:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f3afe397-9403-4a4e-9df0-ea1fb56c9591">Prototype #2:</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f071d9f7-329f-4846-a751-2fb6b0a0233c">Usability Goals and Benchmark Tests</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#73e0d546-d027-4850-860d-fcb20891cab4">Usability Goals</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#58f3c218-8900-4efb-bd8f-18d6cbf03086">Test Materials</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4c68d8af-ac75-4c28-b232-5cd20482b650">Ethics</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8ce7f125-19d0-4d5e-b814-402d71d9c86a">Observer Briefing</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d1479c75-266b-4478-86a5-5dc9ea1243b3">User Introduction</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ff5767dd-6004-46f2-bbd0-3b821e00ec45">Pre-test Questionnaire</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#978eab34-b20b-436d-807c-159cbc3f8dd3">User Documentation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a9e80f77-6874-4b21-9671-d8b176e2f6fc">Task Set</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#84a365db-b338-4d69-8e81-7e36c4b598aa">Data Collection</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#234dd693-93fe-4a45-bf73-8f37d8b1ddb2">Post-test form</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#951a73b4-2e8d-401d-b287-d597185c6081">Script For Tests</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c88025b5-7387-45bb-b0da-1066b1f61a4f">Summary of Test Results</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#74b45fdb-398c-4639-9b12-5bc56b3de02c">Pre-Test Questionnaire Responses</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b322b2fa-5632-4ac5-a097-ec1659d32115">Post-Test Survey Results</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e28fa15f-48a2-49fd-9740-44c32b3dfff0">Analysis</a></div></nav><h1 id="abbd87d9-265d-45f2-b559-3a1ad8b35f99" class="">Iterations</h1><h2 id="1d26be9a-ffc5-4116-9865-e36001ea703f" class="">Iteration 1: 10+10 method</h2><div id="59c2924d-10cb-4aa0-af62-009885c18ea8" class="column-list"><div id="250279c6-89f9-4137-a0a3-9794339044bd" style="width:33.333333333333336%" class="column"><figure id="8693a56b-a624-4b03-b75e-693304ea61b1" class="image"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/sketch_jaz_incomingcall_app.jpg"><img style="width:384px" src="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/sketch_jaz_incomingcall_app.jpg"></a><figcaption>Incoming Call Sketches</figcaption></figure></div><div id="3374ef20-a5e2-410e-9930-e4b66db3d3ff" style="width:33.333333333333336%" class="column"><figure id="673a399b-66e7-45e3-b6d1-1746e65802e4" class="image"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/sketch_jaz_emotion_ideas.jpg"><img style="width:144px" src="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/sketch_jaz_emotion_ideas.jpg"></a><figcaption>Sentiment Analysis Sketches</figcaption></figure><p id="17794316-9b8c-4fbd-8de3-9ce4f9fad46c" class="">
+	</p></div><div id="61471187-f345-4486-a820-90dc296ec47d" style="width:33.33333333333333%" class="column"><figure id="a6eeff3b-ab55-41c4-ba90-1efc5bda3bd8" class="image"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Scan_9.jpeg"><img style="width:336px" src="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Scan_9.jpeg"></a><figcaption>Desktop call session interfaces</figcaption></figure><p id="805393f7-0a3a-4ccc-9493-17641f210059" class="">
+	</p></div></div><p id="35e664f7-05a8-49b9-a7c6-4d99f1980112" class="">We started using the 10+10 method to create multiple sketches of our products.
+	These sketches allowed us to experiment with mobile and desktop layouts. This was extremely important as we want our tool to be as accessible as possible and one of the key points we observed in the previous phase is that our users will tend to be more comfortable with a specific device or type of device. As such, designing for both mobile and desktop environments is a key stake for this project.</p><p id="68c73332-ebc2-4ca8-bb48-cfe54b278a29" class="">These sketches allowed us to identify key decisions we had to make concerning the product:</p><ul id="e33f87f2-9b06-4776-a736-7d81ee25e5d7" class="bulleted-list"><li>Handling Group calls V.S. 1-1 calling</li></ul><ul id="2eba3b1e-d5ac-48bc-b48d-ff41a27d365f" class="bulleted-list"><li>Web app V.S. Native app</li></ul><ul id="2536cca7-4daa-4d5a-9a28-a86103a2d6d3" class="bulleted-list"><li>Login and Sign up processes</li></ul><ul id="792c629b-eb2f-4a80-ae49-ad87e2172a44" class="bulleted-list"><li>Physical V.S. Software product</li></ul><ul id="421cd359-df12-4a2a-b986-d6240d5e4509" class="bulleted-list"><li>Closed Captioning</li></ul><ul id="31b170be-af03-4863-b96e-fcf02948c725" class="bulleted-list"><li>Start and join call without account</li></ul><h2 id="7d8d9a7a-0214-4148-a077-de0c3d548cb7" class="">Iteration 2: </h2><p id="d8838aa9-010c-44da-9465-e16806b6e80d" class="">In this second iteration, we focused on our decisions made at the end of the previous iteration. As such we focused on designing an interface for</p><ul id="75479902-8899-48ee-a02a-4654a066a74e" class="bulleted-list"><li>smooth start and join of call,</li></ul><ul id="a84e875c-f887-44e9-9657-45bd97032380" class="bulleted-list"><li>Handling only 1 on 1 calls,</li></ul><ul id="d11d0d97-74e4-4be0-9630-43cf00996214" class="bulleted-list"><li>using a web app that is added to a m,obile device's home screen</li></ul><p id="0bd27b75-3737-49c6-a777-97c61013c75e" class="">We also investigated workflows and interactions of the different designs for different processes.</p><h2 id="458b2554-4201-42c4-b31e-f0a41a3cdbed" class="">Groupings</h2><p id="30e1527b-5d1e-464e-bfa4-ec79f8af155f" class="">Once this second iteration completed we grouped up all the sketches into different categories to identify what we wanted to use for our prototypes.</p><div height="500px" width="100%"><iframe height="500px" width="100%" src="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/final_grouped_sketches.pdf">https://s3.us-west-2.amazonaws.com/secure.notion-static.com/f3d5273a-aef6-4142-be5a-fa37097e9f84/final_grouped_sketches.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20201006%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20201006T012948Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=3a05aac14cec256ba9961050f88742e6a4e24bc19f8fdb0a44c8d940531a01bb&amp;X-Amz-SignedHeaders=host&amp;response-content-disposition=filename%20%3D%22final_grouped_sketches.pdf%22</iframe></div><figcaption>Sketch groupings (zoom for details)</figcaption>
+	<p id="1653a73e-909a-4937-aa69-c69f55c38b5a" class="">
+	</p><h1 id="be02d546-6be1-4cdd-b772-11def31217a7" class="">Prototypes</h1><h2 id="3c6bfcbb-62d0-4e7c-a799-c4c205cbeac9" class="">Prototype #1:</h2><p id="62e15d52-d7f7-4f36-80c7-74c97a60d217" class="">Desktop centered environment with minimalist design</p><div height="500px" width="100%"><iframe width="560" height="315" src="https://www.youtube.com/embed/-Gdr0jJ_yGU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><h2 id="f3afe397-9403-4a4e-9df0-ea1fb56c9591" class="">Prototype #2:</h2><p id="c16b4a91-3095-43f0-9fb4-278fb0141742" class="">Mobile centered prototype with minimalist controls</p><div height="500px" width="100%"><iframe width="560" height="315" src="https://www.youtube.com/embed/PejPebUwrU0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><h1 id="f071d9f7-329f-4846-a751-2fb6b0a0233c" class="">Usability Goals and Benchmark Tests</h1><h3 id="73e0d546-d027-4850-860d-fcb20891cab4" class="">Usability Goals</h3><p id="a9a30f69-e1ae-4520-b424-88dfac966aaf" class="">In order to determine which of the prototypes to continue with, we developed a series of goals which we believe will be important to complete in order to create a successful system. They are as follows:</p><p id="1c3a34fe-c333-4e6d-93a5-d31af4578b27" class=""><strong>1. Users of the tool should be able to adopt it without any required technical background.</strong></p><ul id="13b64c7c-c95f-4c3e-b233-ce53d539e1dd" class="bulleted-list"><li>Because our target demographic is likely to be less technologically comfortable than the user base of an average video conferencing product, we believe it is vital for the tool to not require much knowledge of technology to use effectively.</li></ul><p id="4a6f92c5-48a8-414e-bbe5-a413fea883cc" class=""><strong>2. Emotions should be shown seamlessly by the tool when they are required.</strong></p><ul id="9fa39981-c23a-466d-a20b-a4afdf197142" class="bulleted-list"><li>In order to allow for the tool to take the place of clear video in times of low bandwidth, we believe it is important that emotions should be displayed without much input from the user when they are required.</li></ul><p id="4834f0db-b402-49d7-b2f8-bdef81b7b477" class=""><strong>3. Emotions should be understandable to the user.</strong></p><ul id="b9408d33-35f8-4130-8466-e76a0025a870" class="bulleted-list"><li>In the cases where sentiment analysis is produced, users should be able to have a good idea of what emotion is being displayed by the tool.</li></ul><ul id="77c0b95a-4fa8-4740-816f-cf2aed6d58c6" class="bulleted-list"><li>Though it is not vital that the user gets the exact emotion (i.e. happy vs. excited) it is important that a user be able to verify the general idea easily.</li></ul><p id="b3297313-e82d-4934-af86-1d82725d5d55" class=""><strong>4. Users should feel a sense of connection, community, or family by using the system.</strong></p><ul id="b0b34185-da84-40ca-b1f4-f684cf5efa97" class="bulleted-list"><li>When using the emotion system, users should be able to feel more connected with the person on the other side of the call - especially when the video is not able to run effectively.</li></ul><p id="756022e3-26a6-4d4a-b054-51f813097129" class=""><strong>5. The system should not require the use of a dedicated device</strong></p><ul id="a8c2cc7d-e6b7-4bbd-8c0f-065d3174dcaf" class="bulleted-list"><li>The system should be able to run on an everyday device like a laptop - no extra hardware required.</li></ul><p id="00231633-dfa8-4537-8845-43cb8b94df3d" class="">
+	</p><div id="6aad3b0a-9db7-4ed8-a674-1d68729e8a6e" class="collection-content"><h4 class="collection-title">Benchmark Tests</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Task</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Associated Goal and Test</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Related Usability Goals</th></tr></thead><tbody><tr id="f23e3621-3bfe-43b8-8d47-cf19fe7863c6"><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Benchmark%20Tests%206aad3b0a9db74ed8a6741d68729e8a6e/Log%20into%20tool%20f23e36213bfe43b88d47cf19fe7863c6.html">Log into tool</a></td><td class="cell-J}mt">A user should be able to login on their own after a half hour of training from a known helper who understands the tool.</td><td class="cell-hgM;">Goals 1, 5</td></tr><tr id="654be897-668f-45d7-b68a-3f8beb31134b"><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Benchmark%20Tests%206aad3b0a9db74ed8a6741d68729e8a6e/Make%20or%20recieve%20a%20call%20654be897668f45d7b68a3f8beb31134b.html">Make or recieve a call</a></td><td class="cell-J}mt">A user should be able to make and receive a call on their own after an hour of instruction.</td><td class="cell-hgM;">Goals 1, 5</td></tr><tr id="5e5e8b8a-89b7-4c90-8435-7bba2c775f67"><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Benchmark%20Tests%206aad3b0a9db74ed8a6741d68729e8a6e/Alert%20user%20to%20low%20bandwidth%20in%20a%20clear%20way%205e5e8b8a89b74c9084357bba2c775f67.html">Alert user to low bandwidth in a clear way</a></td><td class="cell-J}mt">A user should not be confused when a calls video drops off. After using the tool 3 times they should be able to recognize when this issue arises.</td><td class="cell-hgM;">Goal 2</td></tr><tr id="a163e330-79c2-4260-817f-74c3fdd00ee2"><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Benchmark%20Tests%206aad3b0a9db74ed8a6741d68729e8a6e/Turn%20on%20the%20emotions%20system%20a163e33079c24260817f74c3fdd00ee2.html">Turn on the emotions system.</a></td><td class="cell-J}mt">There should be no more than one button press in order to have sentiment analysis to begin and for a clear output to be shown</td><td class="cell-hgM;">Goal 2</td></tr><tr id="3db1c57f-4205-410d-93a4-f0deef968899"><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Benchmark%20Tests%206aad3b0a9db74ed8a6741d68729e8a6e/View%20and%20understand%20emotion%203db1c57f4205410d93a4f0deef968899.html">View and understand emotion</a></td><td class="cell-J}mt">Users should be able to understand the emotion shown in 75% of cases when shown on screen. This will be tested by naming the emotions presented to them when the video of the person they are conversating with cuts out. Again, only very broad emotions are needed for this test.</td><td class="cell-hgM;">Goals 3, 4</td></tr><tr id="19cb1c5b-b006-43be-a73c-39c4dfb5ce5f"><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Benchmark%20Tests%206aad3b0a9db74ed8a6741d68729e8a6e/Gain%20insight%20from%20emotion%20displayed%2019cb1c5bb00643bea73c39c4dfb5ce5f.html">Gain insight from emotion displayed</a></td><td class="cell-J}mt">Users should state that the emotions provided them information about the call that helped them understand what the other user was feeling. This will be marked with a "Yes, the emotions helped" or "No, the emotions did not help".</td><td class="cell-hgM;">Goal 3</td></tr><tr id="f7915c32-ba5c-462f-a071-e1adae0e93e2"><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Benchmark%20Tests%206aad3b0a9db74ed8a6741d68729e8a6e/Communicate%20with%20another%20user%20f7915c32ba5c462fa071e1adae0e93e2.html">Communicate with another user</a></td><td class="cell-J}mt">A user should be able to have an ongoing conversation with both audio and visuals after initiating or joining a call. </td><td class="cell-hgM;">Goals 2, 3, 4</td></tr><tr id="40007967-5bd6-43c4-b156-1abf90b17be3"><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Benchmark%20Tests%206aad3b0a9db74ed8a6741d68729e8a6e/Find%20'help'%20button%20400079675bd643c4b1561abf90b17be3.html">Find 'help' button</a></td><td class="cell-J}mt">Users should be able to find the help button and tutorials from the system to obtain extra information with they need help. </td><td class="cell-hgM;">Goals 1, 4, 5</td></tr><tr id="6d8786fe-80a0-42ea-91a8-5d812e46fe99"><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Benchmark%20Tests%206aad3b0a9db74ed8a6741d68729e8a6e/Troubleshoot%20a%20problem%206d8786fe80a042ea91a85d812e46fe99.html">Troubleshoot a problem</a></td><td class="cell-J}mt">Users should be able to fix a problem when it occurs without needing external help, other than the 'help' and tutorials information. </td><td class="cell-hgM;">Goals 1, 5</td></tr></tbody></table></div><h1 id="58f3c218-8900-4efb-bd8f-18d6cbf03086" class="">Test Materials</h1><h1 id="4c68d8af-ac75-4c28-b232-5cd20482b650" class="">Ethics</h1><p id="9b655d8d-d78d-44ca-b814-3e1497993c84" class="">The observations and test have been executed following the McGill ethics guideline. As such we have received written consent of all the participants through the following form:</p><div height="500px" width="100%"><iframe height="500px" width="100%" src="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/ethics_consent_form.pdf">https://s3.us-west-2.amazonaws.com/secure.notion-static.com/248e707f-5d48-47a7-b6ba-9f96f9715f5d/ethics_consent_form.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20201006%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20201006T000136Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=276825c1ebf3bef89378625187f3a741e8088bae2c99ad41a28e543795490e90&amp;X-Amz-SignedHeaders=host&amp;response-content-disposition=filename%20%3D%22ethics_consent_form.pdf%22</iframe></div><h2 id="8ce7f125-19d0-4d5e-b814-402d71d9c86a" class="">Observer Briefing</h2><div height="500px" width="100%"><iframe height="500px" width="100%" src="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Observer_Briefing.pdf">https://s3.us-west-2.amazonaws.com/secure.notion-static.com/45a510dc-6069-4486-b407-5f3b2d9e8f3c/Observer_Briefing.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20201006%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20201006T022825Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=413f5b197f84945e6448e174a4f112fe74f295a3836afbf38e248d08071a85e0&amp;X-Amz-SignedHeaders=host&amp;response-content-disposition=filename%20%3D%22Observer%2520Briefing.pdf%22</iframe></div><h2 id="d1479c75-266b-4478-86a5-5dc9ea1243b3" class="">User Introduction</h2><div height="500px" width="100%"><iframe height="500px" width="100%" src="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User_Introduction.pdf">https://s3.us-west-2.amazonaws.com/secure.notion-static.com/8776b6e9-64bf-4baa-9dba-55733e83dea4/User_Introduction.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20201006%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20201006T022843Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=bdb99ba490e44c4c3b1231678f7f17f9e07a87241363af4b9bd0b1774c99c061&amp;X-Amz-SignedHeaders=host&amp;response-content-disposition=filename%20%3D%22User%2520Introduction.pdf%22</iframe></div><h2 id="ff5767dd-6004-46f2-bbd0-3b821e00ec45" class="">Pre-test Questionnaire</h2><p id="8c230519-acd3-477c-9cba-df186bf26450" class=""> We prepared and used the following form as a pre-test for our testers. Results from this form allows us to understand our user's familiarity with technology.</p><div height="500px" width="100%"><iframe height="500px" width="100%" src="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/SeniorityRules_Pre-Test_Form_-_Google_Forms.pdf">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8ba83507-4aaf-4221-8047-eadea323a19c/SeniorityRules_Pre-Test_Form_-_Google_Forms.pdf</iframe></div><h2 id="978eab34-b20b-436d-807c-159cbc3f8dd3" class="">User Documentation</h2><div height="500px" width="100%"><iframe height="500px" width="100%" src="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User_Documentation.pdf">https://s3.us-west-2.amazonaws.com/secure.notion-static.com/d706c9da-7aef-41b7-b8e0-c96e91e9dcf9/User_Documentation.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20201006%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20201006T022910Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=06298c90eb1d83b690d3244c517440d48e0f9e9dc11045738a32e5aa809550f8&amp;X-Amz-SignedHeaders=host&amp;response-content-disposition=filename%20%3D%22User%2520Documentation.pdf%22</iframe></div><p id="a8101c1f-0dd7-4508-b66e-bff04216b2ef" class="">
+	</p><h2 id="a9e80f77-6874-4b21-9671-d8b176e2f6fc" class="">Task Set</h2><div height="500px" width="100%"><iframe height="500px" width="100%" src="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Test_Tasks.pdf">https://s3.us-west-2.amazonaws.com/secure.notion-static.com/8bebbc4a-079f-48b8-b67a-53339216e85b/Test_Tasks.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20201006%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20201006T023253Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=7a3629da682b011a6f560b106c61f503e5af702f2b31e9ecfec978189f2b408d&amp;X-Amz-SignedHeaders=host&amp;response-content-disposition=filename%20%3D%22Test%2520Tasks.pdf%22</iframe></div><p id="60d6c86d-3189-426a-9989-6f61c1b90d06" class="">
+	</p><h2 id="84a365db-b338-4d69-8e81-7e36c4b598aa" class="">Data Collection</h2><div id="7bbb8185-7f37-454f-990b-12b505bdb52f" class="collection-content"><h4 class="collection-title">User A</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Prototype</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Tasks</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Observations</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M0,3 C0,1.34314 1.34326,0 3,0 L11,0 C12.6567,0 14,1.34314 14,3 L14,11 C14,12.6569 12.6567,14 11,14 L3,14 C1.34326,14 0,12.6569 0,11 L0,3 Z M3,1.5 C2.17139,1.5 1.5,2.17157 1.5,3 L1.5,11 C1.5,11.8284 2.17139,12.5 3,12.5 L11,12.5 C11.8286,12.5 12.5,11.8284 12.5,11 L12.5,3 C12.5,2.17157 11.8286,1.5 11,1.5 L3,1.5 Z M2.83252,6.8161 L3.39893,6.27399 L3.57617,6.10425 L3.92334,5.77216 L4.26904,6.10559 L4.44531,6.27582 L5.58398,7.37402 L9.28271,3.81073 L9.45996,3.64008 L9.80664,3.3056 L10.1538,3.63989 L10.3311,3.81067 L10.8936,4.35303 L11.0708,4.52399 L11.4434,4.88379 L11.0708,5.24353 L10.8936,5.41437 L6.1084,10.0291 L5.93115,10.2 L5.58398,10.5344 L5.23682,10.2 L5.05957,10.0292 L2.83057,7.87946 L2.65283,7.70801 L2.27832,7.34674 L2.6543,6.98694 L2.83252,6.8161 Z"></path></svg></span>Achieved (Yes/No)</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M0,3 C0,1.34314 1.34326,0 3,0 L11,0 C12.6567,0 14,1.34314 14,3 L14,11 C14,12.6569 12.6567,14 11,14 L3,14 C1.34326,14 0,12.6569 0,11 L0,3 Z M3,1.5 C2.17139,1.5 1.5,2.17157 1.5,3 L1.5,11 C1.5,11.8284 2.17139,12.5 3,12.5 L11,12.5 C11.8286,12.5 12.5,11.8284 12.5,11 L12.5,3 C12.5,2.17157 11.8286,1.5 11,1.5 L3,1.5 Z M2.83252,6.8161 L3.39893,6.27399 L3.57617,6.10425 L3.92334,5.77216 L4.26904,6.10559 L4.44531,6.27582 L5.58398,7.37402 L9.28271,3.81073 L9.45996,3.64008 L9.80664,3.3056 L10.1538,3.63989 L10.3311,3.81067 L10.8936,4.35303 L11.0708,4.52399 L11.4434,4.88379 L11.0708,5.24353 L10.8936,5.41437 L6.1084,10.0291 L5.93115,10.2 L5.58398,10.5344 L5.23682,10.2 L5.05957,10.0292 L2.83057,7.87946 L2.65283,7.70801 L2.27832,7.34674 L2.6543,6.98694 L2.83252,6.8161 Z"></path></svg></span>Additional Help Needed (Yes/No)</th></tr></thead><tbody><tr id="b307c9fa-177e-4d3b-a7cb-b79b947f2ea2"><td class="cell-nHUP">1</td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Initiate%20a%20call%20b307c9fa177e4d3ba7cbb79b947f2ea2.html">Initiate a call.</a></td><td class="cell-n}T[">Confused at first by what the cardboard and text was representing. And didn't understand that how a call would be made without a name or number being inputed at first.</td><td class="cell-Ke|B"><div class="checkbox checkbox-off"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-on"></div></td></tr><tr id="aa8688b2-ebda-444a-bf62-32fb70df7851"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Terminate%20a%20call%20aa8688b2ebda444abf6232fb70df7851.html">Terminate a call.</a></td><td class="cell-n}T["></td><td class="cell-Ke|B"><div class="checkbox checkbox-on"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-off"></div></td></tr><tr id="47d5165d-fa98-4e5a-8036-a78f53795d90"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Join%20a%20call%2047d5165dfa984e5a8036a78f53795d90.html">Join a call.</a></td><td class="cell-n}T["></td><td class="cell-Ke|B"><div class="checkbox checkbox-on"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-on"></div></td></tr><tr id="1dd166b5-97ee-4ceb-b35e-e2bb253d0307"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Use%20SeniorityRules%20when%20video%20is%20working%201dd166b597ee4cebb35ee2bb253d0307.html">Use SeniorityRules when video is working.</a></td><td class="cell-n}T[">Not completely clear that</td><td class="cell-Ke|B"><div class="checkbox checkbox-on"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-off"></div></td></tr><tr id="364e6b49-9196-445a-bc6b-31b6dbe8ed4a"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Use%20SeniorityRules%20when%20video%20is%20not%20working%20364e6b499196445abc6b31b6dbe8ed4a.html">Use SeniorityRules when video is not working.</a></td><td class="cell-n}T["></td><td class="cell-Ke|B"><div class="checkbox checkbox-on"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-on"></div></td></tr><tr id="81af9bde-4470-42be-a3d6-7c20f152990f"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Indicate%20verbal%20understanding%20when%20video%20is%20not%20wo%2081af9bde447042bea3d67c20f152990f.html">Indicate verbal understanding when video is not working.</a></td><td class="cell-n}T["></td><td class="cell-Ke|B"><div class="checkbox checkbox-on"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-on"></div></td></tr><tr id="297d60ac-0dbd-4163-967c-970622c75866"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Find%20help%20in%20app%20when%20needed%20297d60ac0dbd4163967c970622c75866.html">Find help in app when needed</a></td><td class="cell-n}T[">First thing he did was click the 'help' button.</td><td class="cell-Ke|B"><div class="checkbox checkbox-on"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-off"></div></td></tr><tr id="9d99f193-548c-4c7a-9650-eb2f9a930c8b"><td class="cell-nHUP">2</td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Register%20for%20an%20account%209d99f193548c4c7a9650eb2f9a930c8b.html">Register for an account.</a></td><td class="cell-n}T[">Said didn't remember email/password but would have been able to complete it</td><td class="cell-Ke|B"><div class="checkbox checkbox-on"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-off"></div></td></tr><tr id="3baa8e4d-00aa-4ab2-869e-4359a48c62dd"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Add%20to%20the%20homescreen%203baa8e4d00aa4ab2869e4359a48c62dd.html">Add to the homescreen.</a></td><td class="cell-n}T[">Could add to homescreen but took a while to figure out how to reopen the application.</td><td class="cell-Ke|B"><div class="checkbox checkbox-on"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-on"></div></td></tr><tr id="5055f9f6-c88c-45ed-927f-d8a3c6c2eb05"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Initiate%20a%20call%205055f9f6c88c45ed927fd8a3c6c2eb05.html">Initiate a call.</a></td><td class="cell-n}T["></td><td class="cell-Ke|B"><div class="checkbox checkbox-on"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-off"></div></td></tr><tr id="2f1b50e3-30e5-4880-8bc0-19c1877ad402"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Terminate%20a%20call%202f1b50e330e548808bc019c1877ad402.html">Terminate a call.</a></td><td class="cell-n}T["></td><td class="cell-Ke|B"><div class="checkbox checkbox-on"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-off"></div></td></tr><tr id="e525936d-24c8-4138-a4b8-595dd44aefdd"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Utilize%20%E2%80%98redial%E2%80%99%20or%20%E2%80%98call%20log%E2%80%99%20e525936d24c84138a4b8595dd44aefdd.html">Utilize ‘redial’ or ‘call log’.</a></td><td class="cell-n}T["></td><td class="cell-Ke|B"><div class="checkbox checkbox-off"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-off"></div></td></tr><tr id="e8d0d48a-ecec-42af-bed0-918cf50a9408"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Answer%20an%20incoming%20call%20e8d0d48aecec42afbed0918cf50a9408.html">Answer an incoming call.</a></td><td class="cell-n}T[">Was looking for a different button (for a time sensitive task, this would be an issue)</td><td class="cell-Ke|B"><div class="checkbox checkbox-on"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-on"></div></td></tr><tr id="0dc6c8be-fbe9-43ed-9a74-fd44728db1d0"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Check%20messages%20while%20on%20call%200dc6c8befbe943ed9a74fd44728db1d0.html">Check messages while on call.</a></td><td class="cell-n}T["></td><td class="cell-Ke|B"><div class="checkbox checkbox-on"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-off"></div></td></tr><tr id="58f292ee-0381-4424-b3c4-0844658cc412"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Use%20SeniorityRules%20when%20video%20is%20working%2058f292ee03814424b3c40844658cc412.html">Use SeniorityRules when video is working.</a></td><td class="cell-n}T["></td><td class="cell-Ke|B"><div class="checkbox checkbox-on"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-off"></div></td></tr><tr id="604d4914-b825-4205-8595-64f53a965953"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Use%20SeniorityRules%20when%20video%20is%20not%20working%20604d4914b8254205859564f53a965953.html">Use SeniorityRules when video is not working.</a></td><td class="cell-n}T["></td><td class="cell-Ke|B"><div class="checkbox checkbox-on"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-on"></div></td></tr><tr id="8a8d4734-9f63-45fb-a52c-810637b5313d"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Turn%20off%20%E2%80%98Avatar%E2%80%99%20and%20or%20%E2%80%98Emotion%E2%80%99%208a8d47349f6345fba52c810637b5313d.html">Turn off ‘Avatar’ and/or ‘Emotion’.</a></td><td class="cell-n}T[">Was able to turn it off, but probably didn't understand exactly what it was doing</td><td class="cell-Ke|B"><div class="checkbox checkbox-off"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-on"></div></td></tr><tr id="0042b262-f52e-4744-a7c2-197aa89030bc"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Indicate%20verbal%20understanding%20when%20video%20is%20not%20wo%200042b262f52e4744a7c2197aa89030bc.html">Indicate verbal understanding when video is not working.</a></td><td class="cell-n}T["></td><td class="cell-Ke|B"><div class="checkbox checkbox-off"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-on"></div></td></tr><tr id="7a443734-e1f2-40ef-b35c-f2e54cdc083f"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Find%20help%20in%20the%20app%20if%20they%20need%20it%207a443734e1f240efb35cf2e54cdc083f.html">Find help in the app if they need it.</a></td><td class="cell-n}T["></td><td class="cell-Ke|B"><div class="checkbox checkbox-on"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-off"></div></td></tr><tr id="729c6242-85f9-4b15-bb93-91b57f56943b"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Open%20and%20close%20overlay%20features%20when%20needed%20(i%20e%20h%20729c624285f94b15bb9391b57f56943b.html">Open and close overlay features when needed (i.e. help, notifications).</a></td><td class="cell-n}T["></td><td class="cell-Ke|B"><div class="checkbox checkbox-on"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-off"></div></td></tr><tr id="29d7dc24-8290-4f0e-bd4e-d9889a707189"><td class="cell-nHUP"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20A%207bbb81857f37454f990b12b505bdb52f/Turn%20camera%20on%20off%2029d7dc2482904f0ebd4ed9889a707189.html">Turn camera on/off</a></td><td class="cell-n}T["></td><td class="cell-Ke|B"><div class="checkbox checkbox-off"></div></td><td class="cell-{g`^"><div class="checkbox checkbox-off"></div></td></tr></tbody></table></div><p id="dfcb0d02-49c5-467f-9e40-7a2684895630" class="">
+	</p><div id="e55aca0a-dc8d-4daf-a40d-012f31eaef02" class="collection-content"><h4 class="collection-title">User B</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Prototype</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Tasks</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Observations</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M0,3 C0,1.34314 1.34326,0 3,0 L11,0 C12.6567,0 14,1.34314 14,3 L14,11 C14,12.6569 12.6567,14 11,14 L3,14 C1.34326,14 0,12.6569 0,11 L0,3 Z M3,1.5 C2.17139,1.5 1.5,2.17157 1.5,3 L1.5,11 C1.5,11.8284 2.17139,12.5 3,12.5 L11,12.5 C11.8286,12.5 12.5,11.8284 12.5,11 L12.5,3 C12.5,2.17157 11.8286,1.5 11,1.5 L3,1.5 Z M2.83252,6.8161 L3.39893,6.27399 L3.57617,6.10425 L3.92334,5.77216 L4.26904,6.10559 L4.44531,6.27582 L5.58398,7.37402 L9.28271,3.81073 L9.45996,3.64008 L9.80664,3.3056 L10.1538,3.63989 L10.3311,3.81067 L10.8936,4.35303 L11.0708,4.52399 L11.4434,4.88379 L11.0708,5.24353 L10.8936,5.41437 L6.1084,10.0291 L5.93115,10.2 L5.58398,10.5344 L5.23682,10.2 L5.05957,10.0292 L2.83057,7.87946 L2.65283,7.70801 L2.27832,7.34674 L2.6543,6.98694 L2.83252,6.8161 Z"></path></svg></span>Achieved (Yes/No)</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M0,3 C0,1.34314 1.34326,0 3,0 L11,0 C12.6567,0 14,1.34314 14,3 L14,11 C14,12.6569 12.6567,14 11,14 L3,14 C1.34326,14 0,12.6569 0,11 L0,3 Z M3,1.5 C2.17139,1.5 1.5,2.17157 1.5,3 L1.5,11 C1.5,11.8284 2.17139,12.5 3,12.5 L11,12.5 C11.8286,12.5 12.5,11.8284 12.5,11 L12.5,3 C12.5,2.17157 11.8286,1.5 11,1.5 L3,1.5 Z M2.83252,6.8161 L3.39893,6.27399 L3.57617,6.10425 L3.92334,5.77216 L4.26904,6.10559 L4.44531,6.27582 L5.58398,7.37402 L9.28271,3.81073 L9.45996,3.64008 L9.80664,3.3056 L10.1538,3.63989 L10.3311,3.81067 L10.8936,4.35303 L11.0708,4.52399 L11.4434,4.88379 L11.0708,5.24353 L10.8936,5.41437 L6.1084,10.0291 L5.93115,10.2 L5.58398,10.5344 L5.23682,10.2 L5.05957,10.0292 L2.83057,7.87946 L2.65283,7.70801 L2.27832,7.34674 L2.6543,6.98694 L2.83252,6.8161 Z"></path></svg></span>Additional Help Needed (Yes/No)</th></tr></thead><tbody><tr id="072002b6-4f40-42b9-a85b-0ad9a8d9ed8d"><td class="cell-C{B@">1</td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Initiate%20a%20call%20072002b64f4042b9a85b0ad9a8d9ed8d.html">Initiate a call.</a></td><td class="cell-k=|{"></td><td class="cell-UvTX"><div class="checkbox checkbox-on"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-off"></div></td></tr><tr id="b3122205-d59c-4c15-8223-1a220e9e57f4"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Terminate%20a%20call%20b3122205d59c4c1582231a220e9e57f4.html">Terminate a call.</a></td><td class="cell-k=|{"></td><td class="cell-UvTX"><div class="checkbox checkbox-on"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-off"></div></td></tr><tr id="6d521415-1555-4685-8495-250e5309d32c"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Join%20a%20call%206d521415155546858495250e5309d32c.html">Join a call.</a></td><td class="cell-k=|{"></td><td class="cell-UvTX"><div class="checkbox checkbox-on"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-off"></div></td></tr><tr id="05a88544-e261-4447-919e-bfb7917749ba"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Use%20SeniorityRules%20when%20video%20is%20working%2005a88544e2614447919ebfb7917749ba.html">Use SeniorityRules when video is working.</a></td><td class="cell-k=|{">Was confused by the abstractions made by prototype (i.e. cardboard vs actual video image)</td><td class="cell-UvTX"><div class="checkbox checkbox-on"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-off"></div></td></tr><tr id="fa935f75-e39a-4910-8c54-db3a27e9670c"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Use%20SeniorityRules%20when%20video%20is%20not%20working%20fa935f75e39a49108c54db3a27e9670c.html">Use SeniorityRules when video is not working.</a></td><td class="cell-k=|{">Didn't understand what this was despite notification.</td><td class="cell-UvTX"><div class="checkbox checkbox-on"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-off"></div></td></tr><tr id="01810739-5ab5-4246-97c6-f79b0e7e338c"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Indicate%20verbal%20understanding%20when%20video%20is%20not%20wo%20018107395ab5424697c6f79b0e7e338c.html">Indicate verbal understanding when video is not working.</a></td><td class="cell-k=|{"></td><td class="cell-UvTX"><div class="checkbox checkbox-off"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-on"></div></td></tr><tr id="0052f9e3-0463-429f-84a3-0d6721188be2"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Find%20help%20in%20app%20when%20needed%200052f9e30463429f84a30d6721188be2.html">Find help in app when needed</a></td><td class="cell-k=|{"></td><td class="cell-UvTX"><div class="checkbox checkbox-on"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-off"></div></td></tr><tr id="99a8381d-e36c-41a9-81e6-9a69252c65f5"><td class="cell-C{B@">2</td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Register%20for%20an%20account%2099a8381de36c41a981e69a69252c65f5.html">Register for an account.</a></td><td class="cell-k=|{">Said she didn't remember email/password but would have been able to complete it</td><td class="cell-UvTX"><div class="checkbox checkbox-on"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-off"></div></td></tr><tr id="0e487af8-5dd9-4ebf-a01f-7d1f1c0d048d"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Add%20to%20the%20homescreen%200e487af85dd94ebfa01f7d1f1c0d048d.html">Add to the homescreen.</a></td><td class="cell-k=|{">Eventually was able to accomplish this but took a few tries.</td><td class="cell-UvTX"><div class="checkbox checkbox-off"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-on"></div></td></tr><tr id="79727385-9ec1-447e-ab2c-bccad2ee543b"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Initiate%20a%20call%20797273859ec1447eab2cbccad2ee543b.html">Initiate a call.</a></td><td class="cell-k=|{">Some difficulties with understanding meaning of some buttons</td><td class="cell-UvTX"><div class="checkbox checkbox-on"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-off"></div></td></tr><tr id="b71182ab-a7bf-4b44-a806-955eb07f4d75"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Terminate%20a%20call%20b71182aba7bf4b44a806955eb07f4d75.html">Terminate a call.</a></td><td class="cell-k=|{"></td><td class="cell-UvTX"><div class="checkbox checkbox-on"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-off"></div></td></tr><tr id="88d18ffa-b636-44d1-a1bd-bc6b6f0be2e0"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Utilize%20%E2%80%98redial%E2%80%99%20or%20%E2%80%98call%20log%E2%80%99%2088d18ffab63644d1a1bdbc6b6f0be2e0.html">Utilize ‘redial’ or ‘call log’.</a></td><td class="cell-k=|{"></td><td class="cell-UvTX"><div class="checkbox checkbox-on"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-off"></div></td></tr><tr id="40968460-183a-488f-9c20-81f0625cb11d"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Answer%20an%20incoming%20call%2040968460183a488f9c2081f0625cb11d.html">Answer an incoming call.</a></td><td class="cell-k=|{">Confused by text underneath homescreen</td><td class="cell-UvTX"><div class="checkbox checkbox-off"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-off"></div></td></tr><tr id="c568da7e-ad92-474f-b07b-60c0834640ef"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Check%20messages%20while%20on%20call%20c568da7ead92474fb07b60c0834640ef.html">Check messages while on call.</a></td><td class="cell-k=|{">Too many buttons and was confused by what to press and what button achieves what purpose</td><td class="cell-UvTX"><div class="checkbox checkbox-off"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-on"></div></td></tr><tr id="397d9b11-3a95-4521-aa88-8a87e4f423f0"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Use%20SeniorityRules%20when%20video%20is%20working%20397d9b113a954521aa888a87e4f423f0.html">Use SeniorityRules when video is working.</a></td><td class="cell-k=|{"></td><td class="cell-UvTX"><div class="checkbox checkbox-on"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-off"></div></td></tr><tr id="3dd88bb8-aea0-4d1f-b924-20017c0d6e20"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Use%20SeniorityRules%20when%20video%20is%20not%20working%203dd88bb8aea04d1fb92420017c0d6e20.html">Use SeniorityRules when video is not working.</a></td><td class="cell-k=|{"></td><td class="cell-UvTX"><div class="checkbox checkbox-on"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-on"></div></td></tr><tr id="d426730c-eda1-4c31-a57f-8404b3a356e5"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Turn%20off%20%E2%80%98Avatar%E2%80%99%20and%20or%20%E2%80%98Emotion%E2%80%99%20d426730ceda14c31a57f8404b3a356e5.html">Turn off ‘Avatar’ and/or ‘Emotion’.</a></td><td class="cell-k=|{"></td><td class="cell-UvTX"><div class="checkbox checkbox-off"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-off"></div></td></tr><tr id="2209ba2c-1030-4ff4-b9ce-2ea06cfe3300"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Indicate%20verbal%20understanding%20when%20video%20is%20not%20wo%202209ba2c10304ff4b9ce2ea06cfe3300.html">Indicate verbal understanding when video is not working.</a></td><td class="cell-k=|{">Said it was fine to just wait till video came back</td><td class="cell-UvTX"><div class="checkbox checkbox-off"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-on"></div></td></tr><tr id="0a3b4cd0-ada4-4340-a5ef-97f7409603f6"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Find%20help%20in%20the%20app%20if%20they%20need%20it%200a3b4cd0ada44340a5ef97f7409603f6.html">Find help in the app if they need it.</a></td><td class="cell-k=|{"></td><td class="cell-UvTX"><div class="checkbox checkbox-on"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-off"></div></td></tr><tr id="72e965b4-8fe7-4b35-aad4-6a8da702a5dc"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Open%20and%20close%20overlay%20features%20when%20needed%20(i%20e%20h%2072e965b48fe74b35aad46a8da702a5dc.html">Open and close overlay features when needed (i.e. help, notifications).</a></td><td class="cell-k=|{"></td><td class="cell-UvTX"><div class="checkbox checkbox-off"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-off"></div></td></tr><tr id="617c8864-3f9f-4e8e-a6b0-d7539c5b1309"><td class="cell-C{B@"></td><td class="cell-title"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/User%20B%20e55aca0adc8d4dafa40d012f31eaef02/Turn%20camera%20on%20off%20617c88643f9f4e8ea6b0d7539c5b1309.html">Turn camera on/off</a></td><td class="cell-k=|{"></td><td class="cell-UvTX"><div class="checkbox checkbox-off"></div></td><td class="cell-^:ML"><div class="checkbox checkbox-off"></div></td></tr></tbody></table></div><h2 id="234dd693-93fe-4a45-bf73-8f37d8b1ddb2" class="">Post-test form</h2><div height="500px" width="100%"><iframe height="500px" width="100%" src="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/SeniorityRules_Post-Test_Questionaire_-_Google_Forms.pdf">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/161dc1b4-8444-48ad-aedb-8bf8bf1908b2/SeniorityRules_Post-Test_Questionaire_-_Google_Forms.pdf</iframe></div><h3 id="951a73b4-2e8d-401d-b287-d597185c6081" class="">Script For Tests</h3><p id="23349a1c-657e-4c54-9651-2ae000b8553e" class="">Hello [name here], thank you for participating in the user study of our prototype designs. In this study, you will be testing a couple of prototypes for video conferencing software to see what best suits your needs.</p><p id="6eef481f-3366-468e-890f-f5dd975717c0" class="">During this test, you will be looking at two unfinished systems - as such, you will not be looking at the specifics of the implementation - such as whether it is aesthetically pleasing. Rather, you will be mainly focused on what features are useful and which are not necessary. As such, please don’t focus too much on what the system looks like when performing the test.</p><p id="e4cfdbf4-319f-413f-884e-558d32ea1667" class="">While participating, please vocalize any thoughts you have about the system - both positive and negative. If something works well, please let us know. If something seems useless or if something is missing, let us know that too. All feedback will be very valuable in making the system the best that it can be.</p><p id="37ea9e29-bb0e-48a3-b7b8-46004517cac0" class="">Please complete the pre-test questionnaire so that we can get a bit of background on you and how you tend to use (or not use) video conferencing in your normal life.</p><p id="6b223f87-a6a7-401d-9bfd-b9bb496ca9f4" class="">[perform questionnaire]</p><p id="2a4c16c7-d988-4d67-8664-873aa9574738" class="">Thank you for filling that out. Now let’s start the testing. We are going to ask you to complete several actions within the system. If you are confused about how something is done, please let us know. Additionally, if you have a troubleshooter present in your normal video conferencing sessions, please feel free to ask them questions as you normally would. Do not feel pressure to understand everything right away. However, if something is unclear, please let us know.</p><p id="02255cdb-96ea-428b-8f7c-cce3dc001ddf" class="">Q1: Try to log into the tool. Use the prototype to attempt to perform the login process. [BT 1] (Only for PT 1)</p><p id="98b65b16-5f96-4a6a-a1dd-aa8ecb4f4ff9" class="">Q2: Attempt to make a call. [BT 2]</p><p id="73f0c166-98aa-4067-954a-b43b3781c97f" class="">Q3: A call is incoming, please either answer it or decline it. Please let us know which you are trying to do beforehand.</p><p id="a79261b7-0702-4068-8b3c-c9fbe9af860e" class="">Q4: You are now in a call. Try to turn on the emotion system when necessary (only for PT 1). [BT4]</p><p id="8693a9c3-f877-4b30-a2eb-565b7f1d9dd9" class="">Q5: An emotion is now on the screen. Is it clear what the other user is feeling? [BT5]</p><p id="5aa851d8-a36e-4308-941f-828b3817a85d" class="">Q6: What does the displayed emotion tell you about what the other user is feeling? [BT6]</p><p id="dd9da40a-303e-403d-bc2c-66002646d19a" class="">[Repeat Questions 1-6 for PT2 except where noted]</p><p id="81ecd206-daf7-4e13-bde7-1495ab57a973" class="">Now that you have tested both of the systems, we are going to administer a second form which will ask some general questions about the systems you just used. Please answer as you did the first form.</p><p id="9034e0aa-7433-48ce-ac1c-ba6be66757ce" class="">[perform questionnaire]</p><p id="6456be3f-6c19-4da7-bd23-019f82113120" class="">Thank you so much for participating in our usability test! Have a great day!</p><h1 id="c88025b5-7387-45bb-b0da-1066b1f61a4f" class="">Summary of Test Results</h1><p id="e741ae24-e30e-4dd1-b20a-22718540f985" class="">Two users participated in this study. User A falls into the persona group, the Underdog. User B falls into the persona group the Eager Beaver. Both interviews lasted around an hour each with about 10-25 minutes of preparation beforehand. Users were instructed to perform the tasks as outlined in the 'Test Tasks' above and consented to being recorded. The main concerns being tested with our users was (1) ease of use and (2) understanding the meaning of our emotion avatars.</p><p id="37dafc4f-253b-41f2-bdb9-36c963d8dbc9" class="">
+	User A had some confusion at the beginning with understanding how the prototypes represented technological devices, but got the hang of it after a while. The 'help' button was utilized frequently by User A and User A was also willing to experiment with the different buttons to find the action they were looking to perform. User A seemed to be less confused by Prototype 2 due to its more 'regular phone calling' capabilities. User A stated very positively at the end that having a tool that will be 'easy to use' would be great to have. User A verbally stated that they understood what the emotion avatars were representing after further explanation, but this insight indicates that it is likely that more work should be done to clearly convey why one's video might not work and what the avatar is doing to replace it.</p><figure id="deca7235-21f5-44cc-8e95-319d06b30ad6" class="image"><a href="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Untitled.png"><img style="width:1245px" src="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Untitled.png"></a></figure><p id="a70349f0-12c6-4af3-bfbd-85eeebdcd401" class="">
+	</p><p id="5a5ab1b8-2895-4200-8a16-119f4ae4cd0b" class="">User B's comfort in operating the prototypes decreased from Prototype 1 to Prototype 2 as more options (video/emotion avatar) and more buttons (on/off camera, audio, etc.) were introduced. User B was confused by the meaning of the buttons (i.e. with the messaging feature) and stated that many buttons were unnecessary, but did state that some features were beneficial if designed more clearly (i.e. messaging in a call). </p><h3 id="74b45fdb-398c-4639-9b12-5bc56b3de02c" class="">Pre-Test Questionnaire Responses</h3><div height="500px" width="100%"><iframe height="500px" width="100%" src="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Pre_Test_Responses.pdf">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6695b519-73a6-4569-8878-1960ded2ade2/Pre_Test_Responses.pdf</iframe></div><p id="af714b49-3215-49c3-b45e-59681b5d5a6a" class="">
+	</p><h3 id="b322b2fa-5632-4ac5-a097-ec1659d32115" class="">Post-Test Survey Results</h3><div height="500px" width="100%"><iframe height="500px" width="100%" src="Low%20Fidelity%20Prototyping%20225c3a1d725841c59a5aeb40fb35dac7/Post_Test_Repsonses.pdf">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6c52efc9-40e3-4981-af95-cd39d1510fe7/Post_Test_Repsonses.pdf</iframe></div><h3 id="e28fa15f-48a2-49fd-9740-44c32b3dfff0" class="">Analysis</h3><p id="168da69c-d94a-4363-89bc-16c6c2cb45b8" class="">As can be seen within the data collection section above, users were able to complete almost all of the tasks we tested during tests of the first prototype. This likely represents a system which is well suited to users - even those with very limited technical background. The system had far fewer options for the types of actions that could be taken, however, that does not necessarily correspond to a more useful system. As can be seen within the Post-Test Survey Results above, our users indicated that they believed it was more important for the system to be easier to use even at the cost of these options.</p><p id="f9d8589c-b0b0-4caf-ae29-84fc17920331" class="">With regard to the second prototype, the users had more trouble executing several of the tasks we laid out for them within their tests. Of specific importance to our project, the need to turn on the emotions feature when the audio/video of the call dropped out was one that caused difficulty for our users. This is an important point as we will likely proceed with creating a system which does not require the user to turn on the emotions feature in order for it to begin working.</p><p id="275facbd-efbf-4283-a02f-c657cd5dec13" class="">As can be seen within the Post-Test Survey Results above, the users felt that the emotions system would generally make them feel more connected to the other user. This is of particular importance to our project as it is the main thrust of our work.</p><p id="0e190355-dc35-4e4d-86a8-75a29d06d21d" class="">As we touched on above, we find that the first prototype - which takes away much of the responsibility of using the system away from the user - conforms much better to our user base. This is likely due to the fact that our users will often have lower technological knowledge than other segments of the population. Providing them with a tool which is more streamlined and easier to use will likely prove more useful to them than providing a large range of options and expecting them to be able to use the options. We will be proceeding with this in mind moving forward with our project. </p><p id="a7bd7f93-a088-48c7-9faa-e5710ca7181a" class="">
+	</p></div></article></body></html>
