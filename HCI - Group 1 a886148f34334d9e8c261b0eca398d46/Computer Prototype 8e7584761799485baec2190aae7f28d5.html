@@ -1,0 +1,640 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Computer Prototype</title><style>
+	/* webkit printing magic: print all background colors */
+	html {
+		-webkit-print-color-adjust: exact;
+	}
+	* {
+		box-sizing: border-box;
+		-webkit-print-color-adjust: exact;
+	}
+	
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+	}
+	@media only screen {
+		body {
+			margin: 2em auto;
+			max-width: 900px;
+			color: rgb(55, 53, 47);
+		}
+	}
+	
+	body {
+		line-height: 1.5;
+		white-space: pre-wrap;
+	}
+	
+	a,
+	a.visited {
+		color: inherit;
+		text-decoration: underline;
+	}
+	
+	.pdf-relative-link-path {
+		font-size: 80%;
+		color: #444;
+	}
+	
+	h1,
+	h2,
+	h3 {
+		letter-spacing: -0.01em;
+		line-height: 1.2;
+		font-weight: 600;
+		margin-bottom: 0;
+	}
+	
+	.page-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-top: 0;
+		margin-bottom: 0.75em;
+	}
+	
+	h1 {
+		font-size: 1.875rem;
+		margin-top: 1.875rem;
+	}
+	
+	h2 {
+		font-size: 1.5rem;
+		margin-top: 1.5rem;
+	}
+	
+	h3 {
+		font-size: 1.25rem;
+		margin-top: 1.25rem;
+	}
+	
+	.source {
+		border: 1px solid #ddd;
+		border-radius: 3px;
+		padding: 1.5em;
+		word-break: break-all;
+	}
+	
+	.callout {
+		border-radius: 3px;
+		padding: 1rem;
+	}
+	
+	figure {
+		margin: 1.25em 0;
+		page-break-inside: avoid;
+	}
+	
+	figcaption {
+		opacity: 0.5;
+		font-size: 85%;
+		margin-top: 0.5em;
+	}
+	
+	mark {
+		background-color: transparent;
+	}
+	
+	.indented {
+		padding-left: 1.5em;
+	}
+	
+	hr {
+		background: transparent;
+		display: block;
+		width: 100%;
+		height: 1px;
+		visibility: visible;
+		border: none;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+	}
+	
+	img {
+		max-width: 100%;
+	}
+	
+	@media only print {
+		img {
+			max-height: 100vh;
+			object-fit: contain;
+		}
+	}
+	
+	@page {
+		margin: 1in;
+	}
+	
+	.collection-content {
+		font-size: 0.875rem;
+	}
+	
+	.column-list {
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	.column {
+		padding: 0 1em;
+	}
+	
+	.column:first-child {
+		padding-left: 0;
+	}
+	
+	.column:last-child {
+		padding-right: 0;
+	}
+	
+	.table_of_contents-item {
+		display: block;
+		font-size: 0.875rem;
+		line-height: 1.3;
+		padding: 0.125rem;
+	}
+	
+	.table_of_contents-indent-1 {
+		margin-left: 1.5rem;
+	}
+	
+	.table_of_contents-indent-2 {
+		margin-left: 3rem;
+	}
+	
+	.table_of_contents-indent-3 {
+		margin-left: 4.5rem;
+	}
+	
+	.table_of_contents-link {
+		text-decoration: none;
+		opacity: 0.7;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+	}
+	
+	table,
+	th,
+	td {
+		border: 1px solid rgba(55, 53, 47, 0.09);
+		border-collapse: collapse;
+	}
+	
+	table {
+		border-left: none;
+		border-right: none;
+	}
+	
+	th,
+	td {
+		font-weight: normal;
+		padding: 0.25em 0.5em;
+		line-height: 1.5;
+		min-height: 1.5em;
+		text-align: left;
+	}
+	
+	th {
+		color: rgba(55, 53, 47, 0.6);
+	}
+	
+	ol,
+	ul {
+		margin: 0;
+		margin-block-start: 0.6em;
+		margin-block-end: 0.6em;
+	}
+	
+	li > ol:first-child,
+	li > ul:first-child {
+		margin-block-start: 0.6em;
+	}
+	
+	ul > li {
+		list-style: disc;
+	}
+	
+	ul.to-do-list {
+		text-indent: -1.7em;
+	}
+	
+	ul.to-do-list > li {
+		list-style: none;
+	}
+	
+	.to-do-children-checked {
+		text-decoration: line-through;
+		opacity: 0.375;
+	}
+	
+	ul.toggle > li {
+		list-style: none;
+	}
+	
+	ul {
+		padding-inline-start: 1.7em;
+	}
+	
+	ul > li {
+		padding-left: 0.1em;
+	}
+	
+	ol {
+		padding-inline-start: 1.6em;
+	}
+	
+	ol > li {
+		padding-left: 0.2em;
+	}
+	
+	.mono ol {
+		padding-inline-start: 2em;
+	}
+	
+	.mono ol > li {
+		text-indent: -0.4em;
+	}
+	
+	.toggle {
+		padding-inline-start: 0em;
+		list-style-type: none;
+	}
+	
+	/* Indent toggle children */
+	.toggle > li > details {
+		padding-left: 1.7em;
+	}
+	
+	.toggle > li > details > summary {
+		margin-left: -1.1em;
+	}
+	
+	.selected-value {
+		display: inline-block;
+		padding: 0 0.5em;
+		background: rgba(206, 205, 202, 0.5);
+		border-radius: 3px;
+		margin-right: 0.5em;
+		margin-top: 0.3em;
+		margin-bottom: 0.3em;
+		white-space: nowrap;
+	}
+	
+	.collection-title {
+		display: inline-block;
+		margin-right: 1em;
+	}
+	
+	time {
+		opacity: 0.5;
+	}
+	
+	.icon {
+		display: inline-block;
+		max-width: 1.2em;
+		max-height: 1.2em;
+		text-decoration: none;
+		vertical-align: text-bottom;
+		margin-right: 0.5em;
+	}
+	
+	img.icon {
+		border-radius: 3px;
+	}
+	
+	.user-icon {
+		width: 1.5em;
+		height: 1.5em;
+		border-radius: 100%;
+		margin-right: 0.5rem;
+	}
+	
+	.user-icon-inner {
+		font-size: 0.8em;
+	}
+	
+	.text-icon {
+		border: 1px solid #000;
+		text-align: center;
+	}
+	
+	.page-cover-image {
+		display: block;
+		object-fit: cover;
+		width: 100%;
+		height: 30vh;
+	}
+	
+	.page-header-icon {
+		font-size: 3rem;
+		margin-bottom: 1rem;
+	}
+	
+	.page-header-icon-with-cover {
+		margin-top: -0.72em;
+		margin-left: 0.07em;
+	}
+	
+	.page-header-icon img {
+		border-radius: 3px;
+	}
+	
+	.link-to-page {
+		margin: 1em 0;
+		padding: 0;
+		border: none;
+		font-weight: 500;
+	}
+	
+	p > .user {
+		opacity: 0.5;
+	}
+	
+	td > .user,
+	td > time {
+		white-space: nowrap;
+	}
+	
+	input[type="checkbox"] {
+		transform: scale(1.5);
+		margin-right: 0.6em;
+		vertical-align: middle;
+	}
+	
+	p {
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
+	
+	.image {
+		border: none;
+		margin: 1.5em 0;
+		padding: 0;
+		border-radius: 0;
+		text-align: center;
+	}
+	
+	.code,
+	code {
+		background: rgba(135, 131, 120, 0.15);
+		border-radius: 3px;
+		padding: 0.2em 0.4em;
+		border-radius: 3px;
+		font-size: 85%;
+		tab-size: 2;
+	}
+	
+	code {
+		color: #eb5757;
+	}
+	
+	.code {
+		padding: 1.5em 1em;
+	}
+	
+	.code-wrap {
+		white-space: pre-wrap;
+		word-break: break-all;
+	}
+	
+	.code > code {
+		background: none;
+		padding: 0;
+		font-size: 100%;
+		color: inherit;
+	}
+	
+	blockquote {
+		font-size: 1.25em;
+		margin: 1em 0;
+		padding-left: 1em;
+		border-left: 3px solid rgb(55, 53, 47);
+	}
+	
+	.bookmark {
+		text-decoration: none;
+		max-height: 8em;
+		padding: 0;
+		display: flex;
+		width: 100%;
+		align-items: stretch;
+	}
+	
+	.bookmark-title {
+		font-size: 0.85em;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		height: 1.75em;
+		white-space: nowrap;
+	}
+	
+	.bookmark-text {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.bookmark-info {
+		flex: 4 1 180px;
+		padding: 12px 14px 14px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	
+	.bookmark-image {
+		width: 33%;
+		flex: 1 1 180px;
+		display: block;
+		position: relative;
+		object-fit: cover;
+		border-radius: 1px;
+	}
+	
+	.bookmark-description {
+		color: rgba(55, 53, 47, 0.6);
+		font-size: 0.75em;
+		overflow: hidden;
+		max-height: 4.5em;
+		word-break: break-word;
+	}
+	
+	.bookmark-href {
+		font-size: 0.75em;
+		margin-top: 0.25em;
+	}
+	
+	.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+	.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+	.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+	.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+	.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+	
+	.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+	
+	.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+	
+	.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+	
+	.highlight-default {
+	}
+	.highlight-gray {
+		color: rgb(155,154,151);
+	}
+	.highlight-brown {
+		color: rgb(100,71,58);
+	}
+	.highlight-orange {
+		color: rgb(217,115,13);
+	}
+	.highlight-yellow {
+		color: rgb(223,171,1);
+	}
+	.highlight-teal {
+		color: rgb(15,123,108);
+	}
+	.highlight-blue {
+		color: rgb(11,110,153);
+	}
+	.highlight-purple {
+		color: rgb(105,64,165);
+	}
+	.highlight-pink {
+		color: rgb(173,26,114);
+	}
+	.highlight-red {
+		color: rgb(224,62,62);
+	}
+	.highlight-gray_background {
+		background: rgb(235,236,237);
+	}
+	.highlight-brown_background {
+		background: rgb(233,229,227);
+	}
+	.highlight-orange_background {
+		background: rgb(250,235,221);
+	}
+	.highlight-yellow_background {
+		background: rgb(251,243,219);
+	}
+	.highlight-teal_background {
+		background: rgb(221,237,234);
+	}
+	.highlight-blue_background {
+		background: rgb(221,235,241);
+	}
+	.highlight-purple_background {
+		background: rgb(234,228,242);
+	}
+	.highlight-pink_background {
+		background: rgb(244,223,235);
+	}
+	.highlight-red_background {
+		background: rgb(251,228,228);
+	}
+	.block-color-default {
+		color: inherit;
+		fill: inherit;
+	}
+	.block-color-gray {
+		color: rgba(55, 53, 47, 0.6);
+		fill: rgba(55, 53, 47, 0.6);
+	}
+	.block-color-brown {
+		color: rgb(100,71,58);
+		fill: rgb(100,71,58);
+	}
+	.block-color-orange {
+		color: rgb(217,115,13);
+		fill: rgb(217,115,13);
+	}
+	.block-color-yellow {
+		color: rgb(223,171,1);
+		fill: rgb(223,171,1);
+	}
+	.block-color-teal {
+		color: rgb(15,123,108);
+		fill: rgb(15,123,108);
+	}
+	.block-color-blue {
+		color: rgb(11,110,153);
+		fill: rgb(11,110,153);
+	}
+	.block-color-purple {
+		color: rgb(105,64,165);
+		fill: rgb(105,64,165);
+	}
+	.block-color-pink {
+		color: rgb(173,26,114);
+		fill: rgb(173,26,114);
+	}
+	.block-color-red {
+		color: rgb(224,62,62);
+		fill: rgb(224,62,62);
+	}
+	.block-color-gray_background {
+		background: rgb(235,236,237);
+	}
+	.block-color-brown_background {
+		background: rgb(233,229,227);
+	}
+	.block-color-orange_background {
+		background: rgb(250,235,221);
+	}
+	.block-color-yellow_background {
+		background: rgb(251,243,219);
+	}
+	.block-color-teal_background {
+		background: rgb(221,237,234);
+	}
+	.block-color-blue_background {
+		background: rgb(221,235,241);
+	}
+	.block-color-purple_background {
+		background: rgb(234,228,242);
+	}
+	.block-color-pink_background {
+		background: rgb(244,223,235);
+	}
+	.block-color-red_background {
+		background: rgb(251,228,228);
+	}
+	.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+	.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+	.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+	.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+	.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+	.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+	.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+	.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+	.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+	.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+	
+	.checkbox {
+		display: inline-flex;
+		vertical-align: text-bottom;
+		width: 16;
+		height: 16;
+		background-size: 16px;
+		margin-left: 2px;
+		margin-right: 5px;
+	}
+	
+	.checkbox-on {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+	
+	.checkbox-off {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+		
+	</style></head><body><article id="8e758476-1799-485b-aec2-190aae7f28d5" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1602576666092-bf6447a729fc?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;ixid=eyJhcHBfaWQiOjYzOTIxfQ" style="object-position:center 50%"><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🖥️</span></div><h1 class="page-title">Computer Prototype</h1></header><div class="page-body"><p id="6d12bb33-0850-4f6a-9533-b5b55cc5e09b" class="">Our project is a video conferencing app for elderly populations that seeks to maximize empathic connections through an audio sentiment analysis component when a video feed is not possible and emphasizes usability and learnability. In our third stage of the human-centered design process, we we contribute our high-fidelity computer prototype, which draws on key findings from the previous stages, our peer feedback, and the previous rounds of usability tests. The following sections provide our prototype, updates, instructions for usability tests, and more.</p><p id="691b61ef-0b72-46a9-9148-87bfa0c5c333" class="">
+	</p><nav id="abedda35-1698-40bb-a56a-53648f28cb9c" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1aa431ce-4590-453f-8883-d788bc580768">User Manual</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#37aad409-18b6-4e20-85c8-33a93a4b51ab">Design Evolution</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f7101fea-3ce9-4ffa-ad25-e3d9ab0d8611">Insights &amp; Change from Usability Tests</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7e319770-351e-410d-8278-eeecbcd22932">Insights &amp; Change Peer/Mentor Feedback</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4c569f62-d76c-4dca-b39c-5b1bae29d968">User Population</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f15c6600-132a-4ed2-b774-674e68a828fc">Usability Goals</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#edc60187-28b7-41de-aad8-0a1d864b9e32">Usability Test Procedure</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c191cd5a-ecf8-4044-8b80-04a64fd2bf94">Usability Test Tasks</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#96a27a0e-098a-437c-bae0-80554eea1e0b">Reporting</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#1840d1cc-5676-4117-8740-3547dd5fec50">Heuristics </a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#fc7a1c4b-97bb-4d30-9c05-dfede36dce3d">Usability survey/Heuristics survey</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#66ede9fa-35e3-4801-8a19-518953ae7b58">Necessary Documents:</a></div></nav><h1 id="1aa431ce-4590-453f-8883-d788bc580768" class="">User Manual</h1><p id="d64ea5f3-a3e1-4c08-9eb2-894d8b039a94" class="">Below is the link to the user manual. Here we illustrate all necessary information for our target user (see 'User Population' section) to test our prototype. Our computer prototype is made on Framer and can be accessed at <a href="https://framer.com/share/HCI-SeniorityRules--fdAZXlsUB2xx3LVe5InI/fuZKrZXQC">this link</a>. This link is provided, as well, inside the user manual. </p><p id="9d393133-0054-433e-ae2a-0adecc0e7104" class="">This is a preview link and if there is any issue (there was not at the time of submission), please contact one of the team members immediately. Our contact information can be found on the 'Team' page; our emails are our [firstname].[lastname]@mail.mcgill.ca.</p><div width="100%"><iframe width="100%" height="700" src="Computer%20Prototype%208e7584761799485baec2190aae7f28d5/User_Manual.pdf">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a52f3143-eb6f-49cc-a006-79337950080f/User_Manual.pdf</iframe></div><h1 id="37aad409-18b6-4e20-85c8-33a93a4b51ab" class="">Design Evolution</h1><p id="31cfaabc-1294-4c49-9029-b6c245d6f68f" class="">We received much valuable feedback from the usability tests and peer/mentor reviews. The design evolution section will be separated by those two sections. Together we discussed our main findings from the previous steps and set a course for the high-fidelity prototype. The main goal of all our design changes is to increase our goals (listed below), but especially learnability and usability of our target user population.</p><p id="00dc24ab-3b3b-4c4a-b36e-a075d768c7be" class="">
+	</p><div id="49403aa5-9dc3-4b1e-8fec-c8de21a5b689" class="column-list"><div id="896c4ae1-8f74-456f-a28f-9f85d2380454" style="width:50%" class="column"><figure id="3057d96b-7696-47c9-bb73-11b38702c15e" class="image"><a href="Computer%20Prototype%208e7584761799485baec2190aae7f28d5/PXL_20201019_214406622.jpg"><img style="width:240px" src="Computer%20Prototype%208e7584761799485baec2190aae7f28d5/PXL_20201019_214406622.jpg"></a><figcaption>Lo-Fi Prototype with multiple features and icon buttons.</figcaption></figure><p id="c5b8ba2d-d9a8-4122-aec1-b44e69789713" class="">
+	</p></div><div id="66fa8007-4cdc-44a9-8ea7-9b255afeb5b2" style="width:50%" class="column"><figure id="3dc75739-6e18-43bf-ae46-45d438ec9ca4" class="image"><a href="Computer%20Prototype%208e7584761799485baec2190aae7f28d5/Untitled.png"><img style="width:240px" src="Computer%20Prototype%208e7584761799485baec2190aae7f28d5/Untitled.png"></a><figcaption>Hi-Fi Prototype with less featues, removed 'messaging' component, and textual buttons.</figcaption></figure><p id="782006fd-0435-4db8-82fe-7b00671a492b" class="">
+	</p></div></div><h3 id="f7101fea-3ce9-4ffa-ad25-e3d9ab0d8611" class="">Insights &amp; Change from Usability Tests</h3><ol id="1ae47e25-6a54-4f27-b450-c67f58841242" class="numbered-list" start="1"><li><mark class="highlight-blue">Exchanged icons with clearly indicated text</mark><p id="f106aae8-dd82-4e88-89d2-1883b1ee8611" class="">It was indicated multiple times throughout the usability tests that the icons utilized were not clearly understood by the users. This lead to the users either not knowing what to click to achieve a task or clicking the wrong buttons to achieve a task. Using text instead of icons should clearly indicate to the user what a button will do and where or when to click it.</p></li></ol><ol id="2bea777a-bb7d-4dde-a823-18d872b0f550" class="numbered-list" start="2"><li><mark class="highlight-blue">Removed the 'messaging' component</mark><p id="dadf774a-51d6-418c-904d-7bf1b005c126" class="">Both users seemed indifferent and ambivalent towards the in-call messaging component during the usability tests. While in the future, including a feature such as this might be beneficial, for our current stage of our project and main proposed value (the audio sentiment analysis,  'avatar', and usability), we made the decision to not include this in our high-fidelity computer prototype. </p></li></ol><h3 id="7e319770-351e-410d-8278-eeecbcd22932" class="">Insights &amp; Change Peer/Mentor Feedback</h3><ol id="73582179-f42e-42cc-84ef-484ab980d548" class="numbered-list" start="1"><li><mark class="highlight-blue">User Login/Registration not included</mark><p id="fdc3938f-dc47-4dab-bc92-ee5021824e00" class="">Following our feedback session with our mentor, we are not including the user registration and login steps for our program. This decision was made following the logic that these tasks are not relevant to main value proposition</p></li></ol><ol id="8155697e-77a9-49a9-ab70-98b5baea0c57" class="numbered-list" start="2"><li><mark class="highlight-blue">Clearer info-messaging on the audio sentiment analysis component</mark><p id="aa0ffe89-5003-4817-ab56-574480242407" class="">One of our peers provided feedback indicating that our benchmark test for the user to express understanding of the emotional audio sentiment analysis component was not sufficient. To fix this, we have dedicated a whole section of our design process and ultimate decision to clear informal messaging this component of the program. </p></li></ol><ol id="f54e95c3-2968-42c0-934c-4d29ce9b7c83" class="numbered-list" start="3"><li><mark class="highlight-blue">Removed option to turn off the audio sentiment analysis and 'avatar'</mark><p id="5f16db82-895e-46de-a4b2-8146875d5641" class="">Another one of our peers indicated confusion in the options to turn on and off the 'emotion' and the 'avatar'. This coupled with confusion expressed by the users in the usability study were the basis for our decision to simplify the user interface during a call by removing the option to turn 'emotion' and/or 'avatar' on and off. In short, now all the audio sentiment analysis and associated 'avatars' are automatic. They will only be on when the user's friend's camera is off and, reversely, will only be off when the user's friend's camera is on. </p></li></ol><ol id="6bd3b58e-9437-4996-b146-60455465ad3b" class="numbered-list" start="4"><li><mark class="highlight-blue">'Contacts' is now clearly indicated as 'Recent Calls'</mark><p id="3cffaba9-16df-4aab-8bbb-0d06142396f8" class="">Another individual indicated that the button listed as 'Contacts' in our previous prototype (see images below) is not clearly explained. After much discussion with our mentor and amongst ourselves, we have revised this to be 'Recent Calls' where the user information of previous 5 calls as of 'this' moment in time will be stored and accessible. Additionally, following this discussion, we removed the 'Call Log' option and the 'Redial' option.</p></li></ol><div id="eb14c623-a8f0-4061-8c40-9cce6bfb59ba" class="column-list"><div id="114d46b5-440e-4355-9a68-e9c87c7a9d49" style="width:50%" class="column"><figure id="ec0f1fd3-a8f6-4724-8ee9-880c6a541ef0" class="image"><a href="Computer%20Prototype%208e7584761799485baec2190aae7f28d5/PXL_20201005_221039375.jpg"><img style="width:240px" src="Computer%20Prototype%208e7584761799485baec2190aae7f28d5/PXL_20201005_221039375.jpg"></a><figcaption>Lo-fi prototype 2 with 'Contacts'</figcaption></figure></div><div id="036eea4c-f041-4543-8a36-134a203aade4" style="width:50.000000000000014%" class="column"><figure id="a0d747c0-543d-419a-8e54-c0b2865f37c0" class="image"><a href="Computer%20Prototype%208e7584761799485baec2190aae7f28d5/Untitled%201.png"><img style="width:240px" src="Computer%20Prototype%208e7584761799485baec2190aae7f28d5/Untitled%201.png"></a><figcaption>Hi-fi prototype with 'Recently Called'</figcaption></figure><p id="69522d41-5041-4cbc-b719-cc394c05de8f" class="">
+	</p></div></div><figure id="68311261-9998-430c-b4f8-62e0c52f8c9a" class="image"><a href="Computer%20Prototype%208e7584761799485baec2190aae7f28d5/Untitled%202.png"><img style="width:432px" src="Computer%20Prototype%208e7584761799485baec2190aae7f28d5/Untitled%202.png"></a><figcaption>Lo-fi prototype 1 with 'Contacts'</figcaption></figure><p id="e61036f2-cff2-43ba-ad3b-7efbc0d31c6f" class="">5.   <mark class="highlight-blue">Combined simplicity of Prototype 1 with extra options of Prototype 2</mark></p><div class="indented"><p id="fa123991-7e85-4e83-8a17-c6f70c68d05e" class="">Following both our usability test insights and the feedback of another reviewer, we ultimately decided to follow a hybrid of the two prototypes. This reviewer stated that 'Prototype 1 was insufficient' and a major insight from our usability tests was that the familiarity of Prototype 2 in resembling the act of making a normal phone call lead us to make the computer prototype that you will explore in the next section. Namely, the following decisions:</p><ul id="d4eaac09-a176-4614-8cfa-01fda66db626" class="bulleted-list"><li>Less buttons on the home page and calling interface</li></ul><ul id="93b20990-1049-46ff-914a-e78214603b9b" class="bulleted-list"><li>Only a few people displayed in 'recently called' in stead of all of one's contacts.</li></ul><ul id="04af4eec-3d59-4fb6-b7c6-bcdda915e6f2" class="bulleted-list"><li>The ability to join a call (via a 5-digit code) <em>and</em> the ability to answer an incoming call<ul id="92d115f2-7c77-4d4e-9c46-c3fd66cbcef2" class="bulleted-list"><li>This duality was considered for the cases where a person might not know the username or user ID of the person they are trying to reach, but also with the knowledge that answering an incoming call is an easier action for our target population than joining a call.</li></ul></li></ul><ul id="e67a8b49-da97-4451-96b4-896026f0bcf7" class="bulleted-list"><li>Explicitly clear messaging wherever a user may need help or may be confused (i.e. 'help' buttons, info-messages regarding audio sentiment analysis avatars, joining a call/creating a call for people to join)</li></ul></div><p></p><p id="9b8df3fc-197a-4c6a-b83d-b55f6b6379f8" class="">6.   <mark class="highlight-blue">Large buttons, large font, and high color contrast</mark></p><div class="indented"><p id="a2a3d701-8ad2-48d8-99c7-050ac3d98510" class="">The last major design consideration we took was to have the interface follow the guidelines of 'large buttons, large font, and high color contrast' so that our target user population would have the easiest time using the program as possible. This decision came following some research we conducted on how to best design for elderly aged populations, such as the following publication: <a href="https://www.uxmatters.com/mt/archives/2010/05/designing-for-senior-citizens-organizing-your-work-schedule.php#:~:text=%E2%80%9CAs%20for%20fonts%2C%20sans%20serif,it%27s%20easier%20to%20recognize%20characters">https://www.uxmatters.com/mt/archives/2010/05/designing-for-senior-citizens-organizing-your-work-schedule.php#:~:text=“As for fonts%2C sans serif,it's easier to recognize characters</a>. </p></div><p></p><p id="cedde23f-9575-4475-aba8-97eb5db107f6" class="">
+	</p><h3 id="4c569f62-d76c-4dca-b39c-5b1bae29d968" class="">User Population</h3><p id="9386e60a-3d9f-4544-9fac-e3bdb3a6f83c" class="">The users of this product - and therefore the members of our test population - will be users over 65 who have an interest in video conferencing. We have found 3 people who fit this characterization as we feel that it is likely difficult to find senior citizens who are available and willing to participate in a trial such as this one. Each of them is not completely comfortable, nor uncomfortable, with video conferencing, does possess some general technology background, and has used video conferencing in the past, such as Zoom. We believe this to be the most general user type for our product - someone who doesn't know a lot about technology but is able and willing to learn.</p><p id="7d0945b0-dc7b-442b-931e-6114876bc22f" class="">In addition, each subject will have what we call a 'troubleshooter' with them. This person will be there to help them with certain tasks if they need it. This help is baked into our goals for SeniorityRules. It is our belief that in most cases, seniors will have this aid available to them to help them learn a new software. It is our goal that our system will be able to be easily learned so while the troubleshooter may be necessary the first time - the user will quickly pick up on the teachings from the troubleshooter and not need them the second or third time. As such, during this prototyping test, troubleshooters will be present and will be able to help bridge the gap between testers and subjects.</p><p id="2f8c2f1d-aa95-40e8-bc67-f00e85a2cf78" class="">We would also like to add at this stage that the people you will be testing are doing this as a kindness and we would ask that you be respectful. It is possible that they will require a bit more time and attention in order to complete tasks with the prototype than you would. Please do not get frustrated with them and give them the time they need to work with the prototype.</p><p id="08257297-aa51-4355-90d7-4d8ba75a4b59" class="">
+	</p><h3 id="f15c6600-132a-4ed2-b774-674e68a828fc" class="">Usability Goals</h3><p id="3a458a58-e017-4f1f-8212-b914e0f676e1" class="">We restate our usability goals from the last prototype with changes made according to the findings from the last iteration as well as the feedback received. In addition, we tie each of the goals to a specific quantifiable measurement.</p><p id="08081778-01f9-40dd-9909-f450b7a8748b" class=""><strong>1. Users of the tool should be able to adopt it without any required technical background.</strong></p><ul id="ee64be88-1319-40dd-9945-90cba55f6123" class="bulleted-list"><li>Because our target demographic is likely to be less technologically comfortable than the user base of an average video conferencing product, we believe it is vital for the tool to not require much knowledge of technology to use effectively.</li></ul><ul id="541673c4-2aa4-4138-a1b6-90b8a04f87fc" class="bulleted-list"><li>Our goal is for users to be able to perform all of the functions of our tool within an hour of work alongside a troubleshooter. They should be able to to make and receive calls and use the sliders and help button if necessary within this time.</li></ul><p id="d9de783b-6c25-4b73-a45c-6ae03cbf5ab6" class=""><strong>2. Emotions should be shown seamlessly by the tool when they are required.</strong></p><ul id="0d87481a-870b-4dd2-95ec-e6201864ccbc" class="bulleted-list"><li>In order to allow for the tool to take the place of clear video in times of low bandwidth, we believe it is important that emotions should be displayed without much input from the user when they are required.</li></ul><ul id="004b6ab9-e3a0-4149-8d34-969f39103ff7" class="bulleted-list"><li>The low bandwidth functionality should recognize when the user has limited connectivity and turn on the system automatically. For the prototype, this is going to need to be simulated but it should be clear to the user that the change has occurred without any user input.</li></ul><p id="15c49d05-5357-4d97-8da8-3919adb5413d" class=""><strong>3. Emotions should be understandable to the user.</strong></p><ul id="cb4f2bd2-5424-47e0-ba84-88798b871445" class="bulleted-list"><li>In the cases where sentiment analysis is produced, users should be able to have a good idea of what emotion is being displayed by the tool.</li></ul><ul id="7d544fa0-bb6a-4c6a-840e-cf2c5c10786f" class="bulleted-list"><li>Though it is not vital that the user gets the exact emotion (i.e. happy vs. excited) it is important that a user be able to verify the general idea easily.</li></ul><ul id="a83150e1-6d9e-41dd-9178-233371307da6" class="bulleted-list"><li>Users should be able to recognize the general emotion in 80% of cases. As stated above, this need not be exact but should be close to the actual emotion.</li></ul><p id="0b64f025-b7d5-45d0-9f04-6c9f8c239c5f" class=""><strong>4. Users should feel a sense of connection, community, or family by using the system.</strong></p><ul id="003f4341-2f21-411d-ad48-9cbcc73e412d" class="bulleted-list"><li>When using the emotion system, users should be able to feel more connected with the person on the other side of the call - especially when the video is not able to run effectively.</li></ul><ul id="e3cb0da9-05df-49c5-9765-21b27943a978" class="bulleted-list"><li>Users should be able to state whether an emotion on screen is positive or negative in all cases in which they appear. Given the currently limited number of emotions, this should not be unreasonable.</li></ul><p id="94191b29-6029-4658-92b7-4a853ca37d37" class=""><strong>5. The system should not require the use of a dedicated device</strong></p><ul id="4ca98863-ecbd-42f0-9c86-eca5258c767c" class="bulleted-list"><li>The system should be able to run on an everyday device like a laptop - no extra hardware required.</li></ul><ul id="732b4910-487e-46fa-b17f-4acffb1b39da" class="bulleted-list"><li>This has been completed by our choice of design environment.</li></ul><h2 id="edc60187-28b7-41de-aad8-0a1d864b9e32" class="">Usability Test Procedure</h2><p id="0dcf39d2-b2c5-4a46-bd12-cc0abf5aa0b6" class="">The following document illustrates the Test Procedures that the evaluation group(s) should follow. Make sure to read through carefully and be well prepared prior to the official User Test.</p><div width="100%" height="700"><iframe width="100%" height="700" src="Computer%20Prototype%208e7584761799485baec2190aae7f28d5/Test_Procedure_(2).pdf">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4b3141c6-0141-4b5f-bde7-d5f887217255/Test_Procedure_(2).pdf</iframe></div><p id="1ee3a224-a410-4abb-b695-dc872e6f8b12" class="">
+	</p><h2 id="c191cd5a-ecf8-4044-8b80-04a64fd2bf94" class="">Usability Test Tasks</h2><p id="ba6f5dd6-2338-4811-8ea8-a61743679938" class="">
+	</p><p id="081d0ec0-9fc3-476f-b2ed-166052de66f6" class="">Below are the tasks a user will be asked to perform during the Usability Test. In the Usability Test Reporting document (provided below), each task group will have the individual steps listed in the document for clarity.</p><ol id="536feecb-08bb-4c1f-afed-269825e09540" class="numbered-list" start="1"><li>Making a Call to a known user<ul id="e27d4cdf-a30a-47e0-bdf7-f362fc1eebaf" class="bulleted-list"><li>In this test have the user start from the Home Page</li></ul><ul id="9611494f-a9d8-49ed-a588-d27cc8bb00e3" class="bulleted-list"><li>Ask the user to make a new call to their friend who's username is SteveWonder.</li></ul><ul id="b82b0bb6-ae21-48b2-9f19-1970a19d4b21" class="bulleted-list"><li>Once on the call ask them to mute themselves.</li></ul><ul id="fadf8c6e-8600-4695-abe1-41235bc5c7f8" class="bulleted-list"><li>Then ask them to Hang Up</li></ul><ul id="ab2df76e-bc6c-4e15-8cc1-fa85517fe8a4" class="bulleted-list"><li>Make sure to take out your stopwatch to capture the time it takes the user to complete the task.</li></ul></li></ol><ol id="05fb7cb2-8655-495b-b7dc-24df407427ed" class="numbered-list" start="2"><li>Creating an empty call that can be joined<ul id="59d7f8f8-8df7-41b8-9331-3c5280d15f4f" class="bulleted-list"><li>In this test have the user start from the Home Page (shown Previously)</li></ul><ul id="929c0269-be4d-41dd-9276-63fad193906b" class="bulleted-list"><li>Ask the user to make a new empty call.</li></ul><ul id="20ff3e11-a4b7-47cf-bf26-68916d787cd6" class="bulleted-list"><li>Once on the call ask them to report the call id that they should send to their friend.</li></ul><ul id="615c0bd5-eef0-4a98-b734-396e28d89052" class="bulleted-list"><li>Then ask them to turn their video off.</li></ul><ul id="050c89d0-267a-428f-bc8f-9767c1d56db5" class="bulleted-list"><li>Finally ask them to Hang Up.</li></ul><ul id="35ab9809-a459-424c-b239-ad8674ca2e95" class="bulleted-list"><li>Make sure to take out your stopwatch to capture the time it takes the user to complete the task.</li></ul></li></ol><ol id="f6126d52-a5f4-4caf-8947-1a772c5bfc8a" class="numbered-list" start="3"><li>Joining a Direct call<ul id="d692e6bb-308c-4ef6-be5b-55990a5493f1" class="bulleted-list"><li>In this test have the user start from the Home Page (shown Previously).</li></ul><ul id="c0fcf078-0325-4884-af68-aefd2fccba61" class="bulleted-list"><li>Ask the user to respond to the direct call they are about to receive.</li></ul><ul id="d502fe45-8bea-4a72-b25e-76456a1fe25d" class="bulleted-list"><li>To trigger the call, press on the time at the top left of the user's screen.</li></ul><ul id="d6e90b60-60b9-45e1-bcc4-5f6c73267928" class="bulleted-list"><li>If the user accidentally Declines the call, you can re-trigger the call once more.</li></ul><ul id="517087aa-ea1e-4e77-8e00-5d3aa666293b" class="bulleted-list"><li>Make sure to take out your stopwatch to capture the time it takes the user to complete the task.</li></ul></li></ol><ol id="95eb667c-904c-45a9-9594-ee390325e5ea" class="numbered-list" start="4"><li>Joining an empty call using the call ID<ul id="df761701-fa64-4fad-b6e9-058db7ca82a7" class="bulleted-list"><li>In this test have the user start from the Home Page (shown Previously)</li></ul><ul id="8501ac98-99ea-4f3e-bab8-e44637dd2556" class="bulleted-list"><li>Ask the user to join the call created by their friend SteveWonder.</li></ul><ul id="4c410c4c-80ac-4c57-bbf6-4a614a162d43" class="bulleted-list"><li>SteveWonder's user ID is 12345.</li></ul><ul id="d1ee2a22-700f-404f-b63b-5bbf8b23ad50" class="bulleted-list"><li>The ID of that call is 67890.</li></ul><ul id="ee64525e-dbc8-4ee0-9071-8c58db4dbdfb" class="bulleted-list"><li>Make sure to take out your stopwatch to capture the time it takes the user to complete the task.</li></ul></li></ol><h2 id="96a27a0e-098a-437c-bae0-80554eea1e0b" class="">Reporting</h2><p id="1b29de1e-5e73-4f39-a4f7-d146a5d4104e" class="">Below is our Usability Test reporting mechanism. For each task, there are a series of questions and fields to enter in the results. </p><p id="4d757998-283b-4a44-9c99-8b8b9f399e73" class="">A link to the testing document can be found here: </p><figure id="b8ff7e54-0d98-4363-ab4a-dfcab45fa5dc"><div class="source"><a href="https://forms.gle/KFFvbm39uYAfLUJXA">https://forms.gle/KFFvbm39uYAfLUJXA</a></div></figure><p id="28e8c314-509d-4526-bac7-77bb9783450c" class="">The exact file can be seen below:</p><div width="100%" height="700"><iframe width="100%" height="700" src="https://docs.google.com/forms/d/e/1FAIpQLSeZpm1fgkktJjeZ208W3Z_fn3wO_lJahL3sLj4xJYpLOuLK6Q/viewform?usp=sf_link">https://docs.google.com/forms/d/e/1FAIpQLSeZpm1fgkktJjeZ208W3Z_fn3wO_lJahL3sLj4xJYpLOuLK6Q/viewform?usp=sf_link</iframe></div><p id="17eb6a55-c4b7-42bb-943f-c61634457f42" class="">
+	</p><h3 id="1840d1cc-5676-4117-8740-3547dd5fec50" class="">Heuristics </h3><p id="064f5bfe-a633-4f54-ac34-1ef6eb579a3c" class="">We wish to achieve the following heuristics in our system. Several are taken from Nielson's sources and are attributed as such:</p><ol id="0a708ccb-26fe-4b00-9d96-781716d760f6" class="numbered-list" start="1"><li>Error prevention (Nielson's Heuristics)<ul id="84be8c54-d662-4fd1-86f0-82d310117123" class="bulleted-list"><li>We wish to deter users from causing errors to occur in the system. Given that we worry that our target demographic will not be able to fix problems if they occur in certain cases, we plan to reduce the number of possible things that can go wrong for the user.</li></ul></li></ol><ol id="93f164e9-3344-4e24-a797-593a249ebd51" class="numbered-list" start="2"><li>Aesthetic and minimalist design (Nielson's Heuristics)<ul id="ec1885f6-1b22-42ec-b4b9-c44a5522543e" class="bulleted-list"><li>We believe that it is imperative to ensure that the UI provided to our user base is as streamlined as possible to ensure that they don't confuse different actions. As such, we intend to use a particularly minimalist design.</li></ul></li></ol><ol id="fed8c096-b003-4ed4-b20a-4aed835f03fe" class="numbered-list" start="3"><li>Help users recognize, diagnose, and recover from errors <ul id="acaf7a5c-e819-4766-a5c0-59d241ce9b0b" class="bulleted-list"><li>We believe that it is imperative that users understand when something has gone wrong and we also think that in general, it should be fixed by itself because our target audience may have a more limited ability to troubleshoot.</li></ul></li></ol><ol id="648c2ee3-4369-4cb3-9036-19592b8361e4" class="numbered-list" start="4"><li>Help and documentation (Nielson's Heuristics)<ul id="68ac3ac0-c489-4562-8462-1f3db1214df7" class="bulleted-list"><li>We intend to provide clear and well laid out help for each of the actions a user can be taken. We feel it is a real possibility that users will take a few tries to remember how to perform actions so we want to clearly lay them out in our help section which will appear on each page.</li></ul></li></ol><ol id="36b5061b-9e42-401c-b9a1-8e5c8f59c57a" class="numbered-list" start="5"><li>Few features beyond absolute necesities<ul id="e2aa254a-9a8b-4b05-97fa-c28b29085879" class="bulleted-list"><li>We feel that including too many options to the system will have an inverse effect in that users will not be able to use any of them due to confusion. As such, we intend to only include those which are absolutely necesary.</li></ul></li></ol><ol id="52b1b46b-ff62-4e50-b5ac-350d03364798" class="numbered-list" start="6"><li>Clearly describable<ul id="e33bac67-2473-4465-9bd5-68f6cd1bd01b" class="bulleted-list"><li>We believe that it is important that users be able to explain problems to troubleshooters. As such, icons should be clear and describable -  especially when errors arise - to allow troubleshooters to help fix problems.</li></ul></li></ol><p id="65b9e04d-12e7-408f-af43-7b54d9915017" class="">
+	</p><h3 id="fc7a1c4b-97bb-4d30-9c05-dfede36dce3d" class="">Usability survey/Heuristics survey</h3><div width="100%" height="700"><iframe width="100%" height="700" src="https://docs.google.com/forms/d/e/1FAIpQLSd5MPDZPVEcmwgVIDJ-o8uwauwY-sV7Qq8wkJbeiSyo8jqwJQ/viewform?usp=sf_link">https://docs.google.com/forms/d/e/1FAIpQLSd5MPDZPVEcmwgVIDJ-o8uwauwY-sV7Qq8wkJbeiSyo8jqwJQ/viewform?usp=sf_link</iframe></div><h3 id="66ede9fa-35e3-4801-8a19-518953ae7b58" class="">Necessary Documents:</h3><p id="6fed8a33-a45b-4b02-b909-0a20d55da331" class="">Post-Testing Questionnaire: </p><div width="100%" height="700"><iframe width="100%" height="700" src="https://docs.google.com/forms/d/e/1FAIpQLSfYemU8-PMcGdrlSQO_99dE_TUTkY0TnLBHOX5Jk1VPrhK7Bw/viewform">https://docs.google.com/forms/d/e/1FAIpQLSfYemU8-PMcGdrlSQO_99dE_TUTkY0TnLBHOX5Jk1VPrhK7Bw/viewform</iframe></div><figure id="02e479d3-da5e-4d44-84c2-d8f4183a2543"><div class="source"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfYemU8-PMcGdrlSQO_99dE_TUTkY0TnLBHOX5Jk1VPrhK7Bw/viewform">https://docs.google.com/forms/d/e/1FAIpQLSfYemU8-PMcGdrlSQO_99dE_TUTkY0TnLBHOX5Jk1VPrhK7Bw/viewform</a></div></figure><p id="d2353c87-8897-4038-b972-546d479ba914" class="">
+	</p><p id="5200a08c-9c7b-4ea5-bed9-541d9c7101af" class="">User Introduction:</p><div width="100%" height="700"><iframe width="100%" height="700" src="Computer%20Prototype%208e7584761799485baec2190aae7f28d5/User_Introduction.pdf">https://s3.us-west-2.amazonaws.com/secure.notion-static.com/328d2c51-9937-4d71-ad74-c327bba975b7/User_Introduction.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20201020%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20201020T031128Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=9da646193b53529f0df0f70775e4a7bb6420aa472a9601144daa1a5eed8def60&amp;X-Amz-SignedHeaders=host&amp;response-content-disposition=filename%20%3D%22User%2520Introduction.pdf%22</iframe></div><figure id="04ea432d-0f5e-4ba4-92ae-a185bdc2042c"><div class="source"><a href="Computer%20Prototype%208e7584761799485baec2190aae7f28d5/User_Introduction%201.pdf">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/328d2c51-9937-4d71-ad74-c327bba975b7/User_Introduction.pdf</a></div></figure><p id="928c01b4-5dab-4ded-bfa4-ad49d4d02048" class="">
+	</p><p id="bd38d411-ba88-4c4d-b024-3999742292a7" class="">Link to the prototype itself:</p><figure id="e725cdc5-825c-494e-a3a4-49d0e1d8b244"><a href="https://framer.com/share/HCI-SeniorityRules--fdAZXlsUB2xx3LVe5InI" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">HCI SeniorityRules - Framer</div></div><div class="bookmark-href"><img src="https://framer.com/s/favicon@2x.png" class="icon bookmark-icon">https://framer.com/share/HCI-SeniorityRules--fdAZXlsUB2xx3LVe5InI</div></div></a></figure></div></article></body></html>
