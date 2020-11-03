@@ -1,0 +1,656 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Formative Feedback</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="547c529f-3b88-4a6f-a79e-cda938555555" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;ixid=eyJhcHBfaWQiOjYzOTIxfQ" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🗒️</span></div><h1 class="page-title">Formative Feedback</h1></header><div class="page-body"><p id="6bce50a5-33a8-4a52-82a5-509ef475f672" class="">Group 1 provided feedback on Group 2&#x27;s system, Virtual Class Map. This deliverable details our test procedure, analysis of the usability tests, and critiques on the test plan and design choices for the overall system.</p><p id="94760da8-f276-42b6-b6f9-12be0ae4bc68" class="">
+</p><h2 id="a5562338-5025-40ba-88b2-6e96b2b3017b" class="block-color-blue_background">Testing</h2><p id="c9b28754-77db-47a4-ac33-efb85a7f2f46" class="">In total, we conducted three usability tests on three different individuals. All participants fall into one of three identified persona groups mentioned in Group 2&#x27;s latest deliverable. That being, all participants are &quot;students who have been negatively affected by the switch to online lectures using video conferencing tools, or students that can gain from the added interactions provided by the product.&quot;</p><p id="534bdf57-2b9b-49b8-aec1-7660d43e21df" class="">
+</p><p id="6a8a4205-3cbc-4fb3-a2ca-b9c5485b1510" class="">One thing to note, Group 2&#x27;s &#x27;Usability Test Plan&#x27; calls for ideally, 3 examiners present for each usability test. We considered this note, but ultimately decided that 1 examiner would be sufficient for each usability test. Moreover, due to COVID19 restrictions, some of the tests were conducted in person (with roommates) and some were conducted over Zoom. Because the test procedure and reporting sections of Group 2&#x27;s deliverable did not call for tests to be visually and audibly recorded, only one of the tests was recorded by video - this video is being provided as an example of our test.</p><p id="4806b6d4-7d2a-448e-9ca8-67aa5a7719e5" class="">
+</p><ol id="9271636c-50ef-475e-aed1-36db509acd5c" class="numbered-list" start="1"><li><strong>Download V-Class</strong><p id="b033360c-d604-4f59-96ed-b7c1b0d5592e" class="">This was accomplished by following the steps outlined in the &#x27;User Manual&#x27;. Please see our &#x27;Design Critiques&#x27; section below for more details on this step.</p></li></ol><ol id="01bfed08-acba-4a6d-85f9-91c95f886ee1" class="numbered-list" start="2"><li><strong>Prepare Data Collection Sheet </strong><p id="5539fdad-cd12-4144-b3a2-062a83ec2dc8" class="">The data collection sheet provided was a picture of the necessary information. On one screen the prototype was displayed and on the other screen the test results were recorded.</p></li></ol><ol id="50f033e6-b6fb-42bd-a875-ad74ad72397e" class="numbered-list" start="3"><li><strong>Begin Usability Test with &#x27;User Introduction&#x27; sheet </strong><p id="845683a5-0a63-4e3f-9102-956e851b7b51" class="">Show &#x27;User Introduction&#x27; sheet to user (we used the sheet provided in the previous deliverable stage as no sheet was provided during this stage)</p></li></ol><ol id="d405a22b-bd42-42f0-a7fa-b930a36c2889" class="numbered-list" start="4"><li><strong>Ask user for their consent </strong><p id="eb87185f-c147-4ed6-bcb5-d7a242a503ab" class="">The consent form is presented to user and completed. Then ask for permission to record (if test was recorded).</p></li></ol><ol id="59f10db5-d606-44f2-89bb-721b8f5d4b28" class="numbered-list" start="5"><li><strong>Introduce application, its&#x27; features, and main problem</strong></li></ol><ol id="ab45b6a2-7640-49c7-9bcd-dab894920540" class="numbered-list" start="6"><li><strong>Explain goal of Usability Test to user</strong><p id="c6ff7816-3a86-470c-b88a-6fbe9ba0fbd6" class="">This is stated to be &quot;[determining] whether the design meets the goals set during the test creation.&quot; Additionally, evaluators explain to user that they will abstain from helping unless directly asked for assistance.</p></li></ol><ol id="e9ab1068-378f-44f7-a42a-7168ac00c825" class="numbered-list" start="7"><li><strong>Ask user to complete the &#x27;Pre-test Questionnaire&#x27;</strong></li></ol><ol id="4e0cb327-3039-47c9-96d4-e3fb30c033d1" class="numbered-list" start="8"><li><strong>Guide user through test tasks while recording information</strong><p id="82d1253b-ee94-49d4-ba11-88f2e68d226a" class="">For each task, we time how long it took user to complete the action.</p><p id="b9018933-4e7c-461d-9743-c27fcfd8e542" class="">For some tasks, we record how many incorrect clicks were made before the correct action was completed.</p><p id="2713dea2-2b3f-4817-ab5b-9989f6b7aa0b" class="">Additionally, observations of things the user said or did were made.</p><p id="c991141e-64f6-4231-8d06-9add68b1f5cd" class="">General observations by the evaluators were also noted down.</p></li></ol><ol id="ec73acf7-d083-44b3-b4a0-d38299eec98c" class="numbered-list" start="9"><li><strong>User Comments</strong><p id="0aeff5de-318d-4112-a887-776623f0113c" class="">Once test tasks completed, user was prompted to make any statements or comments about the system.</p></li></ol><ol id="22a1c52d-9ad6-49d2-86de-6797961e52ff" class="numbered-list" start="10"><li><strong>Ask user to complete the &#x27;Post-test Questionnaire&#x27;</strong></li></ol><ol id="f535a8f1-d509-4abc-98de-3a62b5188462" class="numbered-list" start="11"><li><strong>Heuristics Usability Evaluation</strong><p id="6c047173-c8fb-4f36-9581-8f666af5143b" class="">Once the form completed, the examiner asked the user to rate and select the heuristics that they thought were applicable to the prototype. The following heuristics were evaluated:</p><ul id="2a338613-c29f-4b46-9729-aa2a64f65660" class="bulleted-list"><li>Recognition rather than recall</li></ul><ul id="fa43c146-af64-45a1-9db6-051f6f004fab" class="bulleted-list"><li>Match between the system and the real world</li></ul><ul id="b1583685-abc9-48c6-814e-7007a147f20b" class="bulleted-list"><li>Flexibility and efficiency of use</li></ul><ul id="791705b7-8847-449c-8515-c7ab468f871c" class="bulleted-list"><li>Error prevention</li></ul><p id="3e4c6849-afe3-44de-b8cf-3a663774c482" class="">
+</p><p id="394315e2-0051-40cb-b4ae-190fafaf7cf9" class="">
+</p></li></ol><figure id="313bff83-a8e7-4cb5-8b96-675bed1f5e3d"><iframe width="560" height="315" src="https://www.youtube.com/embed/qtvETr4Txl4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><figcaption>Video 1: Sample video of one of our user tests.</figcaption></figure><p id="1dd1f0ca-299c-42b9-899b-ce9a202a8700" class="">
+</p><h2 id="9fc373ec-0117-44f4-8df3-d76c3928edc2" class="block-color-teal_background">Results &amp; Analysis</h2><p id="b644d02a-0d8d-46f1-a5b2-48219e19d181" class="">This section will display the pre-test results for all of our test participants, each of the test collection sheets for the participants, the post-test results, and finally a discussion of our analysis on the usability of the proposed system.</p><p id="772a2b84-bae0-4250-847a-4eb0fdb268d4" class="">
+</p><h3 id="69b24040-a267-4676-b233-e46dc1c2e966" class="block-color-teal">Pre-Test Results</h3><p id="d47c73db-00c9-48ff-93bd-6d8cdc459b07" class="">The following is the results for the pre-test questionnaire. </p><figure id="ae22c56f-313b-49b2-b0b5-cc815dd296a6"><a href="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cc7cfb18-25df-4cd7-8d72-da4b72310217/Pre-test_questionnaire_-_Group_2.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cc7cfb18-25df-4cd7-8d72-da4b72310217/Pre-test_questionnaire_-_Group_2.html</div></div></a></figure><p id="25774d36-333b-4acf-b8a3-b69899b8a075" class="">
+</p><h3 id="e624fc2e-c0aa-429b-b1a0-640ae0cbd9c2" class="block-color-teal">Data Collection Sheets</h3><div id="9fe68fc9-be61-4e99-82e7-90d2ffedf6c3" class="collection-content"><h4 class="collection-title">User 1</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Task</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Observation</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>User Observation</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Measurement</th></tr></thead><tbody><tr id="e8b516ef-409d-4766-8869-e76f945432f1"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%201%209fe68fc9be614e9982e790d2ffedf6c3/Login%20to%20virtual%20class%20by%20entering%20necessary%20infor%20e8b516ef409d47668869e76f945432f1.html">Login to virtual class by entering necessary information</a></td><td class="cell-X&lt;Cw">username was entered as mcgill email. design consideration: an &#x27;info&#x27; button to explain what should be entered in the fields</td><td class="cell-ga&gt;A">unsure what the &#x27;Meeting ID&#x27; would be and unclear how long it should be</td><td class="cell-]OCt">26 seconds</td></tr><tr id="ccb56b8a-7657-4138-96dc-b71198cfb2ca"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%201%209fe68fc9be614e9982e790d2ffedf6c3/Select%20an%20available%20seat%20ccb56b8a7657413896dcb71198cfb2ca.html">Select an available seat</a></td><td class="cell-X&lt;Cw">likes to sit in front of class - feature that impacts relationship to professor?</td><td class="cell-ga&gt;A">I like to sit in the front of the class&quot;</td><td class="cell-]OCt">12 seconds
+0 wrong clicks</td></tr><tr id="de2e971b-0e63-47cb-891b-7a5938dfcb2e"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%201%209fe68fc9be614e9982e790d2ffedf6c3/Join%20the%20class%20with%20neighbors%20de2e971b0e6347cb891b7a5938dfcb2e.html">Join the class with neighbors</a></td><td class="cell-X&lt;Cw"></td><td class="cell-ga&gt;A"></td><td class="cell-]OCt">3 seconds</td></tr><tr id="51e66f6a-02df-4f72-9943-2a6f4cd67779"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%201%209fe68fc9be614e9982e790d2ffedf6c3/Write%20in%20the%20neighborhood%20chat%2051e66f6a02df4f7299432a6f4cd67779.html">Write in the neighborhood chat</a></td><td class="cell-X&lt;Cw">The user&#x27;s mouse searches for a few seconds before ultimately landing on the proper chat window. She expresses a general level of uncertainty due to the task name &#x27;Neighborhood Chat&#x27; vs the column title &#x27;Neighbors&#x27;</td><td class="cell-ga&gt;A">&quot;I think thats this one, because its in the column that says neighbors</td><td class="cell-]OCt">14 seconds to find chat
+18 seconds total
+0 wrong clicks</td></tr><tr id="f23c7936-1263-45ec-937c-2f513435fbd5"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%201%209fe68fc9be614e9982e790d2ffedf6c3/Write%20in%20the%20all%20chat%20f23c7936126345ec937c2f513435fbd5.html">Write in the all chat</a></td><td class="cell-X&lt;Cw">can&#x27;t actually type in &#x27;all chat&#x27; but found it instantly</td><td class="cell-ga&gt;A"></td><td class="cell-]OCt">5 seconds</td></tr><tr id="633d269f-608d-4977-a424-491e13b451f8"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%201%209fe68fc9be614e9982e790d2ffedf6c3/Leave%20the%20meeting%20633d269f608d4977a424491e13b451f8.html">Leave the meeting</a></td><td class="cell-X&lt;Cw"></td><td class="cell-ga&gt;A"></td><td class="cell-]OCt">0.5 sec</td></tr><tr id="23894856-155c-4639-aaab-7589e5aea961"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%201%209fe68fc9be614e9982e790d2ffedf6c3/Join%20another%20class%20without%20neighbors%2023894856155c4639aaab7589e5aea961.html">Join another class without neighbors</a></td><td class="cell-X&lt;Cw">slight uncertainty about requirements for joining a class alone</td><td class="cell-ga&gt;A">isn&#x27;t sure if they need to pick a seat to join class alone</td><td class="cell-]OCt">10 sec
+0 wrong clicks</td></tr><tr id="8683bff8-a6fc-4c6d-855d-2778c9af4248"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%201%209fe68fc9be614e9982e790d2ffedf6c3/Untitled%208683bff8a6fc4c6d855d2778c9af4248.html">Untitled</a></td><td class="cell-X&lt;Cw"></td><td class="cell-ga&gt;A"></td><td class="cell-]OCt"></td></tr></tbody></table></div><div id="83124e01-78aa-492d-80e5-11af7ecb3a3e" class="collection-content"><h4 class="collection-title">User 2</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Task</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Observation</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>User Observation</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Measurement</th></tr></thead><tbody><tr id="9d0d95ac-67b5-4905-9107-87c71e3e7b8d"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%202%2083124e0178aa492d80e511af7ecb3a3e/Login%20to%20virtual%20class%20by%20entering%20necessary%20infor%209d0d95ac67b54905910787c71e3e7b8d.html">Login to virtual class by entering necessary information</a></td><td class="cell-X&lt;Cw">Instructions unclear to user. No class id specified in the task description</td><td class="cell-ga&gt;A">What should I enter? Whats the class code?</td><td class="cell-]OCt">Time to complete: 15 seconds</td></tr><tr id="fe82fe9f-334f-4c00-89fd-4494f99eb149"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%202%2083124e0178aa492d80e511af7ecb3a3e/Select%20an%20available%20seat%20fe82fe9f334f4c0089fd4494f99eb149.html">Select an available seat</a></td><td class="cell-X&lt;Cw">User was able to complete the task successfully without any hesitation</td><td class="cell-ga&gt;A"></td><td class="cell-]OCt">Time to complete: 1 second.
+Number of wrong clicks: 0</td></tr><tr id="6ccdd097-2144-4243-a9f6-5eac08ab0822"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%202%2083124e0178aa492d80e511af7ecb3a3e/Join%20the%20class%20with%20neighbors%206ccdd09721444243a9f65eac08ab0822.html">Join the class with neighbors</a></td><td class="cell-X&lt;Cw">User was able to complete the task successfully without any hesitation</td><td class="cell-ga&gt;A"></td><td class="cell-]OCt">Time to complete the task</td></tr><tr id="63201cac-e354-4805-b6bb-2644f379360f"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%202%2083124e0178aa492d80e511af7ecb3a3e/Write%20in%20the%20neighborhood%20chat%2063201cace3544805b6bb2644f379360f.html">Write in the neighborhood chat</a></td><td class="cell-X&lt;Cw">Instructions unclear to user. Nomenclature of neighborhood chat not immediately understood</td><td class="cell-ga&gt;A">I don’t get it, what do I write</td><td class="cell-]OCt">Time to locate: 4 sec
+Time to complete the task: 18 sec
+Amount of wrong clicks: 0</td></tr><tr id="d5279aab-6858-4998-be5d-9daabb881de5"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%202%2083124e0178aa492d80e511af7ecb3a3e/Write%20in%20the%20all%20chat%20d5279aab68584998be5d9daabb881de5.html">Write in the all chat</a></td><td class="cell-X&lt;Cw">Left the call 2 times.It seemed like the all chat feature was not accessible, it was impossible to click on what seemed to be the all chat.</td><td class="cell-ga&gt;A">Was I not in it already?I can’t click</td><td class="cell-]OCt">Time to complete: 1 minute 22 seconds</td></tr><tr id="7e661375-3daa-4c1b-a57c-0a0dbca40334"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%202%2083124e0178aa492d80e511af7ecb3a3e/Leave%20the%20meeting%207e6613753daa4c1ba57c0a0dbca40334.html">Leave the meeting</a></td><td class="cell-X&lt;Cw">User was able to complete the task successfully without any hesitation</td><td class="cell-ga&gt;A"></td><td class="cell-]OCt">Time to complete: 2 seconds</td></tr><tr id="ca5343f1-e457-46f3-ac0b-f63786f7eb6b"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%202%2083124e0178aa492d80e511af7ecb3a3e/Join%20another%20class%20without%20neighbors%20ca5343f1e45746f3ac0bf63786f7eb6b.html">Join another class without neighbors</a></td><td class="cell-X&lt;Cw">User was able to complete the task successfully without any hesitation</td><td class="cell-ga&gt;A"></td><td class="cell-]OCt">Time to complete: 5 secondsAmount of wrong clicks</td></tr></tbody></table></div><div id="c116d56f-5c0a-4f41-934f-663b83c2f532" class="collection-content"><h4 class="collection-title">User 3</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Task</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Observation</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>User Observation</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Measurement</th></tr></thead><tbody><tr id="2757a5b7-e8d8-4f57-8183-8834efbd4510"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%203%20c116d56f5c0a4f41934f663b83c2f532/Login%20to%20virtual%20class%20by%20entering%20necessary%20infor%202757a5b7e8d84f5781838834efbd4510.html">Login to virtual class by entering necessary information</a></td><td class="cell-X&lt;Cw">Login was performed successfully without any missteps. Given that there was no actual login credentials necessary there was some confusion. However, this is unlikely to be relevant given an actual implementation.</td><td class="cell-ga&gt;A">User found the system to be as expected based on other logins to similar services.</td><td class="cell-]OCt">Took about 12s.</td></tr><tr id="fe9c7ab9-e650-4f71-89a0-0d0394c0c015"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%203%20c116d56f5c0a4f41934f663b83c2f532/Select%20an%20available%20seat%20fe9c7ab9e6504f7189a00d0394c0c015.html">Select an available seat</a></td><td class="cell-X&lt;Cw">User seemed as though they did not much care where they sat so it was easy to choose a place to be. User performed the action with no problems.</td><td class="cell-ga&gt;A">User said that it was super clear and was &#x27;very similar to the spin classes [she does].&#x27;</td><td class="cell-]OCt">4s, 0 misclicks</td></tr><tr id="e6977ae6-0ca9-456c-8397-67c3299f61c8"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%203%20c116d56f5c0a4f41934f663b83c2f532/Join%20the%20class%20with%20neighbors%20e6977ae60ca9456c839767c3299f61c8.html">Join the class with neighbors</a></td><td class="cell-X&lt;Cw">Joining with neighbors also presented no problems for the user. Was able to perform the action on the first try.</td><td class="cell-ga&gt;A">&quot;It said join with neighbors or join alone. I could tell the difference. Also the different colours were helpful.&quot;</td><td class="cell-]OCt">4s</td></tr><tr id="895e620a-796c-4024-bca6-cb0cadae3dfd"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%203%20c116d56f5c0a4f41934f663b83c2f532/Write%20in%20the%20neighborhood%20chat%20895e620a796c4024bca6cb0cadae3dfd.html">Write in the neighborhood chat</a></td><td class="cell-X&lt;Cw">Took a minute to differentiate between the neighborhood chat and the all class chat. However, given a second to think about it she was able to understand.</td><td class="cell-ga&gt;A">&quot;I was confused at first but then I actually read everything and then I understood. But it kind of all looks like one so I&#x27;m a bit confused by it.&quot;</td><td class="cell-]OCt">7s
+0 wrong clicks</td></tr><tr id="89f719e2-bcf9-41b8-9b4b-ee2840c61079"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%203%20c116d56f5c0a4f41934f663b83c2f532/Write%20in%20the%20all%20chat%2089f719e2bcf941b89b4bee2840c61079.html">Write in the all chat</a></td><td class="cell-X&lt;Cw">Easily found the all chat. Likely as she had just differentiated the two in the previous section.</td><td class="cell-ga&gt;A">&quot;Clear because it says &#x27;to everyone&#x27;.&quot;</td><td class="cell-]OCt">4s</td></tr><tr id="f267d064-60cd-40cb-9a60-c188e4fc0aff"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%203%20c116d56f5c0a4f41934f663b83c2f532/Leave%20the%20meeting%20f267d06460cd40cb9a60c188e4fc0aff.html">Leave the meeting</a></td><td class="cell-X&lt;Cw">Nearly instant in figuring this out.</td><td class="cell-ga&gt;A">&quot;Red usually means end so that was helpful.&quot;</td><td class="cell-]OCt">4s</td></tr><tr id="7fee2b58-c499-4ad4-bba5-ed2e5f8e8308"><td class="cell-title"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/User%203%20c116d56f5c0a4f41934f663b83c2f532/Join%20another%20class%20without%20neighbors%207fee2b58c4994ad4bba5ed2e5f8e8308.html">Join another class without neighbors</a></td><td class="cell-X&lt;Cw">Very streamlined as it was very similar to other tasks she had to perform up to this point.</td><td class="cell-ga&gt;A">&quot;Again, the two colors made things more clear. It was the only other button available so it was easy.&quot;</td><td class="cell-]OCt">9s
+0 wrong clicks</td></tr></tbody></table></div><p id="b1a1cc3f-ea57-4a36-b37e-f1eea63abdc1" class="">
+</p><h3 id="c976157a-8cef-446c-8edc-ab88cb49bede" class="block-color-teal">Post-Test Results</h3><p id="60e9abbd-ff3e-441a-a810-6123f5c05a4a" class="">The following is the results for post-test questionnaire.</p><figure id="ada2002c-51d2-4ff5-a2d7-f8608356f6b7"><a href="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1dd1a41b-d736-470c-9fcf-4f94c61f510b/Post-test_questionnaire_-_Group2.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1dd1a41b-d736-470c-9fcf-4f94c61f510b/Post-test_questionnaire_-_Group2.html</div></div></a></figure><p id="7b159f52-6e6e-4b2a-881a-802e5b930369" class="">
+</p><h3 id="cb4bfced-b7d3-4be8-b326-1738924169df" class="block-color-teal">Analysis</h3><p id="990ef101-0516-4c0d-baf8-47749e04ced6" class=""><strong>First,</strong> we wish to discuss the fact that the measurement criteria for the tasks across all three participants were comparable (within a few seconds of each other for all tasks). Our team views this a positive indicator for the usability goals that deal with understandablity (goals 1, 3, 4, and 5) of the system. </p><p id="7797eac9-1363-414c-bb67-33b99051b283" class="">
+</p><p id="e873e63d-1318-4cb3-9128-5eabf4b37b07" class=""><strong>Second</strong>, while each task was completed with none to minimal trouble, a few issues stood out. There was no &#x27;info&#x27; or &#x27;help&#x27; button at any stage of the system. This was especially obvious in the tests given that all three users expressed confusion at what the log in criteria was/should be. One of the users immediately started entering their McGill email, as they normally would to use Zoom, and typed random numbers for the Meeting ID. However, if this was not intended or if username is not supposed to be the email, etc. this was not clearly communicated. This is likely a problem that is less important at this stage as any input would successfully complete the login process. However, when this is not going to be the case - support should be provided.</p><p id="3f66449a-8ddd-400a-971f-93694f07ab25" class="">
+</p><p id="9da9ca15-3206-4420-9b30-e82e276ba4c6" class=""><strong>Third,</strong> our group feels that the signifiers and mappings of the buttons and seating chart seem to be, for the most part, appropriately designed. This is exemplified by the statement made User 1 made where she said &quot;I like to sit in the front of the class&quot; and then proceeded clicking the remaining available seat &#x27;to sit at&#x27;.</p><p id="24810f27-defd-4973-8aef-d5d6111c632d" class="">
+</p><p id="8db2b5c4-652f-41d9-846a-1a529d0c4510" class=""><strong>Fourth</strong>, even though we do feel the signifiers and mappings of the system are appropriate, there was confusion surrounding the difference between the two chats. Despite all users ultimately completing the task with no issues or incorrect actions, there was overall ambivalence that resulted in a longer time for this task than the task for writing in the &#x27;all chat&#x27;. We deduce that this was caused by unclear nomenclature to distinguish, without a shadow of a doubt, between the two chats. This uncertainty will result in less people using the neighborhood chat feature if it is left unaddressed. Additionally, there are some general design issues in the system that are discussed in further detail in the section &#x27;Design Critique&#x27; below.</p><p id="aa4c440b-7809-4c49-b576-68174b69eb1f" class="">
+</p><p id="d9e9cdab-c478-4dd9-bc1f-42889c9465dc" class=""><strong>Fifth,</strong> after reviewing the pre and post test questionnaires, the group feels confident that this system is on the right direction towards solving the issue of student interaction in online classes. The feedback was, on the whole, positive and there were some interesting notes about using this feature especially as an in-between to the &#x27;all chat&#x27; feature and standard &#x27;break-out rooms&#x27; in Zoom. However, as another participant noted in the post-test questionnaire, the usefulness of this system is strongly related to network effects where the more that people join a &#x27;neighborhood&#x27;, the more beneficial it is to everyone. If only one student joins a &#x27;neighborhood&#x27;, then it is the same as no one joining a &#x27;neighborhood&#x27;. When considering how to position the product to ensure maximum use for the target users, this should be a key consideration further down the line. There are many considerations and implications that are not clearly stated which will likely have a direct effect on the usage of the system. For example, will teachers be able to read the chat messages? Or is there any benefit to sitting in the &#x27;front&#x27; of the room versus the &#x27;back&#x27; of the room like in real life (i.e. will a professor be able to see who is sitting where)? </p><p id="9da13c84-762b-47d3-9d5a-a0261ffe575f" class="">
+</p><p id="59d409b5-b7d9-4201-bdea-497ac42f4478" class=""><strong>Finally, t</strong>he following notes are our analysis for the heuristics evaluation of the system:</p><ul id="bdf9a3a7-398f-46ae-8498-bb2f4adeb5a4" class="bulleted-list"><li><strong>Recognition rather than recall:</strong> the use of buttons that are the same as the ones in zoom make identifying actions easier. Furthermore, the placement of those buttons and the extra chat make it easier to recognize where things are.</li></ul><ul id="c77ad74b-b15d-4e81-ac22-51bbf7dd700c" class="bulleted-list"><li><strong>Match between the system and the real world:</strong> since we select our seats and get people in a chat based on that, it’s very similar. The one thing though is that since this is a digital platform we would expect some features such as adding or removing people to the neighborhood chat (just like texting in class).</li></ul><ul id="4ed85a2b-8017-43a2-9eeb-584f44241716" class="bulleted-list"><li><strong>Flexibility and efficiency of use:</strong> not being able to change seats or leave the neighborhood area without leaving the meeting. The lack of selection for the neighborhood chat (cannot add or remove people manually). Two different chats.</li></ul><ul id="533f56e9-4146-4951-9c6c-82ce9cad4800" class="bulleted-list"><li><strong>Error prevention:</strong> Both chats look the same and there is no quick and easy way to see in which chat you are typing (the caret being too small). There didn’t seem to be a way to delete a message that had been sent on accident. Could not find a way to get help outside of asking the examiner. There were two buttons to leave, do both of them do the same thing?</li></ul><p id="0c79eee0-340a-42b4-a649-5dad0b585360" class="">
+</p><h2 id="bf964f40-400d-40ee-97cc-503a843c51ab" class="block-color-purple_background">Test Plan Critique</h2><p id="a7d04673-2ac2-444c-ab5b-80eb59b195a1" class="">In several cases, the test plan was able to accurately assess whether the prototype was able to complete the stated usability goals within the system:</p><ul id="d2f6f72b-ef2e-4d52-9929-2b33faf808cd" class="bulleted-list"><li>The log in and choose a seat features was clearly able to test whether a user was able to choose a seat and select it quickly - the first two usability goals put forth by the team. While the team will likely be able to use the information obtained from this testing phase to determine whether the prototype passed these goals, it may have been beneficial for the team to specifically define an upper bound of time for a user to complete these tasks. This would have made it even more clear whether the prototype was successful.</li></ul><ul id="5fed7d68-7106-4ac3-8a81-8a77030e5b53" class="bulleted-list"><li>The testing of which chat to be used and whether the user was able to tell the difference will likely lead to fruitful results w/r/t whether users can generally understand how to use both the normal and all chat features. In the case that a user was confused about which was which, it would likely be caught by the evaluation team.</li></ul><ul id="75ee42b6-8145-48a4-a066-0cdd4dbf91c6" class="bulleted-list"><li>The goal of easy navigation between zoom&#x27;s base functionality and seating functionality was generally well implemented. The seating setup was clearly tested as was the question of whether users would be able to understand whether they were choosing to sit with other people or whether they would be sitting &#x27;alone&#x27; based on their preferences.</li></ul><p id="d269585b-1be0-4e00-83c8-bd58fa9387ef" class="">
+</p><p id="01501e38-d4b6-4a63-8cfc-c64b65d86f3d" class="">Some of the functionality of the testing was either difficult to assess or the tests did not look into in enough detail.</p><ul id="2ea115ef-f949-4ee3-ba15-351f67597070" class="bulleted-list"><li>Due to the nature of the prototype, it was difficult for a user to have a sense of whether they had successfully used the all class chat. Because this portion of the prototype was not fully coded - likely as it will simply be implemented with the stock zoom chat function in the final product - it was hard for participants to understand whether they had successfully completed the &#x27;write to all chat&#x27; function. In addition, this made it difficult for testers to know if/when users had been successful. This is not a specific problem with the prototype - rather it is caused by the inconsistency in setup. In addition, this is also a failure of the user manual which included no visuals to teach the testing team about the prototype.</li></ul><ul id="f79b5235-6abb-49bc-892a-5e98dc17bbc4" class="bulleted-list"><li>It was not possible to test whether usability goal 5 had been completed. Due to the fact that none of zoom&#x27;s actual functionality was included, a tester would not be able to ascertain whether this goal had been reached. This is likely due to the fact that it is past the scope of this level of testing but this should likely have been specified beforehand.</li></ul><ul id="d1b88647-55c1-440e-a3cf-dd814dc4904d" class="bulleted-list"><li>When testing the difference between joining the meeting alone or in a neighborhood, it was somewhat unclear at what point the timer should begin. Given that users had to leave the meeting and then again login, it should have been more obvious at what point the timing should begin so that an accurate relation between the time taken for the two tasks was possible.</li></ul><p id="752b7989-0ac6-417e-8136-b913eae71102" class="">
+</p><p id="9b199ffa-8a92-4416-a220-06e41800c39e" class="">With regards to the logistics of testing materials and procedure plan, there were a few items that were not clearly provided. This included:</p><ul id="5a3e1d76-e6b4-4cb1-a28e-6202fe9679d4" class="bulleted-list"><li>The &#x27;User Introduction&#x27; sheet. This was retrieved from the group&#x27;s previous deliverable.</li></ul><ul id="3355305c-83e4-4f98-ae06-a6c6301a9145" class="bulleted-list"><li>A user consent form. This was also retrieved from the group&#x27;s previous deliverable.</li></ul><ul id="e8487bfa-f1aa-47cb-8168-583a6404d6b0" class="bulleted-list"><li>There was no direction to record the test.</li></ul><ul id="75d002db-d3af-4722-8b96-ba23f5d1c178" class="bulleted-list"><li>It was unclear whether the usability heuristics were to be conducted by the evaluators or by the users.</li></ul><p id="4560b453-7939-406f-b4ca-92fc95033d3d" class="">
+</p><h2 id="31847bf4-2553-4e66-9921-16b4ef51a39a" class="block-color-red_background">Design Critique</h2><p id="6a06a074-d4d2-45cf-bf2f-f28b3cc4d274" class="">This prototype implements a good design but lacks some essential features for proper usage. </p><ul id="6867c0db-8961-402e-a400-7e2e31bd97c3" class="bulleted-list"><li>Although the user manual specified instructions for installing the prototype on windows computers, it does not function (c.f. screenshot below). Even after following all the troubleshooting instructions provided in the user manual we were unable to make it function properly. We resolved to deploying the project to a private cloud to allow all our evaluators and testers test the application.<figure id="0c3cb3fa-8972-4e9f-9abb-ef9822978d90" class="image"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/123137471_369391654178020_1128228480511852664_n.png"><img style="width:2560px" src="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/123137471_369391654178020_1128228480511852664_n.png"/></a><figcaption>Preview of the display when running the prototype on a computer running the Windows 10 operating system</figcaption></figure></li></ul><ul id="1d3de388-3abb-4a8d-b426-b2755125fe68" class="bulleted-list"><li>No instructions specified what features were implemented and which were not.  Since no instructions in the testing guidelines or the user manual explained how to use the prototype it was concluded that the all chat was not implemented as there was no way of entering a message in what we recognized to be the &quot;normal&quot; zoom chat (seen below). <em>To fix this, we suggest improving the &#x27;User Manual&#x27; with additional sections.</em></li></ul><ul id="042445ad-e468-4116-88a5-e7301a6cfc68" class="bulleted-list"><li>The lack of a &quot;help&quot; section in the application is a clear flaw as there is no for the user to find help or clarify points. First use tutorials are also not present, this was seen in the test with users 1 and 2.</li></ul><ul id="af183bc4-47a9-4e99-9039-ff5e14bb974c" class="bulleted-list"><li>There is some interference with the multiple similar buttons as well as the two chats. As you can see in the screenshot below there are two &quot;leave&quot; button. Both looking alike. <em>To fix this, we suggest making a decision to have only one &quot;leave&quot; button.</em><figure id="9a6189ef-8ed6-487c-acc5-2a4a36ba359a" class="image"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/vclass-428.s3-website.ca-central-1.amazonaws.com_zoom.png"><img style="width:2518px" src="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/vclass-428.s3-website.ca-central-1.amazonaws.com_zoom.png"/></a></figure></li></ul><ul id="7a6d9b20-ba09-4b3e-99be-c9fca6f92ba5" class="bulleted-list"><li>The positioning of the &quot;Leave&quot; button right below the &quot;Send&quot; button as seen on the above picture makes it possible for the user to easily miss the &quot;Send&quot; button and accidentally leave the meeting. Students who leave a class meeting for any reason (e.g. slow network, laggy video or audio, accidentally leaving the meeting…) are more likely to not return to that meeting. </li></ul><ul id="5585df0a-bdc5-4992-97a9-8df3a3b6a02f" class="bulleted-list"><li>The presence of both chats at all time is also a design flaw as it doubles the screen real estate that the chat usually occupies when one is using Zoom. One should be able to toggle one, both or none at all. This is especially prominent when a user selects the &quot;Join Class Alone&quot; option and is presented with a &quot;normal&quot; Zoom chat and an empty &quot;neighborhood chat (c.f. screenshot below). <figure id="0eb7bec8-d8e3-4bf5-aa18-86a36ec41397" class="image"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/vclass-428.s3-website.ca-central-1.amazonaws.com_zoom_(1).png"><img style="width:2518px" src="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/vclass-428.s3-website.ca-central-1.amazonaws.com_zoom_(1).png"/></a></figure></li></ul><ul id="6fa09f83-101d-4c10-8cfa-51b5ef4159b5" class="bulleted-list"><li>Furthermore the ability to leave a group/neighborhood without leaving the meeting is crucial for usability especially in the specified context. As stated above, students who leave a class meeting for any reason (e.g. slow network, laggy video or audio…) are more likely to not return to that meeting.</li></ul><ul id="0a5b6aa4-2287-445e-9e16-7be95d081218" class="bulleted-list"><li>Wrong affordance present given for the user to understand how neighborhood chats are decided. From its name and the fact that a user must choose a seat, it is understood that the users that are included in the neighborhood chat are users that are directly next to the seat we chose. But whether we choose the seat in screenshot 1 or screenshot 2 (c.f. below), the users in the neighborhood chat stay the same. <figure id="3ba57552-b70a-48e9-9bec-962d2a771938" class="image"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/vclass-428.s3-website.ca-central-1.amazonaws.com_zoom_(2).png"><img style="width:672px" src="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/vclass-428.s3-website.ca-central-1.amazonaws.com_zoom_(2).png"/></a><figcaption>Screenshot A: choosing a seat with the least amount of direct members on the left side of the virtual class</figcaption></figure><figure id="1afd4814-b1ec-4fb5-a7e9-1c94726bdc4b" class="image"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/vclass-428.s3-website.ca-central-1.amazonaws.com_zoom_(3).png"><img style="width:720px" src="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/vclass-428.s3-website.ca-central-1.amazonaws.com_zoom_(3).png"/></a><figcaption>Screenshot B: choosing a seat with the most amount of direct members on the right side of the virtual class</figcaption></figure><figure id="d841e2c3-d671-4232-9282-f3e1b8b79302" class="image"><a href="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/vclass-428.s3-website.ca-central-1.amazonaws.com_zoom%201.png"><img style="width:768px" src="Formative%20Feedback%20547c529f3b884a6fa79ecda938555555/vclass-428.s3-website.ca-central-1.amazonaws.com_zoom%201.png"/></a><figcaption>Resulting screen in both case, with the same Neighbors</figcaption></figure></li></ul><ul id="fcdbdc54-8d36-4e35-84e0-ad750567fa31" class="bulleted-list"><li>Finally it is impossible to change the users that are in a neighborhood chat. The user may want to add or remove a user to the neighborhood chat but we found ourselves in the inability to do such an operation.</li></ul><p id="26f4563a-6f68-4788-a6ab-4364d85de351" class="">
+</p></div></article></body></html>
