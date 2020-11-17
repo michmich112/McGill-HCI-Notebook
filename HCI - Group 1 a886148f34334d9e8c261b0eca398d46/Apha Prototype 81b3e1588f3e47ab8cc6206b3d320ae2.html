@@ -1,0 +1,632 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Apha Prototype</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="81b3e158-8f3e-47ab-8cc6-206b3d320ae2" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1581287053822-fd7bf4f4bfec?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;ixid=eyJhcHBfaWQiOjYzOTIxfQ" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🅰️</span></div><h1 class="page-title">Apha Prototype</h1></header><div class="page-body"><p id="e2a25352-e110-4d75-9613-64d75db585bf" class="">This deliverable explores our product, VideoWise (previously SeniorityRules), through its phases of design iteration and the alpha system development/deployment.</p><p id="c6f76af8-ecdf-4c2e-a0af-6fbe162c7fdc" class="">The Alpha System can be found at this <a href="https://d1q06qqhx53gxd.cloudfront.net/">website</a>.</p><h1 id="40879902-1251-4082-9d7b-42c58601e146" class=""><mark class="highlight-blue_background">Evolution</mark></h1><p id="33fbb76d-ea6f-4ef3-a631-e269236c15c6" class="">In light of Group 21&#x27;s formative feedback (can be found <a href="http://www.cim.mcgill.ca/~jer/courses/hci/project/2020/www.ece.mcgill.ca/~mcardi20/Notebook/pages/formative_feedback.html">here</a>) on our project in addition to the feedback in response to our system presentation, a few decisions and changes were made to our system. The following section discusses these changes along with the justification in terms of usability or feasibility.</p><h2 id="bf288b96-73ad-4f9e-829b-7c5e2a195c42" class="">Design Evolution</h2><p id="d41040f5-d575-4a34-b21c-79af1350f6af" class="">The following are design decisions that were implemented to our computer prototype following feedback based on user evaluation tests performed by both Group 21 and additional tests performed by us. For clarity, we restate our usability goals and target heuristics:</p><p id="df4a6b56-f122-4ed3-9704-20bfd845f92f" class=""><strong>Usability Goals:</strong></p><p id="90dadacf-071c-4b53-9c5f-1c0b7870ffff" class="">[U1] Users of the tool should be able to adopt it without any required technical background.</p><p id="118b620d-aa17-448f-80d7-0258c16b4b08" class="">[U2] Emotions should be shown seamlessly by the tool when they are required.</p><p id="dcc9de56-8e05-4cff-8f31-874faae584c7" class="">[U3] Emotions should be understandable to the user.</p><p id="bc8384d8-70f3-4626-8a29-dbf4a11cdade" class="">[U4] Users should feel a sense of connection, community, or family by the system.</p><p id="7b195407-1202-45a1-86cd-536087e61652" class="">[U5] The system should not require the use of a dedicated device.</p><p id="916119e0-9c1a-4f4d-ae36-f7cc6d14955f" class=""><strong>Neilson&#x27;s Heuristics</strong>:</p><p id="6b6a977d-dc4b-46bf-834e-2e7603e11607" class="">[H1] Error prevention (Nielson&#x27;s Heuristics)</p><ul id="2506d5f1-575d-4877-b2b9-77b696208086" class="bulleted-list"><li>We wish to deter users from causing errors to occur in the system. Given that we worry that our target demographic will not be able to fix problems if they occur in certain cases, we plan to reduce the number of possible things that can go wrong for the user.</li></ul><p id="57474635-2934-4be0-8f48-92b2d8c40e39" class="">[H2] Aesthetic and minimalist design (Nielson&#x27;s Heuristics)<div class="indented"><ul id="c2402cdf-4900-441a-a1a3-d4df71771c50" class="bulleted-list"><li>We believe that it is imperative to ensure that the UI provided to our user base is as streamlined as possible to ensure that they don&#x27;t confuse different actions. As such, we intend to use a particularly minimalist design.</li></ul></div></p><p id="7f6c5dd2-5c87-4b3e-8b12-ee6971e1a5c6" class="">[H3] Help users recognize, diagnose, and recover from errors  (Nielson&#x27;s Heuristics)</p><ul id="0c0959fb-5259-4ff2-aa83-70a8150080d4" class="bulleted-list"><li>We believe that it is imperative that users understand when something has gone wrong and we also think that in general, it should be fixed by itself because our target audience may have a more limited ability to troubleshoot.</li></ul><p id="e6576334-ab84-4b97-88f2-ac57525005dd" class="">[H4] Help and documentation (Nielson&#x27;s Heuristics)</p><ul id="37020bd2-f642-4c82-9d6a-471ed4cca8b9" class="bulleted-list"><li>We intend to provide clear and well laid out help for each of the actions a user can be taken. We feel it is a real possibility that users will take a few tries to remember how to perform actions so we want to clearly lay them out in our help section which will appear on each page.</li></ul><p id="e2678c53-f9c6-473f-8d40-a22c41ae5217" class="">[H5] Few features beyond absolute necessities (Nielson&#x27;s Heuristics)</p><ul id="e4f0a3f5-3296-4750-91d8-bf904d68a140" class="bulleted-list"><li>We feel that including too many options to the system will have an inverse effect in that users will not be able to use any of them due to confusion. As such, we intend to only include those which are absolutely necesary.</li></ul><p id="8ef320af-6232-409c-85bb-14bee89491c5" class="">[H6] Clearly describable (Nielson&#x27;s Heuristics)</p><ul id="84fc1b07-9854-49d5-9a46-d770a8088393" class="bulleted-list"><li>We believe that it is important that users be able to explain problems to troubleshooters. As such, icons should be clear and describable -  especially when errors arise - to allow troubleshooters to help fix problems.</li></ul><p id="d666849a-7a64-414c-951b-5dc7c01e53f5" class="">
+</p><p id="2130088c-58a9-4b8a-9716-8db32a6331ac" class="">Based off of these goals and heuristics we wish to achieve, the following changes were made. The changes can be seen in our computer prototype found <a href="https://framer.com/share/HCI-SeniorityRules--fdAZXlsUB2xx3LVe5InI/j2pKpG4tB">here</a>.</p><ol id="17031c23-1861-4c1b-81ed-e122be216618" class="numbered-list" start="1"><li><strong>Making a Call</strong><p id="adfc509d-8503-49e6-822e-b0d78a6ef90b" class=""><em>The problem</em>: Terminology ambiguity and security risks.</p><p id="9b8baaca-b0b0-4b8f-9d9d-98c91de209ca" class=""><em>Usability Goals</em>: U1, U4</p><p id="922651af-7045-40f9-8147-ac518063e0ab" class=""><em>Heuristics</em>: H1, H5, H6</p><p id="46f6cd04-72b3-44fa-83b6-2a6b8a44fc1b" class="">All usability tests illuminated general confusion regarding making a call by inputting a username or userID and creating an &#x27;empty&#x27; call and joining an &#x27;empty&#x27; call. A large part of this confusion stemmed from ambiguity surrounding what &#x27;empty&#x27; call meant and unclear wording of the task test (the latter of which will be discussed in the Test Procedure Evolution section). The caused extra questions from the users or inability to complete the task. In addition, with our current functionality, our design allows for the option for users to brute force calling people by manually entering in possible usernames and disrupting the lives of our users. Due to the reality that our target users (elderly aged people) are frequently the subject of scams and other harmful malpractices, this especially poses a key security risk.</p><p id="452d2e24-c159-4e2f-9559-2bfc11ede228" class=""><mark class="highlight-teal_background"><strong>Design Change 1</strong></mark><mark class="highlight-teal_background">:</mark>  We removed the option for users to call someone directly via inputting a new username.</p><p id="612e0e6a-c65a-4441-807c-4f6a0b4ff5e3" class=""><mark class="highlight-teal_background"><strong>Design Change 2:</strong></mark><strong>  </strong>We rebranded &#x27;empty calls&#x27; to &#x27;video call rooms&#x27;. We felt this concept more closely resembled Zoom&#x27;s terminology, which many of our target users have some experience with thus making the concept easier to understand. We haven&#x27;t gotten a chance to verify this hypothesis of reduced confusion from different terminology, but will be a key part of our upcoming round of iterative user testing.</p><p id="a4870881-73a3-4e54-8487-cf6c6e91f516" class=""><mark class="highlight-teal_background"><strong>Design Change 3:</strong></mark><strong>  </strong>The &#x27;Make Call&#x27; button directs the user to a screen with only two buttons: &#x27;Dial&#x27; and &#x27;Help&#x27;. In addition to these buttons, directions are provided to the user on what the button, &#x27;Dial&#x27;, will do (start a video call room) and what will happen after the video call is started (being shown the room ID and directing the user to send it to another person). We decided to keep the button that actually starts a video call as &#x27;Dial&#x27; because it was clear after the user testing that the buttons with &#x27;Dial&#x27; were always clear to the user in what the expected behavior of clicking that button would be.</p><p id="56661dd2-36be-4e61-8825-3235baff24fd" class="">Note: The &#x27;Join Call&#x27; button and flow has not been changed. This was because the confusion came solely with &#x27;starting an empty room&#x27; and not &#x27;joining&#x27; one.</p></li></ol><ol id="d71644d6-9086-490f-8eac-cd96242c0516" class="numbered-list" start="2"><li><strong>Help Button Tooltip</strong><p id="c529fc3d-c29e-4664-80b4-5123fb98392c" class=""><em>The problem</em>: No users throughout any user test made use of the &#x27;help&#x27; button.</p><p id="3a09b31f-dbf9-4dfe-80e0-cff751937186" class=""><em>Usability Goals</em><strong><em><em>: </em></em></strong>U1, U4, U5</p><p id="f70c433f-ec3b-49bc-9cfa-6d09a4befcc3" class=""><em>Heuristics</em>: H1, H4, H6</p><p id="75453d26-df6f-449f-9954-3ea5f6ec9025" class="">Users never used the &#x27;Help&#x27; button despite it being clear and present at every stage of the prototype and despite the fact that there were tasks that users were confused about. The users only explored the &#x27;Help&#x27; button when it was specifically pointed out to them after all the user test tasks had been completed.  </p><p id="87c5fcd6-706c-4c57-9b00-b631a45b1ea8" class=""><mark class="highlight-teal_background"><strong>Design Change 4:</strong></mark><strong> </strong>We added a &#x27;tool tip&#x27; highlight feature when a user first logs into the system. In our computer prototype (using Framer), this was implemented right at the beginning when someone opens up the prototype link to simulate a first time use of the system. See the image below for a visual of the tooltip and the contents that is conveyed to the user.</p><p id="fff61551-4181-4fd4-9892-a8fc55eb90fe" class="">
+</p><figure id="c9f6e31e-f4b6-4465-8df1-24ef8a6bd2d5" class="image"><a href="Apha%20Prototype%2081b3e1588f3e47ab8cc6206b3d320ae2/Untitled.png"><img style="width:480px" src="Apha%20Prototype%2081b3e1588f3e47ab8cc6206b3d320ae2/Untitled.png"/></a><figcaption>Figure 1. Image of the computer prototype &#x27;Help&#x27; button tool tip highlighter.</figcaption></figure></li></ol><ol id="ca3bbfa1-a79f-4fcf-b56c-f2cd6eecf943" class="numbered-list" start="3"><li><strong>Inputting in the Call ID</strong><p id="b617e262-6373-4a89-b94a-36dc80f47c7f" class=""><em>The problem</em>: When inputting in the room ID for &#x27;Join Call&#x27; process-flow, there was a functionality error with entering in the numbers into the fields that resulted from Framer&#x27;s own limitations. </p><p id="0853daeb-1eba-4c8b-9588-52f73fc9cd02" class=""><em>Usability Goals</em>: U1, U5</p><p id="b7b73980-89d4-4454-ac65-448b48b30e68" class=""><em>Heuristics</em>: H1, H2, H5</p><p id="53d67818-c311-499d-9ae9-fc5882ac976a" class="">As shown in the left picture below in Figure 2, the expected functionality of having 5 separate input bars for entering the 5-digit ID is that after entering each number, the cursor would automatically move to the next bar. Framer does not support this functionality and, as such, every user encountered the same problem of typing too many numbers in the first bar, having to delete some numbers, and then click to type in the next bar. </p><p id="ec920d29-832b-4502-8fdd-ef00b21521f5" class=""><mark class="highlight-teal_background"><strong>Design Change 5:</strong></mark><strong> </strong>The input text field was changed from 5 separate input bars to one input bar because Framer does not provide the functionality for automatically switching to the next input bar as shown in the picture on the left.  We would like to revisit this design, however, because we feel it clearly illustrates the 5-digit nature of the code and where/how to fill out the numbers properly.</p><figure id="d8f9299f-fef6-4815-9fd8-2c92fee46139" class="image"><a href="Apha%20Prototype%2081b3e1588f3e47ab8cc6206b3d320ae2/Untitled%201.png"><img style="width:480px" src="Apha%20Prototype%2081b3e1588f3e47ab8cc6206b3d320ae2/Untitled%201.png"/></a><figcaption>Figure 2. (Left) Original Design; (Right) New Design</figcaption></figure></li></ol><ol id="feb7ab59-2bc8-4b66-a1e2-3b4f88e070d2" class="numbered-list" start="4"><li><strong>Increased Accessibility</strong><p id="60b728bb-49f0-46c9-a712-dd1a78049de2" class="">There are many different types of colorblindness. In our initial studies, we found evidence to use colors that have high contrast with each other. Because of this and a desire to keep a familiar sense of what the colors red and green convey, the colors we use primarily in this system are limited to red, green, blue, black, and white (as can be seen in our prototype. However, it was brought to our attention that red-green color blindness is one of the more common forms of color blindness.</p><p id="78ef2f1d-8a57-4186-bbb4-9252551c3239" class=""><mark class="highlight-teal_background"><strong>Design Change 5:</strong></mark><strong>  </strong>Already, we prioritized text over icons, but now we revisited all our components of the computer prototype to ensure that regardless of one&#x27;s ability to see color, it would be clearly communicated to the user. See figure 3 below for an example that was implemented in our Alpha System to better communicate the state of the system. Additionally, we are committed to keeping the font of the text at large as the space and aesthetic design allows us and as easy to read (H2). In the prototype, this meant that all font was at least size 16+, all font was sans serif for increased readability, a dedicated background color, and plenty of line spacing. (Used the following as resources: <a href="https://www.w3.org/TR/WCAG20/">WCAG 2.0</a>,  <a href="https://www.uxmatters.com/mt/archives/2010/05/designing-for-senior-citizens-organizing-your-work-schedule.php#:~:text=%E2%80%9CAs%20for%20fonts%2C%20sans%20serif,it%27s%20easier%20to%20recognize%20characters">Designing for Senior Citizens</a>, and </p><p id="22474bfd-ca34-4599-8020-89520ab531d2" class=""><a href="https://usabilla.com/blog/how-to-design-for-color-blindness/">How to Design for Color Blindness</a>).</p><p id="5d3de7a2-2ce8-4d1c-ae2a-240ad171d969" class="">
+</p><figure id="27c70608-a270-4c59-aacf-385530de4542" class="image"><a href="Apha%20Prototype%2081b3e1588f3e47ab8cc6206b3d320ae2/Untitled%202.png"><img style="width:240px" src="Apha%20Prototype%2081b3e1588f3e47ab8cc6206b3d320ae2/Untitled%202.png"/></a><figcaption>Figure 3. Dynamic Changes in system state shown through color and text.</figcaption></figure><p id="c8e1e2b0-27dd-47b1-8217-d3fb85a4f436" class=""><mark class="highlight-teal_background">(Future) </mark><mark class="highlight-teal_background"><strong>Design Change 6:</strong></mark><strong> </strong>The final change, which we will not implement right now due to time constraints, is introducing a &#x27;Color Blind Friendly&#x27; button in our system. The button would change our system to colors that are optimized for those with red-green color blindness. (See <a href="https://www.visualisingdata.com/2019/08/five-ways-to-design-for-red-green-colour-blindness/#:~:text=The%20pink%2Dred%20through%20to,green%20hues%20used%20by%20default.">here</a> for some examples).</p></li></ol><h2 id="4c7b178c-eedf-4ec3-8084-f6bb65ee1621" class="">Test Procedure Evolution</h2><p id="3ddd7d65-d6b6-4527-bbb7-e77b0b4c1263" class="">We have made several changes to our test procedure to reflect the suggestions provided to us by Group 21 during the formative feedback section. They are outlined here.</p><h3 id="3f07d883-8db8-42e9-b466-2ba2d5da41c8" class="">Post-Test Questionnaire </h3><p id="97117ad0-4602-4625-ba42-b37b335676d6" class="">We made changes to our post-test questionnaire related to group 21&#x27;s suggestions regarding document. The group recommended that we include more specific questions about the usefulness of each of the individual feature present within the tool. As such, we added questions related to the call initiation, help button, and emotion detection features - asking the users to respond with how they felt the feature performed and any issues they had in using them. The new form can be found below:</p><figure id="181367da-452e-40d5-9eb7-6f44232b79b7"><div class="source"><a href="https://forms.gle/Qeq6eYRQ9q1Z8qmt9">https://forms.gle/Qeq6eYRQ9q1Z8qmt9</a></div></figure><h3 id="1706f82d-e4c0-4048-b8db-ead453f69591" class="">Evaluation Heuristics Changes</h3><p id="0de067fa-0cd7-450d-8736-4e128164bfd2" class="">In response to the suggestions made by Group 21, we update our heuristics as follows. Specifically, we include a new heuristic of &quot;Match between system and real world.&quot;</p><h3 id="3ea6a252-230b-49e2-a952-dc3f9363189a" class="">Heuristics </h3><p id="3567d815-c84e-48f0-9d9b-2e22c8f34e3b" class="">We wish to achieve the following heuristics in our system. Several are taken from Nielson&#x27;s sources and are attributed as such:</p><p id="3374d13b-e08e-4c33-a24c-7999b527303b" class=""><mark class="highlight-teal">7.    Match between system and real world (Nielson&#x27;s Heuristics)</mark><div class="indented"><ul id="cd7c9e68-029e-4aa0-9666-8c94129481a5" class="block-color-teal bulleted-list"><li>In order for our target group to have a smooth transition into our product, which may be complicated by a lack of technological expertise, it is important that our product be similar to real world products they have used before. Specifically, we wish to include as many allegories to traditional phone calls as possible. Our system is thus intended to mimic as much of the functionality of a normal phone call as is possible.</li></ul></div></p><h3 id="0616ad60-0bf9-498e-9813-0f4adf0e2136" class="">Reporting and Test Task Changes</h3><p id="3dccfdd8-95db-4848-a5b2-f30421d3628e" class="">Based on the feedback provided to us by Group 21 during their formative feedback section, we update the test tasks in a couple of ways. The most relevant is that we forgot to include specific instructions about how to test the emotion detection system. In this updated version, we include a specific method of testing to see if our emotion system is clear to users and is able to provide an improved experience in cases in which bandwidth for a call is not sufficient to provide consistent video. The updated tasks are as follows:</p><p id="50f463bd-c45d-4fdb-b6a4-12bc3f1af79c" class="">
+</p><p id="a611a1a7-6281-4711-ad7d-69b68730cd32" class="">Below are the tasks a user will be asked to perform during the Usability Test. In the Usability Test Reporting document (provided below), each task group will have the individual steps listed in the document for clarity.</p><ol id="fb355a2d-fc49-4d58-9a4c-1002cf690493" class="numbered-list" start="1"><li>Making a call to a known user<ul id="be6dc546-0637-43e1-b44b-f28b5536e34b" class="bulleted-list"><li>In this test have the user start from the Home Page</li></ul><ul id="8e2bb694-2378-4c1e-a370-0b88e4a155e8" class="bulleted-list"><li>Ask the user to make a new call to their friend who&#x27;s username is SteveWonder.</li></ul><ul id="d631ddc1-451e-4b33-bcc6-71a733a9333e" class="bulleted-list"><li>Once on the call ask them to mute themselves.</li></ul><ul id="dd1b017d-2e74-4759-821f-1bf9c0046823" class="bulleted-list"><li>Then ask them to Hang Up</li></ul><ul id="790f4deb-61db-4064-b146-4c5ad89c9bfa" class="bulleted-list"><li>Make sure to take out your stopwatch to capture the time it takes the user to complete the task.</li></ul></li></ol><ol id="8633b338-86a3-45dd-859a-bcbe26c6b236" class="numbered-list" start="2"><li>Start an empty call<ul id="6a848236-6b9c-44c7-a906-4655cadd1093" class="bulleted-list"><li>In this test have the user start from the Home Page (shown Previously)</li></ul><ul id="3439771b-e562-4405-8130-ced81b644f67" class="bulleted-list"><li>Ask the user to make a new call without a specific partner to call.</li></ul><ul id="13d8d5b9-649d-4d95-b3dc-ca52b6b57967" class="bulleted-list"><li>This, ideally, will direct them to the &quot;Start an empty call&quot; button within the &quot;Join Call&quot; menu.</li></ul><ul id="a2707787-9c47-4203-a5e8-aa31b8a33542" class="bulleted-list"><li>Once on the call ask them to report the call id that they should send to their friend.</li></ul><ul id="11170378-3544-4425-ada1-116023ba869b" class="bulleted-list"><li>Then ask them to turn their video off.</li></ul><ul id="ae0269ba-ffed-4104-bf61-f109d1d805f0" class="bulleted-list"><li>Finally ask them to Hang Up.</li></ul><ul id="47f65634-a942-494f-b880-b2396ea4b059" class="bulleted-list"><li>Make sure to take out your stopwatch to capture the time it takes the user to complete the task.</li></ul></li></ol><ol id="c2c05906-9dd5-465b-9fb7-44ac46148d2d" class="numbered-list" start="3"><li>Joining an empty call using the call ID<ul id="07a176a9-cb6a-42ee-8dc5-bf1d287fe112" class="bulleted-list"><li>In this test have the user start from the Home Page (shown Previously)</li></ul><ul id="2c4eeb27-9631-4b85-8dde-609a14be91e7" class="bulleted-list"><li>Ask the user to join the call created by their friend SteveWonder.</li></ul><ul id="b4ceed49-96ea-41df-8e9a-15163c563e5c" class="bulleted-list"><li>SteveWonder&#x27;s user ID is 12345.</li></ul><ul id="844ce047-bf40-46e5-a886-5c389033f1d3" class="bulleted-list"><li>The ID of that call is 67890.</li></ul><ul id="aef1dcb1-67d5-4298-bc8d-a0127beb8da9" class="bulleted-list"><li>Make sure to take out your stopwatch to capture the time it takes the user to complete the task.</li></ul></li></ol><ol id="c1bd4b05-540e-4474-99f6-011467639890" class="numbered-list" start="4"><li>Using the emotion detection system<ul id="f664e612-66d5-4d43-bfc7-f391a749f82a" class="bulleted-list"><li>This system will be on by default at this stage in the development.</li></ul><ul id="8b0cb7a5-cd74-415a-88a3-295e86eeced7" class="bulleted-list"><li>Check to see the user&#x27;s response. Ensure that they are able to understand the purpose of the system.</li></ul><ul id="c4feb4bc-d736-484a-b4fa-7f062668b63b" class="bulleted-list"><li>If necessary, ask the user what the reason for the system is to gauge their level of understanding of the feature.</li></ul></li></ol><ol id="65f7c4e1-3cd6-4c57-b260-9c16bccae56c" class="numbered-list" start="5"><li>Understanding the emotion system <code>*</code><ul id="f9075188-c903-44d3-a5b6-384baff2ca1e" class="bulleted-list"><li>After reading the &#x27;Info message&#x27; presented to the user, ask the user what the purpose of the emotions is.</li></ul><ul id="3967d5bd-2fda-4eff-82ac-17fdfd79eeba" class="bulleted-list"><li>As the evaluator, when an emotion appears, say quick blurb, story, or sentence that would communicate the displayed emotion (i.e. &#x27;I&#x27;m so happy that we finally have a time to talk!&#x27; for &#x27;Happy&#x27;, or &#x27;I&#x27;m having a really hard day at work today.&#x27; for &#x27;Sad&#x27;) and  and ask the user whether they feel the shown emotion represents what the user is saying. </li></ul><ul id="f682cc1b-bc9d-472c-a59f-7fb44e13b810" class="bulleted-list"><li>Attempt to ascertain - with follow up questions if necessary - whether the user knows who the emotion belongs to as well as what their partner is feeling based on the emotion.</li></ul><ul id="61cdc12c-13ae-4116-bf84-8e37357e6147" class="bulleted-list"><li>Log each of the phrases used as well as the emotion displayed as a result and the response from the user viewing the emotions.</li></ul><p id="32a08315-e7ca-40b1-9d28-d9b54806fcc3" class=""><code>* Note that the emotion in the computer prototype needs to be manually triggered by the evaluator by clicking the status bar while in a &#x27;video call room&#x27; started through any method (i.e. make a call, join a call, recently called). Then once the &#x27;Happy&#x27; emotion is displayed, the evaluator can cycle through 4 different emotions by continuing to press the status bar. </code></p></li></ol><p id="01caff09-8a4f-4697-9890-aee40f041001" class="">In addition, we removed the &quot;heuristic survey&#x27; from our test plan as it was not beneficial in the way we thought it might be. We now ask that testers keep our heuristics in mind when performing the normal testing rather than using the survey to account for how successful we were in attaining our goals with the heuristics.Screenshot from 2020-11-16 18-42-32 </p><h3 id="afd1b52b-34db-4350-89cb-0ca11f3e2c2b" class="">Reporting</h3><p id="b3ad53ef-7273-4d61-8fd1-87b686be01a8" class="">We updated the reporting system in accordance with the suggestions of Group 21. Specifically, we included more questions about the emotion detection feature and we moved our reporting system from a form to a spreadsheet so that the team could more easily report results. The form is seen below:</p><figure id="de94df84-6a19-48c0-8f67-a867138713c8"><div class="source"><a href="https://docs.google.com/spreadsheets/d/15RhSVAipwJaz6KgapkliWIypd1HYFFnhQiGjeFunnho/edit?usp=sharing">https://docs.google.com/spreadsheets/d/15RhSVAipwJaz6KgapkliWIypd1HYFFnhQiGjeFunnho/edit?usp=sharing</a></div></figure><h1 id="1a32255f-dc9e-4d32-86de-cf1bd801894e" class=""><mark class="highlight-purple_background">Prototype Revisions</mark></h1><p id="68625f39-fbe4-44a9-9e65-58a7cdad3cd5" class=""><strong>Please click </strong><a href="https://d1q06qqhx53gxd.cloudfront.net/">here</a><a href="https://d1q06qqhx53gxd.cloudfront.net/"><strong> </strong></a><strong>to find and use our Alpha System Prototype!</strong></p><p id="c6197aca-45f0-480b-844f-684142295a75" class="">A user manual can be found below.</p><p id="4b72fdff-a9b1-47ec-8d2c-215ef0033c43" class="">Our key objectives for this project are as follows:</p><ol id="310a4133-d475-49d4-a0af-2b2af31a2cb1" class="numbered-list" start="1"><li>Make a system that will preserve emotional information about a video call when the video is not available (poor connectivity, no camera, etc.) through sentiment analysis</li></ol><ol id="5c57a677-d37d-4bd2-9426-c8aff20843c3" class="numbered-list" start="2"><li>Make a system whose design is easily understandable and easy to operate by elderly individuals.</li></ol><p id="2b358a4b-d027-4d6e-b743-9bcec16e25f0" class="">Our Usability Goals are reiterated, again: <div class="indented"><p id="d128bdce-17b3-42fa-97eb-075531669a40" class="">[U1] Users of the tool should be able to adopt it without any required technical background.</p><p id="a778edf1-b787-42ad-99dd-3c490e230ae9" class="">[U2] Emotions should be shown seamlessly by the tool when they are required.</p><p id="0d001ae2-1905-4d09-8a96-765719f45fcd" class="">[U3] Emotions should be understandable to the user.</p><p id="84fa494c-0c0e-4f7b-8f84-6ca791dc833d" class="">[U4] Users should feel a sense of connection, community, or family by the system.</p><p id="50306d57-79ce-47ee-bf98-a33faf70dd56" class="">[U5] The system should not require the use of a dedicated device.</p></div></p><p id="6afcf5af-42f0-4982-a90a-9b437c9528bd" class="">A reminder that our target persona, at this stage, is the &#x27;Eager Beaver&#x27; who is ready to take on the new challenges of learning how to use new technologies, but can get easily overwhelmed. However, once our Eager Beaver can use it correctly once, they are confident in their skills moving forward.</p><h3 id="176eead0-ceab-4684-9167-750c0330ebd4" class="">Our Prototype&#x27;s Functionality</h3><p id="2d789497-248b-46a2-92fb-9b632b9ce896" class="block-color-teal_background">Our Alpha System prototype provides baseline functionality with respect to the two key objectives and our five usability goals as presented above. Listed below the key functionalities of our alpha system:</p><ol id="eb836021-5a3a-4942-82ad-6971590b979f" class="numbered-list" start="1"><li>A video call can happen between two individuals. <p id="a1082ea4-d3b6-4047-a8ad-68542d02bbcd" class="">[U1, U4]</p></li></ol><ol id="686a8756-ee83-473e-9058-f5dd712b9866" class="numbered-list" start="2"><li>Our alpha system is accessible on any device via an internet browser at this website: <mark class="highlight-blue"><a href="https://d1q06qqhx53gxd.cloudfront.net/">https://d1q06qqhx53gxd.cloudfront.net/</a></mark><mark class="highlight-blue">. I</mark>t is currently optimized for a mobile phone, so if you are using a laptop browser, simply press &#x27;F12&#x27; to see it in mobile view. <strong>However, this is not necessary and still works correctly in normal browser view</strong>.<p id="9b067ccf-bf58-456e-9785-40d04fa6a48c" class="">[U1, U5]</p></li></ol><ol id="0835671e-6784-49f2-831f-85c5a4e47d60" class="numbered-list" start="3"><li>The sentiment analysis component has been implemented preliminarily as a Proof of Concept. <p id="c89ba114-da9b-4f48-86d0-a2f2d96a53cd" class="">[Main Objective 1, U2, U3, U4]</p></li></ol><ol id="ff888bb2-fb3e-49c1-b509-68230b0e7bc8" class="numbered-list" start="4"><li>The alpha system implements the same feature designs (minimal buttons and choices, the same color scheme, concise yet explicitly stated text, etc.) to ensure the system is easy to use and understand. <p id="d48ea6d6-58cc-495d-879c-58c5d3cbe369" class="">[Main Objective 2, U1]</p></li></ol><ol id="85dcad6c-1458-4896-b708-6ae3aea7ee69" class="numbered-list" start="5"><li>Our system properly allows for making a video call room and joining a video room as stated earlier in <strong>Design Changes 1, 2, and 3. </strong><p id="ab4b2bdd-e3b2-42c2-8e25-18e401ad0350" class="">[U1, U5]</p></li></ol><ol id="71730d98-2d2b-45c5-85fa-471e73668bcc" class="numbered-list" start="6"><li>The functionality to turn on and off the buttons while in a video room is correctly implemented. <p id="4c942949-8557-4fa0-a715-e3b394c609ab" class="">[U1]</p></li></ol><p id="1d00c65c-1ff4-4695-918b-dae681f85869" class="">
+</p><p id="1c52c24c-f2dc-495b-b70f-24e82959ae5d" class="block-color-red_background">While baseline functionality of our alpha system prototype has been achieved, we indicate below some limitations facing our web application. Each point stated below will be completed for the Beta System.</p><ol id="dfb5e36b-e8c3-4a77-90dc-87558da8009c" class="numbered-list" start="1"><li>When the sentiment is categorized, currently we only display the emotion name (i.e. &#x27;Happy&#x27;, &#x27;Sad&#x27;, and &#x27;Neutral&#x27;) based on the sentiment analysis processing. While having the image of the emotion in addition to the name of the emotion is key for conveying the lost emotional information of a video call, we are working to first achieve the proper sentiment classification during a conversation and to display it visually in accordance with our heuristics (namely Aesthetic and minimalist design; clearly describable).</li></ol><ol id="2079b38d-dc31-4e58-8ff5-603e3594ad7b" class="numbered-list" start="2"><li>Currently, we were unable to completely implement video quality monitoring due to unforeseen complications. This will be fixed for the Beta System.</li></ol><ol id="1db0c1cf-10d2-44c3-b08d-3ed1add4a18f" class="numbered-list" start="3"><li>Our alpha system currently does not support creating a user account. Once this is successfully made, our <strong>Design Decision 4</strong> will be properly implemented to highlight the &#x27;Help&#x27; button for first time users.</li></ol><ol id="3663c1c5-face-47ad-a7f1-3fde0e9f2a61" class="numbered-list" start="4"><li>The alpha system currently does not support functionality of having a &#x27;Recently Called&#x27; section where the user information for the 5 previous users who were called from one user&#x27;s account is saved for quick dialing. A call can currently only occur through making or joining a video call room.</li></ol><ol id="0cdf15cb-ea28-4437-a960-0e70401f57cd" class="numbered-list" start="5"><li>The alpha system supports functionality for incoming notifications when someone is calling you directly via the &#x27;Recently Called&#x27; option.</li></ol><ol id="2aefdc3c-6deb-4aee-9ee3-b12c4267138d" class="numbered-list" start="6"><li>Once all the above functionality has been successfully implemented, we will do a thorough sweep of the entire system to ensure the design of the text, buttons, colors, and key informational messages adhere to our design decisions outlined earlier in this deliverable as well as in previous deliverables. </li></ol><h1 id="ad2bc323-8884-4099-91e1-a66099cd0274" class=""><mark class="highlight-pink_background">User Manual and Installation Guide Updates</mark></h1><p id="b4318d03-a9fb-4cc0-9b07-f2912994f1e3" class="">Below you can find the User Manual/Installation Guide for our Alpha System prototype. Enjoy!</p><figure id="b587f891-908c-4981-9e18-f081a0d29a9f"><div class="source"><a href="Apha%20Prototype%2081b3e1588f3e47ab8cc6206b3d320ae2/User_Manual.pdf">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3685c5f6-2cf8-4f75-9195-038159390d75/User_Manual.pdf</a></div></figure></div></article></body></html>
