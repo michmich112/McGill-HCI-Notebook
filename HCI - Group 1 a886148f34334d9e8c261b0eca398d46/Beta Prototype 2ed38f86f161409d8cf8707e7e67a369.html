@@ -1,0 +1,634 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Beta Prototype</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2ed38f86-f161-409d-8cf8-707e7e67a369" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🅱️</span></div><h1 class="page-title">Beta Prototype</h1></header><div class="page-body"><p id="9b727b4b-a9d4-4dbf-b9de-b1d4ba4a99c1" class="">
+</p><p id="8e953092-44e0-4d01-82b4-703d13b96de0" class="">This deliverable explores our product, VideoWise, through its phases of design iteration and the beta system development/deployment. </p><p id="e24cc967-3832-4866-a897-112bfd555f7c" class="">VideoWise is an empathy-forward video calling platform for elderly people that seeks to create a space where our users will experience as few barriers as possible when connecting with their loved ones.</p><p id="3c26c076-842d-4ccd-a887-94e2f486cee8" class="">The Beta System can be found at this <a href="https://d1q06qqhx53gxd.cloudfront.net/">website</a>. (note, press F12 if you are viewing the website in a browser and would like to experience it in mobile format - which is what the beta system is currently sized for. This is not necessary, though and all features and functionality work the same, regardless.)</p><p id="b518cd84-d7fa-4aeb-ab8b-da993e05d6bf" class="">(note that the &#x27;Hang Up&#x27; button lags but it works, just give it a moment and/or click it again)</p><h2 id="8a8d798d-19fa-42f2-b388-c64b84c6bb04" class="block-color-purple_background">Design Evolution</h2><p id="58396fd3-6e2e-47f6-8d13-0adebffea126" class="">This section discusses the design evolution of VideoWise from the last deliverable to this deliverable. For reference, we reiterate our Usability Goals and Heuristics below. All of our changes were made with these in mind.</p><p id="88267713-0e7e-4c93-8d82-31a35ce09ef9" class=""><strong>Usability Goals:</strong></p><p id="ec3b6376-d5ba-4cd7-982d-39223cd770d8" class="">[U1] Users of the tool should be able to adopt it without any required technical background.</p><p id="004e3274-a478-4301-b1e2-129a7e01ee7d" class="">[U2] Emotions should be shown seamlessly by the tool when they are required.</p><p id="766e244c-8edd-4e1b-93f1-d1180471c783" class="">[U3] Emotions should be understandable to the user.</p><p id="3e9d1b79-c3c3-4204-a895-27bcdea509e7" class="">[U4] Users should feel a sense of connection, community, or family by the system.</p><p id="acfe10f7-13a3-43b9-9614-ea9b8ed561a4" class="">[U5] The system should not require the use of a dedicated device.</p><p id="82a97ece-8776-49c1-890f-82b0c5daf0d4" class=""><strong>Neilson&#x27;s Heuristics</strong>:</p><p id="df074d50-321f-40d9-856c-4e4067059bc1" class="">[H1] Error prevention (Nielson&#x27;s Heuristics)</p><ul id="74ba9428-e9b3-458f-922d-2a8d8638ac68" class="bulleted-list"><li>We wish to deter users from causing errors to occur in the system. Given that we worry that our target demographic will not be able to fix problems if they occur in certain cases, we plan to reduce the number of possible things that can go wrong for the user.</li></ul><p id="4a21884d-016f-4c99-ad34-133010f98aa3" class="">[H2] Aesthetic and minimalist design (Nielson&#x27;s Heuristics)<div class="indented"><ul id="bef64eda-2be8-40e5-a527-88b476c0a38b" class="bulleted-list"><li>We believe that it is imperative to ensure that the UI provided to our user base is as streamlined as possible to ensure that they don&#x27;t confuse different actions. As such, we intend to use a particularly minimalist design.</li></ul></div></p><p id="d1ad21c0-4521-4141-ab61-b63b2202583d" class="">[H3] Help users recognize, diagnose, and recover from errors  (Nielson&#x27;s Heuristics)</p><ul id="ad5beedf-1f09-4344-a542-83ed22979fe0" class="bulleted-list"><li>We believe that it is imperative that users understand when something has gone wrong and we also think that in general, it should be fixed by itself because our target audience may have a more limited ability to troubleshoot.</li></ul><p id="f522f250-d8e9-4ec6-95b6-15fb710869d4" class="">[H4] Help and documentation (Nielson&#x27;s Heuristics)</p><ul id="3dc223b5-2b2f-4e21-aadb-062097d07e6d" class="bulleted-list"><li>We intend to provide clear and well laid out help for each of the actions a user can be taken. We feel it is a real possibility that users will take a few tries to remember how to perform actions so we want to clearly lay them out in our help section which will appear on each page.</li></ul><p id="18d949b7-7a74-428c-91a6-4326cd6cfb5f" class="">[H5] Few features beyond absolute necessities (Nielson&#x27;s Heuristics)</p><ul id="346b5139-b2a0-4dfe-8fcf-7124f57d6790" class="bulleted-list"><li>We feel that including too many options to the system will have an inverse effect in that users will not be able to use any of them due to confusion. As such, we intend to only include those which are absolutely necesary.</li></ul><p id="cc47e676-ebbe-4000-97f1-726ebbb85ccb" class="">[H6] Clearly describable (Nielson&#x27;s Heuristics)</p><ul id="084f8d33-c3f5-48a9-8ca8-ef12ac09605a" class="bulleted-list"><li>We believe that it is important that users be able to explain problems to troubleshooters. As such, icons should be clear and describable -  especially when errors arise - to allow troubleshooters to help fix problems.</li></ul><p id="f9f81d98-b4a5-4ad5-960f-6efcdf29545b" class="">[H7] Match between system and real world (Nielson&#x27;s Heuristics)<div class="indented"><ul id="3a5d8579-b236-4829-993b-79aa5fe3bd6c" class="bulleted-list"><li>In order for our target group to have a smooth transition into our product, which may be complicated by a lack of technological expertise, it is important that our product be similar to real world products they have used before. Specifically, we wish to include as many allegories to traditional phone calls as possible. Our system is thus intended to mimic as much of the functionality of a normal phone call as is possible.</li></ul></div></p><h3 id="b8fb5aed-0a6a-48d3-88fc-c23a68badd41" class="">Our Design Changes</h3><p id="bc315ddf-f535-4d33-af67-5c3fe0e13222" class=""><em>From peers</em></p><p id="d0fd7317-72e2-4235-a711-996c087aa6ee" class="">1.  Language Features<div class="indented"><p id="888ed591-5297-46f5-b6a9-d36b952c9b68" class="">Target Usability Goals: U1, U4</p><p id="8e3c3786-b762-447e-9586-8e5c9aba0552" class="">Target Heuristics: H1, H4, H5, H6, H7</p><p id="947c3dd1-0d9d-49c6-8201-e3b4d01ca561" class="">From our latest round of peer feedback, one of our reviewers was able to conduct a usability test with their grandmother and indicated that accommodating users who are not fluent in English or more comfortable in other languages would improve the experience of using the app by making it even more accessible and learnable.</p><blockquote id="a29eee6b-c9e8-4f54-944d-b7c11f4fd199" class="">&quot;The participant was not a native English speaker and suggested language options as a feature addition. The participant also mentioned they were more comfortable using this prototype than most video-calling applications and hopes she can be a user in the future.&quot; - <em>Reviewer X</em></blockquote><p id="5f06527c-e060-4f42-9ebd-e7c7391ae1a6" class=""><mark class="highlight-teal_background"><strong>Design Change 1:</strong></mark><strong> </strong>We have added a feature that will make use of Google Translate to accommodate non-native English speakers in our target user group. Making this design decision is in-line with our goals of fostering community, maintaining connections, and prioritizing the accessibility needs of our users. Because all our buttons are text-based to avoid confusion and errors, translations are necessary for non-native English speakers to experience gains in their lives from using VideoWise.</p><p id="3b3be73f-0802-41f7-8972-374e7a0d512c" class="">
+</p><figure id="313ee65d-94b1-4929-828a-6ffbb1385dbe" class="image"><a href="Beta%20Prototype%202ed38f86f161409d8cf8707e7e67a369/Untitled.png"><img style="width:528px" src="Beta%20Prototype%202ed38f86f161409d8cf8707e7e67a369/Untitled.png"/></a><figcaption>Figure 1. Updated home page with added language functionality demonstrated in our Framer prototype.</figcaption></figure></div></p><p id="4d8cc032-205c-4af1-8079-a802463f2a8e" class="">2.  &#x27;Coming Soon&#x27; features<div class="indented"><p id="1e86a9ff-e031-4daa-b13b-4c6564eb9f1b" class="">Target Usability Goals: U1</p><p id="1ce81957-c95f-401d-a6b8-7cba3c5e1bcb" class="">Target Heuristics: H1, H3, H4, H6</p><p id="b12ab65b-cb5e-4eaf-99a2-e4d92fa07b2f" class="">Another reviewer pointed out that even though our core functionalities of our design objectives have been implemented in the Alpha Prototype, we still had features prepared for implementation that we couldn&#x27;t complete yet. This reviewer suggested it is good design practice to illustrate this by notifying users the feature would be coming soon and what it will do.</p><p id="94393ef6-8a58-4a29-ac42-c5b1b4f0d139" class=""><mark class="highlight-teal_background"><strong>Design Change 2:</strong></mark><strong> </strong>When features are not fully implemented yet, we have added a note that they will be coming soon and give a brief description of what that feature will accomplish. We argue this is an important design decision because our target age group is likely to get frustrated, discouraged, or confused if they press a button and it nothing happens. In our user testing of the Alpha System, separately from the peer feedback, we found that this happened quite frequently. While the users were able to achieve the core functions (make a call, joining a call, etc.), many were discouraged from exploring the rest of the application with confidence because they thought they had done something wrong. Including &#x27;Coming Soon&#x27; messages clearly tells the user what is happening and what to do next.</p><p id="3dd8dcd3-35fb-4031-a6f3-bda803028ddf" class="">
+</p><figure id="aaff8874-caca-40ed-94dd-2ecfa4a938c8" class="image"><a href="Beta%20Prototype%202ed38f86f161409d8cf8707e7e67a369/Untitled%201.png"><img style="width:353px" src="Beta%20Prototype%202ed38f86f161409d8cf8707e7e67a369/Untitled%201.png"/></a></figure><p id="63f20a9a-a15a-4103-9752-4e70ca583325" class="">Figure 2. An update showing how we are handing showing future work within our beta system. </p></div></p><p id="8adabaf5-e297-4f50-82cf-643fa8a970db" class=""><em>From User testing</em></p><p id="a5b72e4c-e8d1-4745-9e7e-4c0be64deea1" class="">3.  Help functionality<div class="indented"><p id="f87ace70-5d81-435f-90a1-7548adf0717d" class="">Target Usability Goals: U1, U3, U4</p><p id="bc382883-f188-4b09-82f5-f019f615454b" class="">Target Heuristics: H3, H4, H6, H7</p><p id="7a0ced12-ff98-490f-8afb-0674a828cea1" class="">Following user testing of the Alpha Prototype, it became evident that some of our &#x27;Help&#x27; features were not clear enough or contained incorrect information. Additionally, it wasn&#x27;t immediately clear where the &#x27;Video Call Room ID&#x27; number was in a call in the alpha system.</p><p id="e3fb8f65-7e68-4111-a666-46895be290f9" class=""><mark class="highlight-teal_background"><strong>Design Change 3:</strong></mark><strong> </strong>We have improved the &#x27;Help&#x27; button and the provided information to be more descriptive and clear. We have updated where specific information is available. Additionally, we have increased the size of the room ID number in a call.</p></div></p><p id="a3e8deef-df00-433e-8d90-a9183cb31c42" class="">4.  The size of the input text bar<div class="indented"><p id="8a99e823-1d89-4f24-af9c-a82cef60468f" class="">Target Usability Goals: U1, U5</p><p id="ea3888f0-30d3-437c-9e79-fa2581a4db67" class="">Target Heuristics: H2, H3, H4</p><p id="ec220e12-d008-4243-ba8d-fbe9c0f264de" class="">Following user testing, we found that in the only place where we have users enter their own information (joining a video call room), the input text bar was much too small. When users tried to input variables in on their phone, there were difficulties tapping in the right place to zoom in and input the digits. Then when the page redirected, there were page sizing issues.</p><p id="ca602e45-6a63-43b1-a74c-445a68af3337" class=""><mark class="highlight-teal_background"><strong>Design Change 4:</strong></mark> To fix this, we increased the size of the input bar and font so there would be little to no barriers in successfully starting a call.</p></div></p><h1 id="d41b4e99-8293-46a9-9f52-43c18193b6df" class="block-color-pink_background">Prototype Revisions</h1><p id="57832e39-89e7-4e0f-83fd-21d33b6fa943" class="">
+</p><p id="a953fc8e-7596-4d43-a5ed-25fcba166330" class=""><strong>Please click </strong><a href="https://d1q06qqhx53gxd.cloudfront.net/">here</a><a href="https://d1q06qqhx53gxd.cloudfront.net/"><strong> </strong></a><strong>to find and use our Beta System Prototype!</strong></p><p id="107c2237-b985-4dae-bbe1-09f91c105b8c" class="">A user manual can be found below.</p><p id="f9a34753-74e8-4dd4-8eef-d7b67a5bd4b0" class="">Below we will reiterate our main objectives, usability goals, and target persona for VideoWise.</p><p id="85847d08-ce3a-497b-9520-ae5933784577" class="">Key Objectives</p><ol id="6a412b33-2e84-458c-8fa1-7a0f6a7d429c" class="numbered-list" start="1"><li>Make a system that will preserve emotional information about a video call when the video is not available (poor connectivity, no camera, etc.) through sentiment analysis</li></ol><ol id="726a9ea0-fb4f-4a74-bdc6-ac8cd517ed43" class="numbered-list" start="2"><li>Make a system whose design is easily understandable and easy to operate by elderly individuals.</li></ol><p id="ef7e401e-2adf-49fc-9a89-03a520f4e47d" class="">Usability Goals (reiterated for convenience)<div class="indented"><p id="bd5d4f5f-32a8-46d0-bbb7-9c681d96ca6f" class="">[U1] Users of the tool should be able to adopt it without any required technical background.</p><p id="7f8612f7-cae9-45bf-b04d-1aa5755ea4da" class="">[U2] Emotions should be shown seamlessly by the tool when they are required.</p><p id="6ec9e535-509a-4207-be8e-92c3c46ea703" class="">[U3] Emotions should be understandable to the user.</p><p id="6f6e5451-36aa-45f8-b132-872aad8ac4a0" class="">[U4] Users should feel a sense of connection, community, or family by the system.</p><p id="89050aad-8761-4ef3-8090-451be63c8194" class="">[U5] The system should not require the use of a dedicated device.</p></div></p><p id="a4f6bc97-25a3-433e-9253-f8bbe72fe15d" class="">Target Persona<div class="indented"><p id="df93b232-e7b8-4537-9fac-5fd24492463b" class="">The &#x27;Eager Beaver&#x27; is ready to take on the challenges of learning how to use new technologies. But they can also get easily overwhelmed. We know, though, that once our Eager Beaver can use the new technology correctly once, they are confident in their skills moving forward.</p></div></p><h3 id="ec9b25a2-1370-4e37-813e-9167c35617d3" class="">Alpha Prototype Functionality</h3><p id="40e329ea-4f0e-4a47-b0f9-9eb3b7c1c0b7" class="">We want to reiterate that our alpha system achieved core functionality and our five usability goals for our target persona. To see our arguments, please visit <a href="Apha%20Prototype%2081b3e1588f3e47ab8cc6206b3d320ae2.html">this page</a>.</p><h3 id="2cfbe227-0a24-4ed2-802e-01a43a64bf4d" class="">Beta Prototype Functionality</h3><p id="08a16791-2549-42ae-92f5-466713a691d7" class="">Here we will define the additional features that have been implemented in our beta prototype to allow for important interactions.</p><ol id="fecc0b3d-5609-45b9-ab3f-885529ecba0b" class="numbered-list" start="1"><li>Sentiment analysis has been implemented with emoji characters (&#x27;happy face&#x27;, &#x27;sad face&#x27;, and &#x27;neutral face&#x27;) being used when one&#x27;se video is not on.<p id="27bf554b-f36a-4342-abd9-0bab21863562" class="">[Main Objective 1, U2, U3, U4]</p><figure id="00c08f4b-4ec6-41d8-9c18-32a3a7bb5b9d" class="image"><a href="Beta%20Prototype%202ed38f86f161409d8cf8707e7e67a369/Screenshot_from_2020-11-30_19-14-31.png"><img style="width:240px" src="Beta%20Prototype%202ed38f86f161409d8cf8707e7e67a369/Screenshot_from_2020-11-30_19-14-31.png"/></a><figcaption>Figure 3: Sentiment analysis with emojis to replace video.</figcaption></figure></li></ol><ol id="f46cd7be-c1f5-42f9-8358-1f7126d36725" class="numbered-list" start="2"><li>Our sentiment analysis component now automatically turns on when video is not available. (Points 1 &amp; 2 fully achieve our products core functionality)<p id="1b64e87f-789f-4c52-930c-2cb505ef6cc6" class="">[Main Objective 1, U2, U3, U4]</p></li></ol><ol id="1f94922b-e7c3-4d26-945c-b99e692456d8" class="numbered-list" start="3"><li>We have successfully implemented user accounts through Google Authentication. (at the moment this implementation is extremely rudimentary) To use this, the user just needs to sign into their google account where just the email and name is stored on a secure database where the email is used as the unique ID.<mark class="highlight-red"> </mark><mark class="highlight-red"><strong>Because our users are an extremely vulnerable community and frequently victims of scam and fraud, we prioritize the security and privacy rights of our users and put their needs first. This data will never be seen or utilized outside of this project. </strong></mark><p id="9a56a60f-b6eb-4a1f-863c-3ada0186876d" class="">This feature also allows us to keep track of first time users and display the, now implemented, tooltip that highlights the &#x27;Help&#x27; button for maximizing learnability and usability.</p><p id="2dcdae72-05be-483f-8daf-cab49a46cb8a" class="">We also plan to utilize this to help users find friends on VideoWise by seeing whom in their contacts has an account with us.</p><p id="299f7aae-216e-4b93-ba38-2d0c2efe95fd" class="">[Main Objective 2, U1, U4, U5]</p><p id="5356f812-66dc-40ae-8a6b-ab0603270346" class="">
+</p><figure id="85be3cb2-9566-4063-a5bb-270d9b4dfa69" class="image"><a href="Beta%20Prototype%202ed38f86f161409d8cf8707e7e67a369/Untitled%202.png"><img style="width:384px" src="Beta%20Prototype%202ed38f86f161409d8cf8707e7e67a369/Untitled%202.png"/></a><figcaption>Figure 4: A view of the authentication screen</figcaption></figure><p id="d2ac75e4-585d-477e-af7b-16ba6f4332a4" class="">
+</p></li></ol><ol id="3eda6b0e-308d-4854-9880-b8a2766b2986" class="numbered-list" start="4"><li>For the &#x27;Recently Called&#x27; functionality, because we were not yet able to implement it, we add a &#x27;Coming Soon&#x27; feature to properly inform users. This is in accordance with <strong>Design Decision 2.</strong><p id="b913f9d8-8ce4-4304-a062-66ba262cdb85" class="">[Main Objective 2, U1, U4, U5]</p></li></ol><ol id="e1eb89d5-2bd8-4f61-8094-4894fc191a6a" class="numbered-list" start="5"><li>We have add in the framework for delivering functionality for users to change the language of the app or change the color scheme (if they are color blind) to maximize accessibility for users to our web application.<p id="1866052c-2549-4ac6-abbd-522fce64f3b1" class="">[Main Objective 2, U1, U3, U4, U5]</p></li></ol><h3 id="9dea5d35-8128-48ab-b4e8-dff9b3a0928c" class="">Course Objectives &amp; Enhancing the Human Experience</h3><p id="192f965d-3d4b-46c4-9952-40d00a986ea3" class="">VideoWise has already started to improve the lives of our target users. In our usability studies, overwhelmingly positive support was shown for not only the need for an application that makes technology easy and accessible to elderly individuals, but for the ways in which VideoWise was actively solving these challenges. From our post-test questionnaire,  we found that all of our participants agreed that a tool like VideoWise would helpful. See Figure 5 below.</p><p id="b72702f1-708c-4af8-9d5c-f0cc54077c6d" class="">
+</p><figure id="0eeb27e6-9f88-49f4-8009-5f4b3a4450a8" class="image"><a href="Beta%20Prototype%202ed38f86f161409d8cf8707e7e67a369/post_question_videowise.jpg"><img style="width:751px" src="Beta%20Prototype%202ed38f86f161409d8cf8707e7e67a369/post_question_videowise.jpg"/></a><figcaption>Figure 5. Responses from our Post-Questionnaire</figcaption></figure><p id="10daabdf-6c34-4f7a-9dec-4856319e832e" class="">The course objectives were to learn and utilize key design methods to create technology that will improve people&#x27;s daily lives. Our course project was focused on, specifically, video conferencing in the time of the COVID19 pandemic. </p><p id="f5191332-c700-4657-94dd-cf5364f8c086" class="block-color-red"><mark class="highlight-teal"><strong>Our group firmly believes and claims that VideoWise is making the world a better place. By successfully using the design methods to iteratively develop a full functioning web application, we have found a way to connect a segment of the population all to often forgotten about by the tech world in a time when just going outside can mean the difference between life and death. </strong></mark></p><p id="8127cd18-40e4-41c6-950c-fb0e768ea9e7" class="">Our team knows that VideoWise still has a lot of room to grow, but we are proud of the work we have done to help provide a dedicated space for elderly individuals in the technology world. Furthermore, we do hope to continue working on this project so that our target users can truly benefit from having a dedicated, easy to learn and easy to use video web application that focuses first and foremost on prioritizing human connections. </p><h1 id="655b5bca-1e85-4ff4-bd97-45c7e4a76fe1" class="block-color-red_background">Updated User Manual</h1><p id="ba218c5f-7306-4b5a-a440-ccf23730a88b" class="">Below you can find the updated User Manual/Installation Guide for our Beta System prototype. All changes made based on updates from the Alpha→Beta system are outlined in red for easy understanding Enjoy!</p><figure id="07e06f27-852d-413e-a414-39dc7c8f845e"><div class="source"><a href="Beta%20Prototype%202ed38f86f161409d8cf8707e7e67a369/User_Manual.pdf">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0dc8ac6a-c9d9-43ed-9b84-55e588bdab7f/User_Manual.pdf</a></div></figure></div></article></body></html>
